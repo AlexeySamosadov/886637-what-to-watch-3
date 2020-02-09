@@ -12,5 +12,5 @@ ReactDOM.render(
     <App
       movieInfo={MovieInfo}
     />,
-    document.querySelector(`.app`)
+    document.querySelector(`#root`)
 );
