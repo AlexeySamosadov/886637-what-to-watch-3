@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 const MovieInfo = {
   name: `The Grand Budapest Hotel`,
-  date: 2014,
+  date: `2014`,
   genre: `Drama`,
 };
 
