@@ -5,7 +5,6 @@ const Main = (props) => {
   const movieInfo = props.movieInfo;
   // eslint-disable-next-line react/prop-types
   const {name, genre, date} = movieInfo;
-  console.log(name);
 
   return (
     <React.Fragment>
