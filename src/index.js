@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "./components/app/app.jsx";
 
 const MovieInfo = {
   name: `The Grand Budapest Hotel`,
@@ -7,7 +8,7 @@ const MovieInfo = {
   genre: `Drama`,
 };
 
-import App from "./components/app/app.jsx";
+
 ReactDOM.render(
     <App
       movieInfo={MovieInfo}
