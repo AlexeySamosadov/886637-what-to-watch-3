@@ -1,11 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const Main = (props) => {
-  // eslint-disable-next-line react/prop-types
-  const movieInfo = props.movieInfo;
-  // eslint-disable-next-line react/prop-types
-  const {name, genre, date} = movieInfo;
-
+const Main = ({movieInfo, onTitleClick}) => {
+  const {name, genre, date, listFilm} = movieInfo;
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -38,7 +35,7 @@ const Main = (props) => {
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{name}</h2>
+              <h2 onClick={onTitleClick} className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
                 <span className="movie-card__genre">{genre}</span>
                 <span className="movie-card__year">{date}</span>
@@ -101,32 +98,16 @@ const Main = (props) => {
           </ul>
 
           <div className="catalog__movies-list">
-            <article className="small-movie-card catalog__movies-card">
+
+
+            {listFilm.map((it, index)=> <article key={index} className="small-movie-card catalog__movies-card">
               <div className="small-movie-card__image">
                 <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
               </div>
               <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
+                <a className="small-movie-card__link" href="movie-page.html">{it}</a>
               </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-              </h3>
-            </article>
+            </article>)}
 
             <article className="small-movie-card catalog__movies-card">
               <div className="small-movie-card__image">
@@ -308,6 +289,16 @@ const Main = (props) => {
       </div>
     </React.Fragment>
   );
+};
+
+Main.propTypes = {
+  movieInfo: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    listFilm: PropTypes.array.isRequired,
+  }),
+  onTitleClick: PropTypes.func.isRequired,
 };
 
 export default Main;

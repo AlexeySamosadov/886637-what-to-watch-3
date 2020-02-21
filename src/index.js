@@ -1,16 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "./components/app/app.jsx";
 
 const MovieInfo = {
   name: `The Grand Budapest Hotel`,
   date: `2014`,
   genre: `Drama`,
+  listFilm: [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`],
 };
 
-import App from "./components/app/app.jsx";
+
 ReactDOM.render(
     <App
-      movieInfo={MovieInfo}
+      movieInfo= {MovieInfo}
     />,
     document.querySelector(`#root`)
 );
