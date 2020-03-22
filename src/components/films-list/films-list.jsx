@@ -1,9 +1,6 @@
 import React, {PureComponent} from "react";
-import {generateFilmCardsData} from "../mocks/films.js";
+import PropTypes from "prop-types";
 import FilmCard from "../film-card/film-card.jsx";
-
-
-const filmsData = generateFilmCardsData(8);
 
 
 export default class FilmsList extends PureComponent {
@@ -19,10 +16,10 @@ export default class FilmsList extends PureComponent {
     this.setState({
       activeFilm: name,
     });
-    console.log(this.state);
   }
 
   getFilms() {
+    const {filmsData} = this.props;
     return filmsData.map(({name, src, id}) => {
       return (
         <FilmCard
@@ -38,5 +35,13 @@ export default class FilmsList extends PureComponent {
     return this.getFilms();
   }
 }
+
+FilmsList.propTypes = {
+  filmsData: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+  }))
+};
 
 

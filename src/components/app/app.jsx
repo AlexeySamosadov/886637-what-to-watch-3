@@ -6,10 +6,10 @@ const titleHandler = () => {
   return `Привет`;
 };
 
-const App = ({movieInfo}) => {
+const App = ({filmsData}) => {
   return (
     <Main
-      movieInfo={movieInfo}
+      filmsData={filmsData}
       onTitleClick={titleHandler}
     />
   );
@@ -18,6 +18,8 @@ const App = ({movieInfo}) => {
 App.propTypes = {
   movieInfo: PropTypes.shape({
   }),
+  filmsData: PropTypes.arrayOf(PropTypes.shape({
+  })),
 };
 
 export default App;

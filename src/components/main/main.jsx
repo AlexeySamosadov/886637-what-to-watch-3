@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import FilmsList from "../films-list/films-list.jsx";
 
-const Main = ({movieInfo, onTitleClick}) => {
+const Main = ({filmsData, onTitleClick}) => {
+  const movieInfo = filmsData[0];
   const {name, genre, date} = movieInfo;
   return (
     <React.Fragment>
@@ -99,7 +100,9 @@ const Main = ({movieInfo, onTitleClick}) => {
           </ul>
 
           <div className="catalog__movies-list">
-            <FilmsList/>
+            <FilmsList
+              filmsData={filmsData}
+            />
           </div>
 
           <div className="catalog__more">
@@ -126,11 +129,11 @@ const Main = ({movieInfo, onTitleClick}) => {
 };
 
 Main.propTypes = {
-  movieInfo: PropTypes.shape({
+  filmsData: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-  }),
+    date: PropTypes.number.isRequired,
+  })),
   onTitleClick: PropTypes.func.isRequired,
 };
 
