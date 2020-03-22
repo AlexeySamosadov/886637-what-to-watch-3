@@ -8,19 +8,20 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const MovieInfo = {
+const filmsData = [{
   name: `The Grand Budapest Hotel`,
-  date: `2014`,
+  date: 2014,
   genre: `Drama`,
-  listFilm: [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`],
-};
+  src: `www.rr.i/fsfsdf`,
+  id: `55`,
+}];
 
 it(`Should be title be clicked`, ()=>{
   const onTitleClick = jest.fn();
 
   const main = shallow(
       <Main
-        movieInfo={MovieInfo}
+        filmsData={filmsData}
         onTitleClick={onTitleClick}
       />
   );

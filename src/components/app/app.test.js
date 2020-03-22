@@ -2,16 +2,19 @@ import React from "react";
 import renderer from "react-test-renderer";
 import App from "./app.jsx";
 
-const MovieInfo = {
+const filmsData = [{
   name: `The Grand Budapest Hotel`,
-  date: `2014`,
+  date: 2014,
   genre: `Drama`,
-};
+  src: `www.rr.i/fsfsdf`,
+  id: `55`,
+}];
+
 
 it(`Render App`, () => {
   const tree = renderer.
   create(<App
-    movieInfo = {MovieInfo}
+    filmsData = {filmsData}
   />).
   toJSON();
 

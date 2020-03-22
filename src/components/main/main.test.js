@@ -2,18 +2,19 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main.jsx";
 
-const MovieInfo = {
+const filmsData = [{
   name: `The Grand Budapest Hotel`,
-  date: `2014`,
+  date: 2014,
   genre: `Drama`,
-  listFilm: [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`],
-};
+  src: `www.rr.i/fsfsdf`,
+  id: `55`,
+}];
 
 it(`This is main test`, () => {
   const tree = renderer.
     create(
         <Main
-          movieInfo={MovieInfo}
+          filmsData={filmsData}
           onTitleClick={() => {}}
         />
     ).
