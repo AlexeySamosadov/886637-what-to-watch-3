@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
+import {generateFilmCardsData} from "./components/mocks/films.js";
 
 const MovieInfo = {
   name: `The Grand Budapest Hotel`,
@@ -12,7 +13,7 @@ const MovieInfo = {
 
 ReactDOM.render(
     <App
-      movieInfo= {MovieInfo}
+      movieInfo={MovieInfo}
     />,
     document.querySelector(`#root`)
 );

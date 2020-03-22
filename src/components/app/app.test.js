@@ -6,7 +6,6 @@ const MovieInfo = {
   name: `The Grand Budapest Hotel`,
   date: `2014`,
   genre: `Drama`,
-  listFilm: [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`],
 };
 
 it(`Render App`, () => {
