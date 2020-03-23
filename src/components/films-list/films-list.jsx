@@ -12,7 +12,7 @@ export default class FilmsList extends PureComponent {
     this.handleMouseOver = this.handleMouseOver.bind(this);
   }
 
-  handleMouseOver(evt, name) {
+  handleMouseOver(name) {
     this.setState({
       activeFilm: name,
     });

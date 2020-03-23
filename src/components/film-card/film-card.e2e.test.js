@@ -15,9 +15,25 @@ const filmsData = [{
   id: `55`,
 }];
 
+
 const {name, src} = filmsData[0];
-const handleMouseOver = () => {};
 
-it(`should data get pass when mouse over card`, ()=>{
+const mockEvent = {
+  preventDefault() {}
+};
 
+it(`Should data get pass when mouse over card`, ()=>{
+  const handleMouseOver = jest.fn();
+  const smallMovieCard = shallow(
+      <FilmCard
+        handleMouseOver={handleMouseOver}
+        name={name}
+        src={src}
+      />
+  );
+
+  const card = smallMovieCard.find(`.small-movie-card`);
+  card.simulate(`mouseover`, mockEvent);
+
+  expect(handleMouseOver).toHaveBeenCalledWith(name);
 });
