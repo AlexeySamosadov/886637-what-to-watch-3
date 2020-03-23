@@ -276,7 +276,7 @@ Array [
             className="small-movie-card__title"
           >
             <a
-              className="sevtmall-movie-card__link"
+              className="small-movie-card__link"
               href="movie-page.html"
             >
               The Grand Budapest Hotel
