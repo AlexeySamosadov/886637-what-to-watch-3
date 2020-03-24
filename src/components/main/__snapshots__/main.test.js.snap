@@ -67,6 +67,7 @@ Array [
       >
         <div
           className="movie-card__poster"
+          onClick={[Function]}
         >
           <img
             alt="{name} poster"

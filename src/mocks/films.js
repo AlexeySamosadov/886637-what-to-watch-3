@@ -161,6 +161,7 @@ const createComments = (count) => {
 
 const generateFilmCardData = () => {
   const comments = createComments(getRandomNumber(1, 10));
+  const link = getRandomItem(FILMS_LINKS);
   return {
     name: getRandomItem(filmNames),
     rating: getRandomRating(3, 10),
@@ -177,7 +178,8 @@ const generateFilmCardData = () => {
     isWatched: Math.random() > 0.5,
     isFavorite: Math.random() > 0.5,
     comments,
-    src: getRandomItem(FILMS_LINKS),
+    src: link,
+    srcPoster: link,
   };
 };
 

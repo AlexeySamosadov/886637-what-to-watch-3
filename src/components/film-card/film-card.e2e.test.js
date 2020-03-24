@@ -13,6 +13,7 @@ const filmsData = [{
   genre: `Drama`,
   src: `www.rr.i/fsfsdf`,
   id: `55`,
+  srcPoster: `www.rr.i/fsfsdf`,
 }];
 
 

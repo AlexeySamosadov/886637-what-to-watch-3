@@ -32,7 +32,7 @@ const Main = ({filmsData, onTitleClick}) => {
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
-            <div className="movie-card__poster">
+            <div onClick={onTitleClick} className="movie-card__poster">
               <img src="img/the-grand-budapest-hotel-poster.jpg" alt="{name} poster" width="218" height="327"/>
             </div>
 

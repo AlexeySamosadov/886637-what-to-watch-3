@@ -14,7 +14,6 @@ const FilmCard = ({src, name, handleMouseOver}) => {
         <a className="small-movie-card__link" href="movie-page.html">{name}</a>
       </h3>
     </article>
-    // <div name={name} src={src} onMouseOver={onMouseOver}>{name}</div>
   );
 
 
