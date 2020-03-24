@@ -28,8 +28,10 @@ it(`Should be title be clicked`, ()=>{
   );
 
   const title = main.find(`h2.movie-card__title`);
+  const poster = main.find(`.movie-card__poster`);
 
-  title.props().onClick();
+  title.simulate(`click`);
+  poster.simulate(`click`);
 
-  expect(onTitleClick.mock.calls.length).toBe(1);
+  expect(onTitleClick.mock.calls.length).toBe(2);
 });
