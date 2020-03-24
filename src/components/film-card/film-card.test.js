@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
+import FilmCard from "./film-card.jsx";
 
 const filmsData = [{
   name: `The Grand Budapest Hotel`,
@@ -11,15 +11,18 @@ const filmsData = [{
   srcPoster: `www.rr.i/fsfsdf`,
 }];
 
-it(`This is main test`, () => {
+const {name, src} = filmsData[0];
+const handleMouseOver = () => {};
+
+it(`This is FilmCard Unit test`, ()=> {
   const tree = renderer.
-    create(
-        <Main
-          filmsData={filmsData}
-          onTitleClick={() => {}}
-        />
-    ).
-    toJSON();
+  create(
+      <FilmCard
+        src={src}
+        handleMouseOver={handleMouseOver}
+        name={name}
+      />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
+import MoviePage from "./movie-page.jsx";
 
 const filmsData = [{
   name: `The Grand Budapest Hotel`,
@@ -11,15 +11,13 @@ const filmsData = [{
   srcPoster: `www.rr.i/fsfsdf`,
 }];
 
-it(`This is main test`, () => {
-  const tree = renderer.
-    create(
-        <Main
+it(`This is Unit Test for MoviePage component`, ()=>{
+  const tree = renderer
+    .create(
+        <MoviePage
           filmsData={filmsData}
-          onTitleClick={() => {}}
         />
-    ).
-    toJSON();
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

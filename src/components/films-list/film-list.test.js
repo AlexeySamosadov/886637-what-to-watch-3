@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
+import FilmsList from "./films-list.jsx";
 
 const filmsData = [{
   name: `The Grand Budapest Hotel`,
@@ -11,15 +11,13 @@ const filmsData = [{
   srcPoster: `www.rr.i/fsfsdf`,
 }];
 
-it(`This is main test`, () => {
+it(`This is FilmList Unit Test`, ()=> {
   const tree = renderer.
-    create(
-        <Main
-          filmsData={filmsData}
-          onTitleClick={() => {}}
-        />
-    ).
-    toJSON();
+  create(
+      <FilmsList
+        filmsData={filmsData}
+      />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

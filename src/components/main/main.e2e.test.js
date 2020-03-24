@@ -8,26 +8,30 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const MovieInfo = {
+const filmsData = [{
   name: `The Grand Budapest Hotel`,
-  date: `2014`,
+  date: 2014,
   genre: `Drama`,
-  listFilm: [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`],
-};
+  src: `www.rr.i/fsfsdf`,
+  id: `55`,
+  srcPoster: `www.rr.i/fsfsdf`,
+}];
 
 it(`Should be title be clicked`, ()=>{
   const onTitleClick = jest.fn();
 
   const main = shallow(
       <Main
-        movieInfo={MovieInfo}
+        filmsData={filmsData}
         onTitleClick={onTitleClick}
       />
   );
 
   const title = main.find(`h2.movie-card__title`);
+  const poster = main.find(`.movie-card__poster`);
 
-  title.props().onClick();
+  title.simulate(`click`);
+  poster.simulate(`click`);
 
-  expect(onTitleClick.mock.calls.length).toBe(1);
+  expect(onTitleClick.mock.calls.length).toBe(2);
 });
