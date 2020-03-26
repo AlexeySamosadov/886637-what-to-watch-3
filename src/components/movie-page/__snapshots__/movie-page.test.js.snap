@@ -206,12 +206,13 @@ Array [
               <span
                 className="movie-rating__level"
               >
-                Very good
+                Must-see
               </span>
               <span
                 className="movie-rating__count"
               >
-                240 ratings
+                323
+                 ratings
               </span>
             </p>
           </div>

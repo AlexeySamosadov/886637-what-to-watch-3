@@ -231,4 +231,4 @@ const generateFilmCardsData = (count) => {
     .map(generateFilmCardData);
 };
 
-export {generateFilmCardData, generateFilmCardsData, genres, getRandomFullDate};
+export {generateFilmCardData, generateFilmCardsData, genres, getRandomFullDate, RATING_DESCRIPTION};
