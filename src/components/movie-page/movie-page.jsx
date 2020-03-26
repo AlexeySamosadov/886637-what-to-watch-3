@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 
-const MoviePage = ({filmsData}) => {
-  const {name, genre, date, srcPoster} = filmsData[0];
+const MoviePage = ({filmData}) => {
+  const {name, genre, date, srcPoster} = filmData;
   return (
     <React.Fragment>
       <section className="movie-card movie-card--full">
@@ -171,11 +171,11 @@ const MoviePage = ({filmsData}) => {
 export default MoviePage;
 
 MoviePage.propTypes = {
-  filmsData: PropTypes.arrayOf(PropTypes.shape({
+  filmData: PropTypes.shape({
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     date: PropTypes.number.isRequired,
     srcPoster: PropTypes.string.isRequired,
-  })),
+  }),
 };
 
