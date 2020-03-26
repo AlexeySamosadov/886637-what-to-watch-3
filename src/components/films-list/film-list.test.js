@@ -11,11 +11,14 @@ const filmsData = [{
   srcPoster: `www.rr.i/fsfsdf`,
 }];
 
+const onTitleClick = ()=> {};
+
 it(`This is FilmList Unit Test`, ()=> {
   const tree = renderer.
   create(
       <FilmsList
         filmsData={filmsData}
+        onTitleClick={onTitleClick}
       />
   ).toJSON();
 

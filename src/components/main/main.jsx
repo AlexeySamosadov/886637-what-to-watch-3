@@ -4,12 +4,14 @@ import FilmsList from "../films-list/films-list.jsx";
 
 const Main = ({filmsData, onTitleClick}) => {
   const movieInfo = filmsData[0];
-  const {name, genre, date} = movieInfo;
+  const {name, genre, date, id} = movieInfo;
   return (
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="{name} poster"/>
+          <img src="img/bg-the-grand-budapest-hotel.jpg"
+            alt="{name} poster"
+          />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -32,12 +34,12 @@ const Main = ({filmsData, onTitleClick}) => {
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
-            <div onClick={onTitleClick} className="movie-card__poster">
+            <div onClick={()=>onTitleClick(id)} className="movie-card__poster">
               <img src="img/the-grand-budapest-hotel-poster.jpg" alt="{name} poster" width="218" height="327"/>
             </div>
 
             <div className="movie-card__desc">
-              <h2 onClick={onTitleClick} className="movie-card__title test">{name}</h2>
+              <h2 onClick={()=>onTitleClick(id)} className="movie-card__title test">{name}</h2>
               <p className="movie-card__meta">
                 <span className="movie-card__genre">{genre}</span>
                 <span className="movie-card__year">{date}</span>
@@ -102,6 +104,7 @@ const Main = ({filmsData, onTitleClick}) => {
           <div className="catalog__movies-list">
             <FilmsList
               filmsData={filmsData}
+              onTitleClick={onTitleClick}
             />
           </div>
 
@@ -133,6 +136,7 @@ Main.propTypes = {
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     date: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   })),
   onTitleClick: PropTypes.func.isRequired,
 };

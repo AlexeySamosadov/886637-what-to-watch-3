@@ -7,17 +7,14 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const filmsData = [{
+const filmData = {
   name: `The Grand Budapest Hotel`,
   date: 2014,
   genre: `Drama`,
   src: `www.rr.i/fsfsdf`,
   id: `55`,
   srcPoster: `www.rr.i/fsfsdf`,
-}];
-
-
-const {name, src} = filmsData[0];
+};
 
 const mockEvent = {
   preventDefault() {}
@@ -25,16 +22,19 @@ const mockEvent = {
 
 it(`Should data get pass when mouse over card`, ()=>{
   const handleMouseOver = jest.fn();
+  const onTitleClick = jest.fn();
   const smallMovieCard = shallow(
       <FilmCard
+        filmData={filmData}
         handleMouseOver={handleMouseOver}
-        name={name}
-        src={src}
+        onTitleClick={onTitleClick}
       />
   );
 
   const card = smallMovieCard.find(`.small-movie-card`);
   card.simulate(`mouseover`, mockEvent);
+  card.simulate(`click`, mockEvent);
 
-  expect(handleMouseOver).toHaveBeenCalledWith(name);
+  expect(handleMouseOver).toHaveBeenCalledWith(filmData.name);
+  expect(onTitleClick).toHaveBeenCalledWith(filmData.id);
 });

@@ -2,25 +2,25 @@ import React from "react";
 import renderer from "react-test-renderer";
 import FilmCard from "./film-card.jsx";
 
-const filmsData = [{
+const filmData = {
   name: `The Grand Budapest Hotel`,
   date: 2014,
   genre: `Drama`,
   src: `www.rr.i/fsfsdf`,
   id: `55`,
   srcPoster: `www.rr.i/fsfsdf`,
-}];
+};
 
-const {name, src} = filmsData[0];
 const handleMouseOver = () => {};
+const onTitleClick = () => {};
 
 it(`This is FilmCard Unit test`, ()=> {
   const tree = renderer.
   create(
       <FilmCard
-        src={src}
+        filmData={filmData}
         handleMouseOver={handleMouseOver}
-        name={name}
+        onTitleClick={onTitleClick}
       />
   ).toJSON();
 

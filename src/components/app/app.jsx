@@ -9,31 +9,34 @@ class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      state: 1
+      popupFilmData: null,
     };
-    this._handleMainTitleClick = this._handleMainTitleClick.bind(this);
+    this.onTitleClick = this.onTitleClick.bind(this);
   }
 
-  _handleMainTitleClick() {
+  onTitleClick(id) {
+    const [currentFilm] = this.props.filmsData.filter((it)=>it.id === id);
+
     this.setState({
-      state: 2,
+      showMoviePage: true,
+      popupFilmData: currentFilm,
     });
   }
 
   renderApp() {
     const filmsData = this.props.filmsData;
-    const {state} = this.state;
-    if (state === 1) {
+    const {showMoviePage, popupFilmData} = this.state;
+    if (!showMoviePage) {
       return (
         <Main
           filmsData={filmsData}
-          onTitleClick={this._handleMainTitleClick}
+          onTitleClick={this.onTitleClick}
         />
       );
-    } else if (state === 2) {
+    } else if (showMoviePage) {
       return (
         <MoviePage
-          filmsData={filmsData}
+          filmData={popupFilmData}
         />
       );
     } else {
@@ -63,7 +66,7 @@ class App extends React.PureComponent {
 //   return (
 //     <Main
 //       filmsData={filmsData}
-//       onTitleClick={titleHandler}
+//       testClick={titleHandler}
 //     />
 //   );
 // };

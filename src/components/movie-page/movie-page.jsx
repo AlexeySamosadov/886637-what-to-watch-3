@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 
-const MoviePage = ({filmsData}) => {
-  const {name, genre, date, srcPoster} = filmsData[0];
+const MoviePage = ({filmData}) => {
+  const {name, genre, date, srcPoster, ratingCount, ratingLevel} = filmData;
   return (
     <React.Fragment>
       <section className="movie-card movie-card--full">
@@ -82,8 +82,8 @@ const MoviePage = ({filmsData}) => {
               <div className="movie-rating">
                 <div className="movie-rating__score">8,9</div>
                 <p className="movie-rating__meta">
-                  <span className="movie-rating__level">Very good</span>
-                  <span className="movie-rating__count">240 ratings</span>
+                  <span className="movie-rating__level">{ratingLevel}</span>
+                  <span className="movie-rating__count">{ratingCount} ratings</span>
                 </p>
               </div>
 
@@ -171,11 +171,13 @@ const MoviePage = ({filmsData}) => {
 export default MoviePage;
 
 MoviePage.propTypes = {
-  filmsData: PropTypes.arrayOf(PropTypes.shape({
+  filmData: PropTypes.shape({
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     date: PropTypes.number.isRequired,
     srcPoster: PropTypes.string.isRequired,
-  })),
+    ratingCount: PropTypes.number.isRequired,
+    ratingLevel: PropTypes.string.isRequired,
+  }),
 };
 
