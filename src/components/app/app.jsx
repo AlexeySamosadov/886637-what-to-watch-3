@@ -12,27 +12,21 @@ class App extends React.PureComponent {
       showMoviePage: false,
       popupFilmData: this.props.filmsData[0],
     };
-    // this._handleMainTitleClick = this._handleMainTitleClick.bind(this);
     this.onTitleClick = this.onTitleClick.bind(this);
   }
 
-  // _handleMainTitleClick() {
-  //   this.setState({
-  //     state: 2,
-  //   });
-  // }
-
   onTitleClick(id) {
+    const [currentFilm] = this.props.filmsData.filter((it)=>it.id === id);
+
     this.setState({
       showMoviePage: true,
+      popupFilmData: currentFilm,
     });
-    console.log(`Отработал TitleClick`, id);
   }
 
   renderApp() {
     const filmsData = this.props.filmsData;
     const {showMoviePage, popupFilmData} = this.state;
-    console.log(`popupFilmData`, popupFilmData);
     if (!showMoviePage) {
       return (
         <Main
