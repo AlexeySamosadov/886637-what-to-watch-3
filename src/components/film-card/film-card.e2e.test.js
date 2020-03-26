@@ -33,6 +33,8 @@ it(`Should data get pass when mouse over card`, ()=>{
 
   const card = smallMovieCard.find(`.small-movie-card`);
   card.simulate(`mouseover`, mockEvent);
+  card.simulate(`click`, mockEvent);
 
-  expect(handleMouseOver).toHaveBeenCalledWith(name);
+  expect(handleMouseOver).toHaveBeenCalledWith(filmData.name);
+  expect(onTitleClick).toHaveBeenCalledWith(filmData.id);
 });
