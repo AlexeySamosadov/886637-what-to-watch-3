@@ -19,13 +19,13 @@ export default class FilmsList extends PureComponent {
   }
 
   getFilms() {
-    const {filmsData} = this.props;
-    return filmsData.map(({name, src, id}) => {
+    const {filmsData, onTitleClick} = this.props;
+    return filmsData.map((filmData) => {
       return (
         <FilmCard
-          key={id}
-          name={name}
-          src={src}
+          key={filmData.id}
+          filmData={filmData}
+          onTitleClick={onTitleClick}
           handleMouseOver={this.handleMouseOver}/>
       );
     });
@@ -37,11 +37,8 @@ export default class FilmsList extends PureComponent {
 }
 
 FilmsList.propTypes = {
-  filmsData: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-  }))
+  filmsData: PropTypes.arrayOf(PropTypes.shape({})),
+  onTitleClick: PropTypes.func.isRequired,
 };
 
 

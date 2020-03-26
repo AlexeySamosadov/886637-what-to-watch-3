@@ -34,12 +34,12 @@ const Main = ({filmsData, onTitleClick}) => {
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
-            <div onClick={onTitleClick} className="movie-card__poster">
+            <div onClick={()=>onTitleClick(name)} className="movie-card__poster">
               <img src="img/the-grand-budapest-hotel-poster.jpg" alt="{name} poster" width="218" height="327"/>
             </div>
 
             <div className="movie-card__desc">
-              <h2 onClick={onTitleClick} className="movie-card__title test">{name}</h2>
+              <h2 onClick={()=>onTitleClick(name)} className="movie-card__title test">{name}</h2>
               <p className="movie-card__meta">
                 <span className="movie-card__genre">{genre}</span>
                 <span className="movie-card__year">{date}</span>
@@ -104,6 +104,7 @@ const Main = ({filmsData, onTitleClick}) => {
           <div className="catalog__movies-list">
             <FilmsList
               filmsData={filmsData}
+              onTitleClick={onTitleClick}
             />
           </div>
 

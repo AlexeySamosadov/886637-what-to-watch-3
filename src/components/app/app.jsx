@@ -9,28 +9,36 @@ class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      state: 1
+      showMoviePage: false,
     };
-    this._handleMainTitleClick = this._handleMainTitleClick.bind(this);
+    // this._handleMainTitleClick = this._handleMainTitleClick.bind(this);
+    this.onTitleClick = this.onTitleClick.bind(this);
   }
 
-  _handleMainTitleClick() {
+  // _handleMainTitleClick() {
+  //   this.setState({
+  //     state: 2,
+  //   });
+  // }
+
+  onTitleClick(t) {
     this.setState({
-      state: 2,
+      showMoviePage: true,
     });
+    console.log(`Отработал TitleClick`, t);
   }
 
   renderApp() {
     const filmsData = this.props.filmsData;
-    const {state} = this.state;
-    if (state === 1) {
+    const {showMoviePage} = this.state;
+    if (!showMoviePage) {
       return (
         <Main
           filmsData={filmsData}
-          onTitleClick={this._handleMainTitleClick}
+          onTitleClick={this.onTitleClick}
         />
       );
-    } else if (state === 2) {
+    } else if (showMoviePage) {
       return (
         <MoviePage
           filmsData={filmsData}
@@ -63,7 +71,7 @@ class App extends React.PureComponent {
 //   return (
 //     <Main
 //       filmsData={filmsData}
-//       onTitleClick={titleHandler}
+//       testClick={titleHandler}
 //     />
 //   );
 // };
