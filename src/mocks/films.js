@@ -38,15 +38,15 @@ const descriptionFilms = [
   `In rutrum ac purus sit amet tempus.`,
 ];
 
-const posters = [
-  `made-for-each-other.png`,
-  `popeye-meets-sinbad.png`,
-  `sagebrush-trail.jpg`,
-  `santa-claus-conquers-the-martians.jpg`,
-  `the-dance-of-life.jpg`,
-  `the-great-flamarion.jpg`,
-  `the-man-with-the-golden-arm.jpg`,
-];
+// const posters = [
+//   `made-for-each-other.png`,
+//   `popeye-meets-sinbad.png`,
+//   `sagebrush-trail.jpg`,
+//   `santa-claus-conquers-the-martians.jpg`,
+//   `the-dance-of-life.jpg`,
+//   `the-great-flamarion.jpg`,
+//   `the-man-with-the-golden-arm.jpg`,
+// ];
 
 const countries = [
   `Russia`,
@@ -159,27 +159,69 @@ const createComments = (count) => {
     .map(generateComment);
 };
 
+const RATING_DESCRIPTION = {
+  satisfying: `Satisfying`,
+  normal: `Normal`,
+  well: `Well`,
+  veryGood: `Very good`,
+  mustSee: `Must-see`,
+};
+
+const getRatingLevel = (rating) => {
+  if (rating < 3) {
+    return RATING_DESCRIPTION.satisfying;
+  } else if (rating < 5) {
+    return RATING_DESCRIPTION.normal;
+  } else if (rating < 7) {
+    return RATING_DESCRIPTION.well;
+  } else if (rating < 9) {
+    return RATING_DESCRIPTION.veryGood;
+  } else if (rating >= 9) {
+    return RATING_DESCRIPTION.mustSee;
+  }
+  return true;
+
+  // switch (rating) {
+  //   case rating < 3:
+  //     return `Satisfying`;
+  //   case rating < 5:
+  //     return `Norma`;
+  //   case rating < 7:
+  //     return `lWell`;
+  //   case rating < 9:
+  //     return `Very good`;
+  //   case rating >= 9:
+  //     return `Must-see`;
+  // }
+  // return true;
+};
+
 const generateFilmCardData = () => {
   const comments = createComments(getRandomNumber(1, 10));
   const link = getRandomItem(FILMS_LINKS);
+  const rating = getRandomRating(1, 10);
   return {
+
     name: getRandomItem(filmNames),
-    rating: getRandomRating(3, 10),
-    duration: getRandomNumber(70, 150),
+    src: link,
+    srcPoster: link,
     id: String(Math.random() + Math.random()),
+    date: getRandomFullDate().getFullYear(),
     genre: getRandomItem(genres),
-    posterSource: getRandomItem(posters),
+    rating,
+    ratingCount: getRandomNumber(1, 300),
+    ratingLevel: getRatingLevel(rating),
+    // posterSource: getRandomItem(posters),
+
+    duration: getRandomNumber(70, 150),
     description: getRandomArray(descriptionFilms, 3).join(` `),
     commentsQuantity: comments.length,
     titleDetails: getRandomItem(nameDetails),
-    date: getRandomFullDate().getFullYear(),
     country: getRandomArray(countries, 3),
     isAddWatch: Math.random() > 0.5,
     isWatched: Math.random() > 0.5,
     isFavorite: Math.random() > 0.5,
     comments,
-    src: link,
-    srcPoster: link,
   };
 };
 
