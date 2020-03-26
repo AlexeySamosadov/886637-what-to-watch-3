@@ -9,8 +9,7 @@ class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      showMoviePage: false,
-      popupFilmData: this.props.filmsData[0],
+      popupFilmData: null,
     };
     this.onTitleClick = this.onTitleClick.bind(this);
   }
