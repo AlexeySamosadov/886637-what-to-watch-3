@@ -132,6 +132,11 @@ const FILMS_LINKS = [
   `midnight-special.jpg`,
 ];
 
+const VIDEO_LINKS = [
+  `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+];
+
 const DIRECTORS = [
   `Arnold Vicci`,
   `Van gog`,
@@ -202,6 +207,7 @@ const getRatingLevel = (rating) => {
 const generateFilmCardData = () => {
   const comments = createComments(getRandomNumber(1, 10));
   const link = getRandomItem(FILMS_LINKS);
+  const videoLink = getRandomItem(VIDEO_LINKS);
   const rating = getRandomRating(1, 10);
   return {
 
@@ -217,6 +223,7 @@ const generateFilmCardData = () => {
     description: getRandomArray(descriptionFilms, 3).join(` `),
     actors: getRandomArray(ACTORS, ACTORS.length),
     directors: getRandomItem(DIRECTORS),
+    srcVideo: videoLink,
     // posterSource: getRandomItem(posters),
 
     duration: getRandomNumber(70, 150),

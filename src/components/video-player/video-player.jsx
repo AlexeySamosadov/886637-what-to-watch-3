@@ -8,19 +8,21 @@ export default class VideoPlayer extends PureComponent {
   }
 
   componentDidMount() {
-    const {src} = this.props;
+    const {srcVideo} = this.props;
     const video = this._videoRef.current;
-    video.src = src;
+    video.src = srcVideo;
     video.muted = true;
     video.play();
   }
   render() {
+    const {src} = this.props;
     return (
-      <video className="player__video" ref={this._videoRef} poster="img/player-poster.jpg"/>
+      <video className="player__video" ref={this._videoRef} poster={`img/${src}`}/>
     );
   }
 }
 
 VideoPlayer.propTypes = {
   src: PropTypes.string.isRequired,
+  srcVideo: PropTypes.string.isRequired,
 };

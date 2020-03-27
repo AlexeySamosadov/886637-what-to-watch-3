@@ -1,15 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import VideoPlayer from "../video-player/video-player.jsx";
 
 const FilmCard = ({filmData, handleMouseOver, onTitleClick}) => {
-  const {src, name, id} = filmData;
+  const {src, name, id, srcVideo} = filmData;
   return (
     <article onMouseOver={() => {
       handleMouseOver(name);
     }
     } onClick={()=> onTitleClick(id)} className="small-movie-card catalog__movies-card">
       <div className="small-movie-card__image">
-        <img src={`img/${src}`} alt={name} width="280" height="175" />
+        <VideoPlayer src={src} srcVideo={srcVideo} width="280" height="175"/>
       </div>
       <h3 className="small-movie-card__title">
         <a className="small-movie-card__link" href="movie-page.html">{name}</a>
