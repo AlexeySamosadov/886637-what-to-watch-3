@@ -6,17 +6,17 @@ import FilmCard from "../film-card/film-card.jsx";
 export default class FilmsList extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      activeFilm: null,
-    };
-    this.handleMouseOver = this.handleMouseOver.bind(this);
+    // this.state = {
+    //   activeFilm: null,
+    // };
+    // this.handleMouseOver = this.handleMouseOver.bind(this);
   }
 
-  handleMouseOver(name) {
-    this.setState({
-      activeFilm: name,
-    });
-  }
+  // handleMouseOver(name) {
+  //   this.setState({
+  //     activeFilm: name,
+  //   });
+  // }
 
   getFilms() {
     const {filmsData, onTitleClick} = this.props;
@@ -26,7 +26,8 @@ export default class FilmsList extends PureComponent {
           key={filmData.id}
           filmData={filmData}
           onTitleClick={onTitleClick}
-          handleMouseOver={this.handleMouseOver}/>
+          // handleMouseOver={this.handleMouseOver}
+        />
       );
     });
   }
