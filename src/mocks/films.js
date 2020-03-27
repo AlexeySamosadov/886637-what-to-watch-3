@@ -132,6 +132,23 @@ const FILMS_LINKS = [
   `midnight-special.jpg`,
 ];
 
+const DIRECTORS = [
+  `Arnold Vicci`,
+  `Van gog`,
+  `Charli Chaplin`,
+  `German French`,
+  `Italian English`
+];
+
+const ACTORS = [
+  `Toni Hawk`,
+  `Arnold Vicci`,
+  `Van gog`,
+  `Charli Chaplin`,
+  `German French`,
+  `Italian English`
+];
+
 const getRandomRating = (minNumber, maxNumber) => {
   return (Math.random() * (maxNumber - minNumber) + minNumber).toFixed(2);
 };
@@ -159,7 +176,7 @@ const createComments = (count) => {
     .map(generateComment);
 };
 
-const RATING_DESCRIPTION = {
+const RatingDescription = {
   satisfying: `Satisfying`,
   normal: `Normal`,
   well: `Well`,
@@ -167,36 +184,19 @@ const RATING_DESCRIPTION = {
   mustSee: `Must-see`,
 };
 
-const DIRECTORS = [`Arnold Vicci`, `Van gog`, `Charli Chaplin`, `German French`, `Italian English`];
-const ACTORS = [`Toni Hawk`, `Arnold Vicci`, `Van gog`, `Charli Chaplin`, `German French`, `Italian English`];
-
 const getRatingLevel = (rating) => {
   if (rating < 3) {
-    return RATING_DESCRIPTION.satisfying;
+    return RatingDescription.satisfying;
   } else if (rating < 5) {
-    return RATING_DESCRIPTION.normal;
+    return RatingDescription.normal;
   } else if (rating < 7) {
-    return RATING_DESCRIPTION.well;
+    return RatingDescription.well;
   } else if (rating < 9) {
-    return RATING_DESCRIPTION.veryGood;
+    return RatingDescription.veryGood;
   } else if (rating >= 9) {
-    return RATING_DESCRIPTION.mustSee;
+    return RatingDescription.mustSee;
   }
   return true;
-
-  // switch (rating) {
-  //   case rating < 3:
-  //     return `Satisfying`;
-  //   case rating < 5:
-  //     return `Norma`;
-  //   case rating < 7:
-  //     return `lWell`;
-  //   case rating < 9:
-  //     return `Very good`;
-  //   case rating >= 9:
-  //     return `Must-see`;
-  // }
-  // return true;
 };
 
 const generateFilmCardData = () => {
