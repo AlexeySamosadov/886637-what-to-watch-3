@@ -211,10 +211,12 @@ const generateFilmCardData = () => {
     rating,
     ratingCount: getRandomNumber(1, 300),
     ratingLevel: getRatingLevel(rating),
+    description: getRandomArray(descriptionFilms, 3).join(` `),
+    actors: [`Toni Hawk `],
+    directors: [`Arnold Vicci, `, `Van gog, `, `Charli Chaplin, `, `German French, `, `Italian English, `],
     // posterSource: getRandomItem(posters),
 
     duration: getRandomNumber(70, 150),
-    description: getRandomArray(descriptionFilms, 3).join(` `),
     commentsQuantity: comments.length,
     titleDetails: getRandomItem(nameDetails),
     country: getRandomArray(countries, 3),
