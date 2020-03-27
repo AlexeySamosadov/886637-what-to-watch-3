@@ -2,6 +2,7 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Main from "./main.jsx";
+import {RATING_DESCRIPTION} from "../../mocks/films";
 
 
 Enzyme.configure({
@@ -15,6 +16,11 @@ const filmsData = [{
   src: `www.rr.i/fsfsdf`,
   id: `55`,
   srcPoster: `www.rr.i/fsfsdf`,
+  ratingCount: 323,
+  ratingLevel: RATING_DESCRIPTION.mustSee,
+  description: `dsfsdfdsfsfsdfsdfdsf`,
+  actors: [`Toni Hawk`, `Arnold Vicci`, `Van gog`, `Charli Chaplin`, `German French`, `Italian English`],
+  directors: `Alex Smitch`,
 }];
 
 it(`Should be title be clicked`, ()=>{

@@ -167,6 +167,9 @@ const RATING_DESCRIPTION = {
   mustSee: `Must-see`,
 };
 
+const DIRECTORS = [`Arnold Vicci`, `Van gog`, `Charli Chaplin`, `German French`, `Italian English`];
+const ACTORS = [`Toni Hawk`, `Arnold Vicci`, `Van gog`, `Charli Chaplin`, `German French`, `Italian English`];
+
 const getRatingLevel = (rating) => {
   if (rating < 3) {
     return RATING_DESCRIPTION.satisfying;
@@ -212,8 +215,8 @@ const generateFilmCardData = () => {
     ratingCount: getRandomNumber(1, 300),
     ratingLevel: getRatingLevel(rating),
     description: getRandomArray(descriptionFilms, 3).join(` `),
-    actors: [`Toni Hawk `],
-    directors: [`Arnold Vicci, `, `Van gog, `, `Charli Chaplin, `, `German French, `, `Italian English, `],
+    actors: getRandomArray(ACTORS, ACTORS.length),
+    directors: getRandomItem(DIRECTORS),
     // posterSource: getRandomItem(posters),
 
     duration: getRandomNumber(70, 150),
