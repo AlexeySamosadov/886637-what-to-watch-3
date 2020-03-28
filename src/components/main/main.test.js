@@ -1,7 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main.jsx";
-import FilmsList from "../films-list/films-list";
 
 const filmsData = [{
   name: `The Grand Budapest Hotel`,

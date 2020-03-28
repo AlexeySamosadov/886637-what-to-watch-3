@@ -2,8 +2,6 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import FilmCard from "./film-card.jsx";
-import {RATING_DESCRIPTION} from "../../mocks/films";
-import FilmsList from "../films-list/films-list";
 
 Enzyme.configure({
   adapter: new Adapter(),

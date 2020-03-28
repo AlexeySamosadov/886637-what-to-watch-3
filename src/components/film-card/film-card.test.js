@@ -1,7 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import FilmCard from "./film-card.jsx";
-import FilmsList from "../films-list/films-list";
 
 const filmData = {
   name: `The Grand Budapest Hotel`,
