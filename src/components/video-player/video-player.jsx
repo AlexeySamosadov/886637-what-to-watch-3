@@ -7,17 +7,47 @@ export default class VideoPlayer extends PureComponent {
     this._videoRef = createRef();
   }
 
+
   componentDidMount() {
     const {srcVideo} = this.props;
-    const video = this._videoRef.current;
-    video.src = srcVideo;
-    video.muted = true;
-    video.play();
+    this._video = this._videoRef.current;
+    this._video.src = srcVideo;
+    this._video.muted = true;
   }
+
+  componentDidUpdate() {
+    const {isActive} = this.props;
+    if (isActive) {
+      this._video.play();
+    } else {
+      this._video.load();
+    }
+  }
+
+  componentWillUnmount() {
+    this._video.oncanplaythrough = null;
+    this._video.onplay = null;
+    this._video.onpause = null;
+    this._video.ontimeupdate = null;
+    this._video.src = ``;
+    this._video = null;
+  }
+
   render() {
-    const {src} = this.props;
+    const {src, handleMouse} = this.props;
+    let timeOut = () => {};
     return (
-      <video className="player__video" ref={this._videoRef} poster={`img/${src}`}/>
+      <div className="small-movie-card__image"
+        onMouseOver={()=>{
+          timeOut = setTimeout(handleMouse, 1000);
+        }}
+        onMouseLeave={()=>{
+          clearTimeout(timeOut);
+          handleMouse();
+        }}
+      >
+        <video className="player__video" ref={this._videoRef} poster={`img/${src}`}/>
+      </div>
     );
   }
 }
@@ -25,4 +55,6 @@ export default class VideoPlayer extends PureComponent {
 VideoPlayer.propTypes = {
   src: PropTypes.string.isRequired,
   srcVideo: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  handleMouse: PropTypes.func.isRequired,
 };

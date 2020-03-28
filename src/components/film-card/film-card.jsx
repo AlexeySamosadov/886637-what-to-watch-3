@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import VideoPlayer from "../video-player/video-player.jsx";
+import withVideoPlayer from "../../hocs/with-video-player.js";
+
+const VideoPlayerWrapper = withVideoPlayer(VideoPlayer);
 
 class FilmCard extends React.PureComponent {
   constructor(props) {
@@ -11,12 +14,12 @@ class FilmCard extends React.PureComponent {
     const {filmData, onTitleClick} = this.props;
     const {src, name, id, srcVideo} = filmData;
     return (
-      <article onMouseOver={() => {
+      <article onClick={
+        ()=> onTitleClick(id)
       }
-      } onClick={()=> onTitleClick(id)} className="small-movie-card catalog__movies-card">
-        <div className="small-movie-card__image">
-          <VideoPlayer src={src} srcVideo={srcVideo} width="280" height="175"/>
-        </div>
+      className="small-movie-card catalog__movies-card"
+      >
+        <VideoPlayerWrapper src={src} srcVideo={srcVideo} width="280" height="175"/>
         <h3 className="small-movie-card__title">
           <a className="small-movie-card__link" href="movie-page.html">{name}</a>
         </h3>
@@ -27,7 +30,6 @@ class FilmCard extends React.PureComponent {
 
 FilmCard.propTypes = {
   onTitleClick: PropTypes.func.isRequired,
-  // handleMouseOver: PropTypes.func.isRequired,
   filmData: PropTypes.shape({
     src: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

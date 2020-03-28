@@ -16,7 +16,6 @@ class App extends React.PureComponent {
 
   onTitleClick(id) {
     const [currentFilm] = this.props.filmsData.filter((it)=>it.id === id);
-
     this.setState({
       showMoviePage: true,
       popupFilmData: currentFilm,
