@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 export default class VideoPlayer extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = {
+      isActive: this.props.isActive,
+    };
     this._videoRef = createRef();
   }
 

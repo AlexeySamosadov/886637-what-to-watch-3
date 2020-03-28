@@ -147,7 +147,7 @@ Array [
           <img
             alt="The Grand Budapest Hotel poster"
             height="327"
-            src="img/www.rr.i/fsfsdf"
+            src="img/somePath"
             width="218"
           />
         </div>
@@ -206,7 +206,7 @@ Array [
               <span
                 className="movie-rating__level"
               >
-                Must-see
+                mustSee
               </span>
               <span
                 className="movie-rating__count"
