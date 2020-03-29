@@ -5,7 +5,7 @@ import MoviePageOverview from "../movie-page-overview/movie-page-overview.jsx";
 import MoviePageDetails from "../movie-page-details/movie-page-details.jsx";
 import MoviePageReviews from "../movie-page-reviews/movie-page-reviews.jsx";
 
-const ACTIVE_TABS = {
+export const ACTIVE_TABS = {
   overview: `Overview`,
   details: `Details`,
   reviews: `Reviews`,
@@ -77,6 +77,7 @@ const MoviePage = ({filmData, activeTap, onTabClick}) => {
             <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
                 <Tabs
+                  activeTap={activeTap}
                   onTabClick={onTabClick}
                 />
               </nav>
