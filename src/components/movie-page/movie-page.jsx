@@ -1,9 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Tabs from "../tabs/tabs.jsx";
+import MoviePageOverview from "../movie-page-overview/movie-page-overview.jsx";
+import MoviePageDetails from "../movie-page-details/movie-page-details.jsx";
+import MoviePageReviews from "../movie-page-reviews/movie-page-reviews.jsx";
 
+const ACTIVE_TABS = {
+  overview: `Overview`,
+  details: `Details`,
+  reviews: `Reviews`,
+};
 
-const MoviePage = ({filmData}) => {
+const MoviePage = ({filmData, activeTap, onTabClick}) => {
   const {name, genre, date, srcPoster, ratingCount, ratingLevel, description, actors, directors} = filmData;
+
+
   return (
     <React.Fragment>
       <section className="movie-card movie-card--full">
@@ -63,37 +74,27 @@ const MoviePage = ({filmData}) => {
               <img src={`img/${srcPoster}`} alt="The Grand Budapest Hotel poster" width="218"
                 height="327"/>
             </div>
-
             <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
+                <Tabs
+                  onTabClick={onTabClick}
+                />
               </nav>
 
-              <div className="movie-rating">
-                <div className="movie-rating__score">8,9</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{ratingLevel}</span>
-                  <span className="movie-rating__count">{ratingCount} ratings</span>
-                </p>
-              </div>
+              {activeTap === ACTIVE_TABS.overview &&
+                <MoviePageOverview
+                  ratingLevel={ratingLevel}
+                  description={description}
+                  directors={directors}
+                  actors={actors}
+                  ratingCount={ratingCount}/>
+              } {activeTap === ACTIVE_TABS.details &&
+                <MoviePageDetails
+                  directors={directors}
+                  actors={actors}/>
+              } {activeTap === ACTIVE_TABS.reviews && <MoviePageReviews/>}
 
-              <div className="movie-card__text">
-                <p>{description}</p>
 
-                <p className="movie-card__director"><strong>Director: {directors}</strong></p>
-
-                <p className="movie-card__starring"><strong>Starring: {actors.join(`, `)}</strong></p>
-              </div>
             </div>
           </div>
         </div>
@@ -176,5 +177,7 @@ MoviePage.propTypes = {
     actors: PropTypes.array.isRequired,
     directors: PropTypes.string.isRequired,
   }),
+  onTabClick: PropTypes.func.isRequired,
+  activeTap: PropTypes.string.isRequired,
 };
 

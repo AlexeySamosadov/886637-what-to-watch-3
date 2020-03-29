@@ -151,7 +151,19 @@ const ACTORS = [
   `Van gog`,
   `Charli Chaplin`,
   `German French`,
-  `Italian English`
+  `Italian English`,
+  `Bill Murray`,
+  `Edward Norton`,
+  `Jude Law`,
+  `Willem Dafoe`,
+  `Saoirse Ronan`,
+  `Tony Revoloru`,
+  `Tilda Swinton`,
+  `Tom Wilkinson`,
+  `Owen Wilkinson`,
+  `Adrien Brody`,
+  `Ralph Fiennes`,
+  `Jeff Goldblum`
 ];
 
 const getRandomRating = (minNumber, maxNumber) => {

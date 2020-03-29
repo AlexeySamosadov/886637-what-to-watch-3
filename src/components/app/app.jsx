@@ -3,6 +3,9 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import PropTypes from 'prop-types';
+import withMoviePage from "../../hocs/with-movie-page";
+
+const MoviePageWrapper = withMoviePage(MoviePage);
 
 
 class App extends React.PureComponent {
@@ -34,7 +37,7 @@ class App extends React.PureComponent {
       );
     } else if (showMoviePage) {
       return (
-        <MoviePage
+        <MoviePageWrapper
           filmData={popupFilmData}
         />
       );
@@ -60,15 +63,6 @@ class App extends React.PureComponent {
     );
   }
 }
-
-// const App = ({filmsData}) => {
-//   return (
-//     <Main
-//       filmsData={filmsData}
-//       testClick={titleHandler}
-//     />
-//   );
-// };
 
 App.propTypes = {
   movieInfo: PropTypes.shape({

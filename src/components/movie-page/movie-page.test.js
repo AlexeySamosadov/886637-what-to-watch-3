@@ -22,6 +22,8 @@ it(`This is Unit Test for MoviePage component`, ()=>{
     .create(
         <MoviePage
           filmData={filmData}
+          activeTap={`Overview`}
+          onTabClick={()=>{}}
         />
     ).toJSON();
 
