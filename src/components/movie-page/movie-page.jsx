@@ -1,9 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Tabs from "../tabs/tabs.jsx";
+import MoviePageOverview from "../movie-page-overview/movie-page-overview.jsx";
+import MoviePageDetails from "../movie-page-details/movie-page-details.jsx";
+import MoviePageReviews from "../movie-page-reviews/movie-page-reviews.jsx";
+
+export const ACTIVE_TABS = {
+  overview: `Overview`,
+  details: `Details`,
+  reviews: `Reviews`,
+};
+
+const MoviePage = ({filmData, activeTap, onTabClick}) => {
+  const {name, genre, date, srcPoster, ratingCount, ratingLevel, description, actors, directors} = filmData;
 
 
-const MoviePage = ({filmData}) => {
-  const {name, genre, date, srcPoster, ratingCount, ratingLevel} = filmData;
   return (
     <React.Fragment>
       <section className="movie-card movie-card--full">
@@ -63,43 +74,28 @@ const MoviePage = ({filmData}) => {
               <img src={`img/${srcPoster}`} alt="The Grand Budapest Hotel poster" width="218"
                 height="327"/>
             </div>
-
             <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
+                <Tabs
+                  activeTap={activeTap}
+                  onTabClick={onTabClick}
+                />
               </nav>
 
-              <div className="movie-rating">
-                <div className="movie-rating__score">8,9</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{ratingLevel}</span>
-                  <span className="movie-rating__count">{ratingCount} ratings</span>
-                </p>
-              </div>
+              {activeTap === ACTIVE_TABS.overview &&
+                <MoviePageOverview
+                  ratingLevel={ratingLevel}
+                  description={description}
+                  directors={directors}
+                  actors={actors}
+                  ratingCount={ratingCount}/>
+              } {activeTap === ACTIVE_TABS.details &&
+                <MoviePageDetails
+                  directors={directors}
+                  actors={actors}/>
+              } {activeTap === ACTIVE_TABS.reviews && <MoviePageReviews/>}
 
-              <div className="movie-card__text">
-                <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge
-                 Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave`&apos:`s friend and protege.</p>
 
-                <p>Gustave prides himself on providing first-class service to the hotel`&apos:`s guests, including satisfying the
-                sexual needs of the many elderly women who stay there. When one of Gustave`&apos:`s lovers dies mysteriously,
-                Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
-
-                <p className="movie-card__director"><strong>Director: Wes Andreson</strong></p>
-
-                <p className="movie-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe
-                and other</strong></p>
-              </div>
             </div>
           </div>
         </div>
@@ -178,6 +174,11 @@ MoviePage.propTypes = {
     srcPoster: PropTypes.string.isRequired,
     ratingCount: PropTypes.number.isRequired,
     ratingLevel: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    actors: PropTypes.array.isRequired,
+    directors: PropTypes.string.isRequired,
   }),
+  onTabClick: PropTypes.func.isRequired,
+  activeTap: PropTypes.string.isRequired,
 };
 

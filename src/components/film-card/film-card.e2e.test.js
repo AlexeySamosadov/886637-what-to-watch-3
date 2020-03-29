@@ -11,9 +11,15 @@ const filmData = {
   name: `The Grand Budapest Hotel`,
   date: 2014,
   genre: `Drama`,
-  src: `www.rr.i/fsfsdf`,
+  src: `somePath`,
   id: `55`,
-  srcPoster: `www.rr.i/fsfsdf`,
+  srcPoster: `somePath`,
+  ratingCount: 323,
+  ratingLevel: `mustSee`,
+  description: `dsfsdfdsfsfsdfsdfdsf`,
+  actors: [`Toni Hawk`, `Arnold Vicci`, `Van gog`, `Charli Chaplin`, `German French`, `Italian English`],
+  directors: `Alex Smitch`,
+  srcVideo: `somePath`
 };
 
 const mockEvent = {
@@ -28,13 +34,14 @@ it(`Should data get pass when mouse over card`, ()=>{
         filmData={filmData}
         handleMouseOver={handleMouseOver}
         onTitleClick={onTitleClick}
-      />
-  );
+      />, {
+        createNodeMock: () => {
+          return {};
+        },
+      });
 
   const card = smallMovieCard.find(`.small-movie-card`);
-  card.simulate(`mouseover`, mockEvent);
   card.simulate(`click`, mockEvent);
 
-  expect(handleMouseOver).toHaveBeenCalledWith(filmData.name);
   expect(onTitleClick).toHaveBeenCalledWith(filmData.id);
 });

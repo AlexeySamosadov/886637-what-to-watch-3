@@ -132,6 +132,40 @@ const FILMS_LINKS = [
   `midnight-special.jpg`,
 ];
 
+const VIDEO_LINKS = [
+  `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+];
+
+const DIRECTORS = [
+  `Arnold Vicci`,
+  `Van gog`,
+  `Charli Chaplin`,
+  `German French`,
+  `Italian English`
+];
+
+const ACTORS = [
+  `Toni Hawk`,
+  `Arnold Vicci`,
+  `Van gog`,
+  `Charli Chaplin`,
+  `German French`,
+  `Italian English`,
+  `Bill Murray`,
+  `Edward Norton`,
+  `Jude Law`,
+  `Willem Dafoe`,
+  `Saoirse Ronan`,
+  `Tony Revoloru`,
+  `Tilda Swinton`,
+  `Tom Wilkinson`,
+  `Owen Wilkinson`,
+  `Adrien Brody`,
+  `Ralph Fiennes`,
+  `Jeff Goldblum`
+];
+
 const getRandomRating = (minNumber, maxNumber) => {
   return (Math.random() * (maxNumber - minNumber) + minNumber).toFixed(2);
 };
@@ -159,7 +193,7 @@ const createComments = (count) => {
     .map(generateComment);
 };
 
-const RATING_DESCRIPTION = {
+const RatingDescription = {
   satisfying: `Satisfying`,
   normal: `Normal`,
   well: `Well`,
@@ -169,36 +203,23 @@ const RATING_DESCRIPTION = {
 
 const getRatingLevel = (rating) => {
   if (rating < 3) {
-    return RATING_DESCRIPTION.satisfying;
+    return RatingDescription.satisfying;
   } else if (rating < 5) {
-    return RATING_DESCRIPTION.normal;
+    return RatingDescription.normal;
   } else if (rating < 7) {
-    return RATING_DESCRIPTION.well;
+    return RatingDescription.well;
   } else if (rating < 9) {
-    return RATING_DESCRIPTION.veryGood;
+    return RatingDescription.veryGood;
   } else if (rating >= 9) {
-    return RATING_DESCRIPTION.mustSee;
+    return RatingDescription.mustSee;
   }
   return true;
-
-  // switch (rating) {
-  //   case rating < 3:
-  //     return `Satisfying`;
-  //   case rating < 5:
-  //     return `Norma`;
-  //   case rating < 7:
-  //     return `lWell`;
-  //   case rating < 9:
-  //     return `Very good`;
-  //   case rating >= 9:
-  //     return `Must-see`;
-  // }
-  // return true;
 };
 
 const generateFilmCardData = () => {
   const comments = createComments(getRandomNumber(1, 10));
   const link = getRandomItem(FILMS_LINKS);
+  const videoLink = getRandomItem(VIDEO_LINKS);
   const rating = getRandomRating(1, 10);
   return {
 
@@ -211,10 +232,13 @@ const generateFilmCardData = () => {
     rating,
     ratingCount: getRandomNumber(1, 300),
     ratingLevel: getRatingLevel(rating),
+    description: getRandomArray(descriptionFilms, 3).join(` `),
+    actors: getRandomArray(ACTORS, ACTORS.length),
+    directors: getRandomItem(DIRECTORS),
+    srcVideo: videoLink,
     // posterSource: getRandomItem(posters),
 
     duration: getRandomNumber(70, 150),
-    description: getRandomArray(descriptionFilms, 3).join(` `),
     commentsQuantity: comments.length,
     titleDetails: getRandomItem(nameDetails),
     country: getRandomArray(countries, 3),
@@ -231,4 +255,4 @@ const generateFilmCardsData = (count) => {
     .map(generateFilmCardData);
 };
 
-export {generateFilmCardData, generateFilmCardsData, genres, getRandomFullDate, RATING_DESCRIPTION};
+export {generateFilmCardData, generateFilmCardsData, genres, getRandomFullDate};
