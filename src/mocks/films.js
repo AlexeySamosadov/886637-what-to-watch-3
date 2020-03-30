@@ -191,7 +191,6 @@ const generateComment = () => {
     commentatorName: getRandomItem(COMMENTATOR_NAMES),
     commentTime: getRandomFullDate(),
     commentRating: getRandomRating(1, 10),
-    // emojiLink: getRandomItem(EMOJIESLINKS),
   };
 };
 
@@ -225,7 +224,7 @@ const getRatingLevel = (rating) => {
 };
 
 const generateFilmCardData = () => {
-  const comments = createComments(getRandomNumber(1, 10));
+  const comments = createComments(getRandomNumber(4, 7));
   const link = getRandomItem(FILMS_LINKS);
   const videoLink = getRandomItem(VIDEO_LINKS);
   const rating = getRandomRating(1, 10);

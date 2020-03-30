@@ -1,9 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {transformDate, TRANSFORM_TYPES} from "../util/util.js";
 
 const renderComment = (comment) => {
   const {commentId, commentText, commentatorName, commentTime, commentRating} = comment;
-  console.log(`commentTime`, commentTime);
+  const commentTimeText = transformDate(commentTime, TRANSFORM_TYPES.TO_COMMENT_DATE);
+  const commentTimeAttribute = transformDate(commentTime, TRANSFORM_TYPES.TO_COMMENT_ATTRIBUTE);
+
   return (
     <div key={commentId} className="review">
       <blockquote className="review__quote">
@@ -11,7 +14,7 @@ const renderComment = (comment) => {
 
         <footer className="review__details">
           <cite className="review__author">{commentatorName}</cite>
-          <time className="review__date" dateTime="2016-12-20">5</time>
+          <time className="review__date" dateTime={commentTimeAttribute}>{commentTimeText}</time>
         </footer>
       </blockquote>
 

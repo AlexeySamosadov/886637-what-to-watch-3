@@ -28,9 +28,9 @@ exports[`This is Unit Test for MoviePageDetails component 1`] = `
           </cite>
           <time
             className="review__date"
-            dateTime="2016-12-20"
+            dateTime="2037-05-10"
           >
-            5
+            May 10, 2037
           </time>
         </footer>
       </blockquote>
