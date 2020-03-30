@@ -1,7 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import MoviePage from "./movie-page.jsx";
-import Main from "../main/main";
 
 const filmData = {
   name: `The Grand Budapest Hotel`,
