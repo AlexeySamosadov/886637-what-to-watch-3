@@ -12,9 +12,6 @@ export const ACTIVE_TABS = {
 };
 
 const renderPageDetails = (filmData, activeTap) => {
-  const {comment} = filmData;
-  console.log(`commentTime`, comment);
-
   switch (activeTap) {
     case ACTIVE_TABS.OVERVIEW:
       return <MoviePageOverview filmData={filmData}/>;

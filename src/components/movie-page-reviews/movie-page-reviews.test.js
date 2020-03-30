@@ -1,9 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import MoviePageReviews from "./movie-page-reviews.jsx";
-import {getRandomFullDate} from "../../mocks/films.js";
-
-const date = getRandomFullDate();
 
 const filmData = {
   name: `The Grand Budapest Hotel`,
@@ -23,7 +20,7 @@ const filmData = {
     commentText: `Some text`,
     commentatorName: `Antoni Banderers`,
     commentRating: 7.9,
-    commentTime: date,
+    commentTime: new Date(1466424490000),
   }]
 };
 
