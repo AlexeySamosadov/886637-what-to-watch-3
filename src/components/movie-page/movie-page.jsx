@@ -18,7 +18,7 @@ const renderPageDetails = (filmData, activeTap) => {
     case ACTIVE_TABS.DETAILS:
       return <MoviePageDetails filmData={filmData}/>;
     case ACTIVE_TABS.REVIEWS:
-      return <MoviePageReviews/>;
+      return <MoviePageReviews filmData={filmData}/>;
   }
   return true;
 };
