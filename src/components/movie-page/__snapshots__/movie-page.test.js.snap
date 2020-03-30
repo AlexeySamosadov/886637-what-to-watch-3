@@ -161,7 +161,7 @@ Array [
               className="movie-nav__list"
             >
               <li
-                className="movie-nav__item movie-nav__item--active"
+                className="movie-nav__item false"
                 onClick={[Function]}
               >
                 <a
@@ -195,55 +195,6 @@ Array [
               </li>
             </ul>
           </nav>
-          <div
-            className="movie-rating"
-          >
-            <div
-              className="movie-rating__score"
-            >
-              8,9
-            </div>
-            <p
-              className="movie-rating__meta"
-            >
-              <span
-                className="movie-rating__level"
-              >
-                mustSee
-              </span>
-              <span
-                className="movie-rating__count"
-              >
-                323
-                 ratings
-              </span>
-            </p>
-          </div>
-          <div
-            className="movie-card__text"
-          >
-            <p>
-              dsfsdfdsfsfsdfsdfdsf
-            </p>
-            <p
-              className="movie-card__director"
-            >
-              <strong>
-                Director: 
-                Alex Smitch
-              </strong>
-            </p>
-            <p
-              className="movie-card__starring"
-            >
-              <strong>
-                Starring: 
-                Toni Hawk, Arnold Vicci, Van gog, Charli Chaplin, German French, Italian English
-              </strong>
-            </p>
-          </div>
-           
-           
         </div>
       </div>
     </div>

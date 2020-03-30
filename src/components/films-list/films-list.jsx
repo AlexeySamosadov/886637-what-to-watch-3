@@ -4,15 +4,14 @@ import FilmCard from "../film-card/film-card.jsx";
 
 
 const FilmsList = ({filmsData, onTitleClick}) => {
-  return filmsData.map((filmData) => {
-    return (
-      <FilmCard
-        key={filmData.id}
-        filmData={filmData}
-        onTitleClick={onTitleClick}
-      />
-    );
-  });
+  return filmsData.map((filmData) => (
+    <FilmCard
+      key={filmData.id}
+      filmData={filmData}
+      onTitleClick={onTitleClick}
+    />
+  )
+  );
 };
 
 FilmsList.propTypes = {

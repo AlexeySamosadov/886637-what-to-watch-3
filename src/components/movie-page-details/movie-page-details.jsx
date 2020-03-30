@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const MoviePageDetails = ({actors, directors}) => {
+const MoviePageDetails = ({filmData}) => {
+  const {actors, directors} = filmData;
   return (
     <div className="movie-card__text movie-card__row">
       <div className="movie-card__text-col">
@@ -36,8 +37,10 @@ const MoviePageDetails = ({actors, directors}) => {
 };
 
 MoviePageDetails.propTypes = {
-  actors: PropTypes.array.isRequired,
-  directors: PropTypes.string.isRequired,
+  filmData: PropTypes.shape({
+    actors: PropTypes.array.isRequired,
+    directors: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default MoviePageDetails;

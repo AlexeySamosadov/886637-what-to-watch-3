@@ -6,13 +6,25 @@ import MoviePageDetails from "../movie-page-details/movie-page-details.jsx";
 import MoviePageReviews from "../movie-page-reviews/movie-page-reviews.jsx";
 
 export const ACTIVE_TABS = {
-  overview: `Overview`,
-  details: `Details`,
-  reviews: `Reviews`,
+  OVERVIEW: `OVERVIEW`,
+  DETAILS: `DETAILS`,
+  REVIEWS: `REVIEWS`,
+};
+
+const renderPageDetails = (filmData, activeTap) => {
+  switch (activeTap) {
+    case ACTIVE_TABS.OVERVIEW:
+      return <MoviePageOverview filmData={filmData}/>;
+    case ACTIVE_TABS.DETAILS:
+      return <MoviePageDetails filmData={filmData}/>;
+    case ACTIVE_TABS.REVIEWS:
+      return <MoviePageReviews/>;
+  }
+  return true;
 };
 
 const MoviePage = ({filmData, activeTap, onTabClick}) => {
-  const {name, genre, date, srcPoster, ratingCount, ratingLevel, description, actors, directors} = filmData;
+  const {name, genre, date, srcPoster} = filmData;
 
 
   return (
@@ -81,21 +93,7 @@ const MoviePage = ({filmData, activeTap, onTabClick}) => {
                   onTabClick={onTabClick}
                 />
               </nav>
-
-              {activeTap === ACTIVE_TABS.overview &&
-                <MoviePageOverview
-                  ratingLevel={ratingLevel}
-                  description={description}
-                  directors={directors}
-                  actors={actors}
-                  ratingCount={ratingCount}/>
-              } {activeTap === ACTIVE_TABS.details &&
-                <MoviePageDetails
-                  directors={directors}
-                  actors={actors}/>
-              } {activeTap === ACTIVE_TABS.reviews && <MoviePageReviews/>}
-
-
+              {renderPageDetails(filmData, activeTap)}
             </div>
           </div>
         </div>

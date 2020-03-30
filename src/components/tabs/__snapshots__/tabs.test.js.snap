@@ -5,7 +5,7 @@ exports[`This is Unit Test for MoviePageDetails component 1`] = `
   className="movie-nav__list"
 >
   <li
-    className="movie-nav__item movie-nav__item--active"
+    className="movie-nav__item false"
     onClick={[Function]}
   >
     <a
