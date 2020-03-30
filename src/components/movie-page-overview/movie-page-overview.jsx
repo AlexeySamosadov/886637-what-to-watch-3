@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const MoviePageOverview = ({filmData}) => {
-  const {ratingLevel, ratingCount, directors, actors, description} = filmData
+  const {ratingLevel, ratingCount, directors, actors, description} = filmData;
   return (
     <React.Fragment>
       <div className="movie-rating">

@@ -10,8 +10,7 @@ const FilmsList = ({filmsData, onTitleClick}) => {
       filmData={filmData}
       onTitleClick={onTitleClick}
     />
-  )
-  );
+  ));
 };
 
 FilmsList.propTypes = {
