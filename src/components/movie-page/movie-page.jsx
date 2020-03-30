@@ -4,6 +4,7 @@ import Tabs from "../tabs/tabs.jsx";
 import MoviePageOverview from "../movie-page-overview/movie-page-overview.jsx";
 import MoviePageDetails from "../movie-page-details/movie-page-details.jsx";
 import MoviePageReviews from "../movie-page-reviews/movie-page-reviews.jsx";
+import FilmsList from "../films-list/films-list.jsx";
 
 export const ACTIVE_TABS = {
   OVERVIEW: `OVERVIEW`,
@@ -23,8 +24,9 @@ const renderPageDetails = (filmData, activeTap) => {
   return true;
 };
 
-const MoviePage = ({filmData, activeTap, onTabClick}) => {
+const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick}) => {
   const {name, genre, date, srcPoster} = filmData;
+  const filmsDataCutted = filmsData.slice(0, 4);
 
 
   return (
@@ -102,46 +104,13 @@ const MoviePage = ({filmData, activeTap, onTabClick}) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-
           <div className="catalog__movies-list">
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                  alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of
-                Grindelwald</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-              </h3>
-            </article>
+            <FilmsList
+              filmsData={filmsDataCutted}
+              onTitleClick={onTitleClick}
+            />
           </div>
+
         </section>
 
         <footer className="page-footer">
@@ -176,7 +145,48 @@ MoviePage.propTypes = {
     actors: PropTypes.array.isRequired,
     directors: PropTypes.string.isRequired,
   }),
+  filmsData: PropTypes.array.isRequired,
+  onTitleClick: PropTypes.func.isRequired,
   onTabClick: PropTypes.func.isRequired,
   activeTap: PropTypes.string.isRequired,
 };
 
+// <div className="catalog__movies-list">
+//   <article className="small-movie-card catalog__movies-card">
+//     <div className="small-movie-card__image">
+//       <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+//            alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
+//     </div>
+//     <h3 className="small-movie-card__title">
+//       <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of
+//         Grindelwald</a>
+//     </h3>
+//   </article>
+//
+//   <article className="small-movie-card catalog__movies-card">
+//     <div className="small-movie-card__image">
+//       <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175"/>
+//     </div>
+//     <h3 className="small-movie-card__title">
+//       <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
+//     </h3>
+//   </article>
+//
+//   <article className="small-movie-card catalog__movies-card">
+//     <div className="small-movie-card__image">
+//       <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175"/>
+//     </div>
+//     <h3 className="small-movie-card__title">
+//       <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
+//     </h3>
+//   </article>
+//
+//   <article className="small-movie-card catalog__movies-card">
+//     <div className="small-movie-card__image">
+//       <img src="img/aviator.jpg" alt="Aviator" width="280" height="175"/>
+//     </div>
+//     <h3 className="small-movie-card__title">
+//       <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
+//     </h3>
+//   </article>
+// </div>
