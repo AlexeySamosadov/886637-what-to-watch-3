@@ -40,6 +40,11 @@ const addZero = (number) => number < 10 ? `0${number}` : `${number}`;
 const getMonthByString = (monthNumber) => {
   return MONTH_BY_NUMBERS[monthNumber];
 };
+
+const formatMovieDuration = (movieDuration) => {
+  return `${(movieDuration / 60).toFixed(0)}h ${movieDuration % 60}min`;
+};
+
 const transformDate = (fullDate, transformType) => {
   const month = (fullDate.getMonth() + 1).toString();
   const monthByString = getMonthByString(month);
@@ -53,6 +58,6 @@ const transformDate = (fullDate, transformType) => {
   return true;
 };
 
-export {getRandomNumber, getRandomArray, getRandomItem, transformDate, TRANSFORM_TYPES};
+export {getRandomNumber, getRandomArray, getRandomItem, transformDate, formatMovieDuration, TRANSFORM_TYPES};
 
 

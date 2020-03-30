@@ -243,11 +243,11 @@ const generateFilmCardData = () => {
     actors: getRandomArray(ACTORS, ACTORS.length),
     directors: getRandomItem(DIRECTORS),
     srcVideo: videoLink,
-    // posterSource: getRandomItem(posters),
     comments,
-
-
     duration: getRandomNumber(70, 150),
+    // posterSource: getRandomItem(posters),
+
+
     commentsQuantity: comments.length,
     titleDetails: getRandomItem(nameDetails),
     country: getRandomArray(countries, 3),
