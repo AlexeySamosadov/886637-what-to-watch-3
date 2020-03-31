@@ -5,14 +5,12 @@ import withVideoPlayer from "../../hocs/with-video-player.js";
 
 const VideoPlayerWrapper = withVideoPlayer(VideoPlayer);
 
-
 const FilmCard = ({filmData, onTitleClick})=> {
   const {src, name, id, srcVideo} = filmData;
+  const onClick = () => onTitleClick(id);
   return (
-    <article onClick={
-      ()=> onTitleClick(id)
-    }
-    className="small-movie-card catalog__movies-card"
+    <article onClick={onClick}
+      className="small-movie-card catalog__movies-card"
     >
       <VideoPlayerWrapper src={src} srcVideo={srcVideo} width="280" height="175"/>
       <h3 className="small-movie-card__title">

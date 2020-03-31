@@ -5,7 +5,7 @@ const withMoviePage = (Component) => {
     constructor(props) {
       super(props);
       this.state = {
-        activeTap: `Overview`
+        activeTap: `OVERVIEW`
       };
       this.onTabClick = this.onTabClick.bind(this);
     }

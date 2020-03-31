@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const MoviePageOverview = ({ratingLevel, ratingCount, directors, actors, description}) => {
+const MoviePageOverview = ({filmData}) => {
+  const {rating, ratingLevel, ratingCount, directors, actors, description} = filmData;
   return (
     <React.Fragment>
       <div className="movie-rating">
-        <div className="movie-rating__score">8,9</div>
+        <div className="movie-rating__score">{rating}</div>
         <p className="movie-rating__meta">
           <span className="movie-rating__level">{ratingLevel}</span>
           <span className="movie-rating__count">{ratingCount} ratings</span>
@@ -23,11 +24,14 @@ const MoviePageOverview = ({ratingLevel, ratingCount, directors, actors, descrip
 };
 
 MoviePageOverview.propTypes = {
-  ratingCount: PropTypes.number.isRequired,
-  ratingLevel: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  actors: PropTypes.array.isRequired,
-  directors: PropTypes.string.isRequired,
+  filmData: PropTypes.shape({
+    ratingCount: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    ratingLevel: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    actors: PropTypes.array.isRequired,
+    directors: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default MoviePageOverview;

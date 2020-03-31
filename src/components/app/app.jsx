@@ -39,6 +39,8 @@ class App extends React.PureComponent {
       return (
         <MoviePageWrapper
           filmData={popupFilmData}
+          filmsData={filmsData}
+          onTitleClick={this.onTitleClick}
         />
       );
     } else {
