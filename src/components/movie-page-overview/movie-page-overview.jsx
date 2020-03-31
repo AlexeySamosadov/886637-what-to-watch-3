@@ -26,7 +26,7 @@ const MoviePageOverview = ({filmData}) => {
 MoviePageOverview.propTypes = {
   filmData: PropTypes.shape({
     ratingCount: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
+    rating: PropTypes.string.isRequired,
     ratingLevel: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     actors: PropTypes.array.isRequired,

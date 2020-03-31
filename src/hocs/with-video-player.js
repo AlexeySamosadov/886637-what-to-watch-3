@@ -10,6 +10,7 @@ const withVideoPlayer = (Component) => {
       };
       this.handleMouseLeave = this.handleMouseLeave.bind(this);
       this.handleMouseEnter = this.handleMouseEnter.bind(this);
+      this.handleClickClearTimeout = this.handleClickClearTimeout.bind(this);
     }
 
     handleMouseLeave() {
@@ -28,12 +29,17 @@ const withVideoPlayer = (Component) => {
       }, 1000);
     }
 
+    handleClickClearTimeout() {
+      clearTimeout(this.timeOut);
+    }
+
     render() {
       const {activeFilm} = this.state;
       return <Component
         {...this.props}
         handleMouseEnter={this.handleMouseEnter}
         isActive = {activeFilm}
+        handleClickClearTimeout={this.handleClickClearTimeout}
         handleMouseLeave={this.handleMouseLeave}
       />;
     }

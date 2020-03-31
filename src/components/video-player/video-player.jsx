@@ -36,11 +36,13 @@ export default class VideoPlayer extends PureComponent {
   }
 
   render() {
-    const {src, handleMouseLeave, handleMouseEnter} = this.props;
+    // eslint-disable-next-line react/prop-types
+    const {src, handleMouseLeave, handleMouseEnter, handleClickClearTimeout} = this.props;
     return (
       <div className="small-movie-card__image"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onClick={handleClickClearTimeout}
       >
         <video className="player__video" ref={this._videoRef} poster={`img/${src}`}/>
       </div>
