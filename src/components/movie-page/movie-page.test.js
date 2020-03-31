@@ -40,7 +40,7 @@ it(`This is Unit Test for MoviePage component`, ()=>{
           filmsData={filmsData}
           activeTap={`Overview`}
           onTabClick={()=>{}}
-          onTitleClic={()=>{}}
+          onTitleClick={()=>{}}
         />, {
           createNodeMock: () => {
             return {};

@@ -265,6 +265,7 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >

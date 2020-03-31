@@ -50,7 +50,7 @@ exports[`This is Unit Test for MoviePageDetails component 1`] = `
       <span
         className="movie-card__details-value"
       >
-        NaNh NaNmin
+        3h 35min
       </span>
     </p>
     <p

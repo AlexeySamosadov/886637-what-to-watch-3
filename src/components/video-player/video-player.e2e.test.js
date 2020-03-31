@@ -21,6 +21,8 @@ it(`Should video player change state with different isPlaying props`, ()=>{
           srcVideo={srcVideo}
           isActive={isActive}
           handleMouse={()=>{}}
+          handleMouseEnter={()=>{}}
+          handleMouseLeave={()=>{}}
         />
     );
   };

@@ -17,6 +17,8 @@ it(`VideoPlayer is renderer correctly`, ()=>{
     srcVideo={srcVideo}
     isActive={isActive}
     handleMouse={()=>{}}
+    handleMouseEnter={()=>{}}
+    handleMouseLeave={()=>{}}
   />, {
     createNodeMock: () => {
       return {play() {}};
