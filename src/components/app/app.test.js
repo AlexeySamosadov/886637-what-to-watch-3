@@ -1,6 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import App from "./app.jsx";
+import {Provider} from "react-redux";
+
 
 const filmsData = [{
   name: `The Grand Budapest Hotel`,
@@ -20,9 +22,11 @@ const filmsData = [{
 
 it(`Render App`, () => {
   const tree = renderer.
-  create(<App
-    filmsData = {filmsData}
-  />, {
+  create(<Provider>
+    <App
+      filmsData = {filmsData}
+    />
+  </Provider>, {
     createNodeMock: () => {
       return {};
     },

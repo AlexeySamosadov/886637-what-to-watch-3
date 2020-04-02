@@ -43,6 +43,8 @@ const getMonthByString = (monthNumber) => {
   return MONTH_BY_NUMBERS[monthNumber];
 };
 
+const changeFirstLetterUppercase = (word) => word[0].toUpperCase() + word.slice(1);
+
 const formatMovieDuration = (movieDuration) => {
   return `${(movieDuration / 60).toFixed(0)}h ${movieDuration % 60}min`;
 };
@@ -72,6 +74,6 @@ const filterFilms = (data, genres) => {
   return films;
 };
 
-export {getRandomNumber, filterFilms, extend, getRandomArray, getRandomItem, transformDate, formatMovieDuration, TRANSFORM_TYPES};
+export {getRandomNumber, filterFilms, extend, getRandomArray, getRandomItem, transformDate, formatMovieDuration, changeFirstLetterUppercase, TRANSFORM_TYPES};
 
 

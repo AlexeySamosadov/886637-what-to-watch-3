@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main.jsx";
+import {Provider} from "react-redux";
 
 const filmsData = [{
   name: `The Grand Budapest Hotel`,
@@ -20,10 +21,12 @@ const filmsData = [{
 it(`This is main test`, () => {
   const tree = renderer.
     create(
-        <Main
-          filmsData={filmsData}
-          onTitleClick={() => {}}
-        />, {
+        <Provider>
+          <Main
+            filmsData={filmsData}
+            onTitleClick={() => {}}
+          />
+        </Provider>, {
           createNodeMock: () => {
             return {};
           },
