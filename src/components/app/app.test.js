@@ -2,6 +2,14 @@ import React from "react";
 import renderer from "react-test-renderer";
 import App from "./app.jsx";
 import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+
+
+const mockStore = configureStore([]);
+
+const store = mockStore({
+  genre: `Drama`,
+});
 
 
 const filmsData = [{
@@ -22,7 +30,7 @@ const filmsData = [{
 
 it(`Render App`, () => {
   const tree = renderer.
-  create(<Provider>
+  create(<Provider store={store}>
     <App
       filmsData = {filmsData}
     />

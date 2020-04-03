@@ -1,6 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import FilmsList from "./films-list.jsx";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+
+
+const mockStore = configureStore([]);
+
+const store = mockStore({
+  genre: `Drama`,
+});
 
 const filmsData = [{
   name: `The Grand Budapest Hotel`,
@@ -17,19 +26,23 @@ const filmsData = [{
   srcVideo: `somePath`
 }];
 
+const filteredGenre = `Drama`;
+
 const onTitleClick = ()=> {};
 
 it(`This is FilmList Unit Test`, ()=> {
   const tree = renderer.
-  create(
-      <FilmsList
-        filmsData={filmsData}
-        onTitleClick={onTitleClick}
-      />, {
-        createNodeMock: () => {
-          return {};
-        },
-      }
+  create(<Provider store={store}>
+    <FilmsList
+      filmsData={filmsData}
+      onTitleClick={onTitleClick}
+      filteredGenre={filteredGenre}
+    />
+  </Provider>, {
+    createNodeMock: () => {
+      return {};
+    },
+  }
   ).toJSON();
 
   expect(tree).toMatchSnapshot();

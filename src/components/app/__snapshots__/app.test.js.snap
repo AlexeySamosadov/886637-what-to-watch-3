@@ -156,7 +156,7 @@ Array [
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item catalog__genres-item--active"
+          className="catalog__genres-item false"
           onClick={[Function]}
         >
           <a
@@ -167,7 +167,7 @@ Array [
           </a>
         </li>
         <li
-          className="catalog__genres-item false"
+          className="catalog__genres-item catalog__genres-item--active"
           onClick={[Function]}
         >
           <a
