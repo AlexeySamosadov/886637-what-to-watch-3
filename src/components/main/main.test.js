@@ -1,6 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main.jsx";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+
+const mockStore = configureStore([]);
+
+const store = mockStore({
+  genre: `Drama`,
+});
 
 const filmsData = [{
   name: `The Grand Budapest Hotel`,
@@ -20,10 +28,12 @@ const filmsData = [{
 it(`This is main test`, () => {
   const tree = renderer.
     create(
-        <Main
-          filmsData={filmsData}
-          onTitleClick={() => {}}
-        />, {
+        <Provider store={store}>
+          <Main
+            filmsData={filmsData}
+            onTitleClick={() => {}}
+          />
+        </Provider>, {
           createNodeMock: () => {
             return {};
           },

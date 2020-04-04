@@ -1,3 +1,5 @@
+import {genreType} from "../const/const";
+
 const getRandomNumber = function (minNumber, maxNumber) {
   return arguments.length === 2 ? Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber) : Math.round(Math.random() * minNumber);
 };
@@ -41,6 +43,8 @@ const getMonthByString = (monthNumber) => {
   return MONTH_BY_NUMBERS[monthNumber];
 };
 
+const changeFirstLetterUppercase = (word) => word[0].toUpperCase() + word.slice(1);
+
 const formatMovieDuration = (movieDuration) => {
   return `${(movieDuration / 60).toFixed(0)}h ${movieDuration % 60}min`;
 };
@@ -58,6 +62,18 @@ const transformDate = (fullDate, transformType) => {
   return true;
 };
 
-export {getRandomNumber, getRandomArray, getRandomItem, transformDate, formatMovieDuration, TRANSFORM_TYPES};
+const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};
+
+const filterFilms = (data, genres) => {
+  let films = data;
+  if (genres !== genreType.ALL) {
+    films = data.filter((it)=>it.genre === genres);
+  }
+  return films;
+};
+
+export {getRandomNumber, filterFilms, extend, getRandomArray, getRandomItem, transformDate, formatMovieDuration, changeFirstLetterUppercase, TRANSFORM_TYPES};
 
 

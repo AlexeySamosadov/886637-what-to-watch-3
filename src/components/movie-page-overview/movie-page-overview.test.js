@@ -14,7 +14,8 @@ const filmData = {
   description: `dsfsdfdsfsfsdfsdfdsf`,
   actors: [`Toni Hawk`, `Arnold Vicci`, `Van gog`, `Charli Chaplin`, `German French`, `Italian English`],
   directors: `Alex Smitch`,
-  srcVideo: `somePath`
+  srcVideo: `somePath`,
+  rating: `9.79`,
 };
 
 it(`This is Unit Test for MoviePageDetails component`, ()=>{

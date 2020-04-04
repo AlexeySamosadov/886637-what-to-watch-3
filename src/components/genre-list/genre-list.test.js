@@ -1,9 +1,8 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import FilmsList from "./films-list.jsx";
+import render from "react-test-renderer";
+import GenreList from "./genre-list.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-
 
 const mockStore = configureStore([]);
 
@@ -28,21 +27,17 @@ const filmsData = [{
 
 const filteredGenre = `Drama`;
 
-const onTitleClick = ()=> {};
 
-it(`This is FilmList Unit Test`, () => {
-  const tree = renderer.
+it(`This is GenreList Unit Test`, ()=> {
+  const tree = render.
   create(<Provider store={store}>
-    <FilmsList
+    <GenreList
+      onGenreClick={()=>{}}
       filmsData={filmsData}
-      onTitleClick={onTitleClick}
-      filteredGenre={filteredGenre}
-    />
-  </Provider>, {
-    createNodeMock: () => {
-      return {};
-    },
-  }
+      filteredGenre={filteredGenre}>
+    </GenreList>
+  </Provider>
+
   ).toJSON();
 
   expect(tree).toMatchSnapshot();

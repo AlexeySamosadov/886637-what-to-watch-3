@@ -1,6 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import MoviePage from "./movie-page.jsx";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+
+
+const mockStore = configureStore([]);
+
+const store = mockStore({
+  genre: `Drama`,
+});
 
 const filmData = {
   name: `The Grand Budapest Hotel`,
@@ -34,18 +43,19 @@ const filmsData = [{
 
 it(`This is Unit Test for MoviePage component`, ()=>{
   const tree = renderer
-    .create(
-        <MoviePage
-          filmData={filmData}
-          filmsData={filmsData}
-          activeTap={`Overview`}
-          onTabClick={()=>{}}
-          onTitleClic={()=>{}}
-        />, {
-          createNodeMock: () => {
-            return {};
-          },
-        }).toJSON();
+    .create(<Provider store={store}>
+      <MoviePage
+        filmData={filmData}
+        filmsData={filmsData}
+        activeTap={`Overview`}
+        onTabClick={()=>{}}
+        onTitleClick={()=>{}}
+      />
+    </Provider>, {
+      createNodeMock: () => {
+        return {};
+      },
+    }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

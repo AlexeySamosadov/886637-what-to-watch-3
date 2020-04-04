@@ -7,6 +7,7 @@ exports[`This is FilmList Unit Test 1`] = `
 >
   <div
     className="small-movie-card__image"
+    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >

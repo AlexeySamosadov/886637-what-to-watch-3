@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {formatMovieDuration} from "../util/util.js";
+import {changeFirstLetterUppercase} from "../util/util";
 
 const MoviePageDetails = ({filmData}) => {
   const {actors, directors, genre, date, duration} = filmData;
-  const genreTransferred = genre[0].toUpperCase() + genre.slice(1);
+  const genreTransferred = changeFirstLetterUppercase(genre);
   const movieDuration = formatMovieDuration(duration);
   return (
     <div className="movie-card__text movie-card__row">
