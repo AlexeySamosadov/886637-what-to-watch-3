@@ -29,10 +29,9 @@ const GenreList = ({fullFilmList, filteredGenre, onGenreClick}) => {
 
 
 GenreList.propTypes = {
-  // filmsData: PropTypes.arrayOf(PropTypes.shape({})),
+  fullFilmList: PropTypes.arrayOf(PropTypes.shape({})),
   filteredGenre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
-  fullFilmList: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({

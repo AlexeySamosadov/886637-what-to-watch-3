@@ -125,15 +125,4 @@ Main.propTypes = {
   showingFilmsNumber: PropTypes.number,
 };
 
-// const mapStateToProps = (state) => ({
-//   showingFilmsNumber: state.showingFilmsNumber,
-//   filteredGenre: state.genre,
-// });
-//
-// const mapStateToDispatch = (dispatch) => ({
-//   onShowMore() {
-//     dispatch(ActionCreator.showMore());
-//   }
-// });
-
 export default Main;
