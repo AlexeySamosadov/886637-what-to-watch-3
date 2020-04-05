@@ -8,6 +8,10 @@ const mockStore = configureStore([]);
 
 const store = mockStore({
   genre: `Drama`,
+  showingFilmsNumber: 8,
+  isRenderButton: true,
+  chosenFilmData: null,
+  popupFilmData: null,
 });
 
 const filmsData = [{
@@ -30,14 +34,14 @@ const filteredGenre = `Drama`;
 
 it(`This is GenreList Unit Test`, ()=> {
   const tree = render.
-  create(<Provider store={store}>
-    <GenreList
-      onGenreClick={()=>{}}
-      filmsData={filmsData}
-      filteredGenre={filteredGenre}>
-    </GenreList>
-  </Provider>
-
+  create(
+      <Provider store={store}>
+        <GenreList
+          onGenreClick={()=>{}}
+          filmsData={filmsData}
+          filteredGenre={filteredGenre}>
+        </GenreList>
+      </Provider>
   ).toJSON();
 
   expect(tree).toMatchSnapshot();

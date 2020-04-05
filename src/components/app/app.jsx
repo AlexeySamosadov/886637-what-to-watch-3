@@ -1,9 +1,11 @@
 import React from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {connect} from "react-redux";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import PropTypes from 'prop-types';
-import withMoviePage from "../../hocs/with-movie-page";
+import withMoviePage from "../../hocs/with-movie-page.js";
+import {getChosenFilmData, getFilmsToRender, getGenre, getShowingFilmsNumber} from "../../reducer/app-status/selectors.js";
 
 const MoviePageWrapper = withMoviePage(MoviePage);
 
@@ -17,35 +19,35 @@ class App extends React.PureComponent {
     this.onTitleClick = this.onTitleClick.bind(this);
   }
 
-  onTitleClick(id) {
+  onTitleClick(id, genre) {
     const [currentFilm] = this.props.filmsData.filter((it)=>it.id === id);
     this.setState({
-      showMoviePage: true,
       popupFilmData: currentFilm,
+      popupGenre: genre,
     });
   }
 
   renderApp() {
-    const filmsData = this.props.filmsData;
-    const {showMoviePage, popupFilmData} = this.state;
-    if (!showMoviePage) {
-      return (
-        <Main
-          filmsData={filmsData}
-          onTitleClick={this.onTitleClick}
-        />
-      );
-    } else if (showMoviePage) {
+    const {filmsData, filteredGenre, showingFilmsNumber, chosenFilmData} = this.props;
+    const {popupGenre} = this.state;
+    if (chosenFilmData) {
       return (
         <MoviePageWrapper
-          filmData={popupFilmData}
+          filmData={chosenFilmData}
           filmsData={filmsData}
           onTitleClick={this.onTitleClick}
+          popupGenre={popupGenre}
         />
       );
-    } else {
-      return true;
     }
+    return (
+      <Main
+        filmsData={filmsData}
+        onTitleClick={this.onTitleClick}
+        filteredGenre={filteredGenre}
+        showingFilmsNumber={showingFilmsNumber}
+      />
+    );
   }
 
   render() {
@@ -71,6 +73,18 @@ App.propTypes = {
   }),
   filmsData: PropTypes.arrayOf(PropTypes.shape({
   })),
+  filteredGenre: PropTypes.string,
+  showingFilmsNumber: PropTypes.number,
+  chosenFilmData: PropTypes.object,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  showingFilmsNumber: getShowingFilmsNumber(state),
+  filteredGenre: getGenre(state),
+  showMoviePage: state.showMoviePage,
+  filmsData: getFilmsToRender(state),
+  chosenFilmData: getChosenFilmData(state),
+});
+
+export {App};
+export default connect(mapStateToProps)(App);
