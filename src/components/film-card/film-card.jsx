@@ -7,15 +7,15 @@ import {ActionCreator} from "../../reducer/app-status/app-status.js";
 
 const VideoPlayerWrapper = withVideoPlayer(VideoPlayer);
 
-const FilmCard = ({filmData, onTitleClick, showPopup})=> {
-  const {src, name, id, srcVideo, genre} = filmData;
+const FilmCard = ({filmData, showPopup})=> {
+  const {src, name, srcVideo} = filmData;
   const onClick = () => {
-    onTitleClick(id, genre);
+    // onTitleClick(id, genre);
     showPopup(filmData);
   };
   return (
     <article onClick={onClick}
-      className="small-movie-card catalog__movies-card"
+      className="small-movie-card test catalog__movies-card"
     >
       <VideoPlayerWrapper src={src} srcVideo={srcVideo} width="280" height="175"/>
       <h3 className="small-movie-card__title">
@@ -27,14 +27,14 @@ const FilmCard = ({filmData, onTitleClick, showPopup})=> {
 
 
 FilmCard.propTypes = {
-  onTitleClick: PropTypes.func.isRequired,
+  // onTitleClick: PropTypes.func.isRequired,
   showPopup: PropTypes.func.isRequired,
   filmData: PropTypes.shape({
     src: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
+    // id: PropTypes.string.isRequired,
     srcVideo: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
+    // genre: PropTypes.string.isRequired,
   }),
 };
 

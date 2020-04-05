@@ -12,6 +12,10 @@ const Main = ({filmsData, onTitleClick, filteredGenre, showingFilmsNumber}) => {
   const filteredFilmsData = filterFilms(filmsData, filteredGenre);
   const cuttedFilmsData = filteredFilmsData.slice(0, showingFilmsNumber);
 
+  const onPlay = (evt) => {
+    evt.preventDefault();
+  };
+
   let isRenderButton = true;
   if (filteredFilmsData.length < showingFilmsNumber) {
     isRenderButton = false;
@@ -58,7 +62,7 @@ const Main = ({filmsData, onTitleClick, filteredGenre, showingFilmsNumber}) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button onClick={(evt) => onPlay(evt)} className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>

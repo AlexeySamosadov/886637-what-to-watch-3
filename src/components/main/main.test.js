@@ -6,10 +6,6 @@ import configureStore from "redux-mock-store";
 
 const mockStore = configureStore([]);
 
-const store = mockStore({
-  genre: `Drama`,
-});
-
 const filmsData = [{
   name: `The Grand Budapest Hotel`,
   date: 2014,
@@ -24,6 +20,18 @@ const filmsData = [{
   directors: `Alex Smitch`,
   srcVideo: `somePath`
 }];
+
+const store = mockStore({
+  APP_STATUS: {
+    genre: `All genres`,
+    showingFilmsNumber: 8,
+    isRenderButton: true,
+    chosenFilmData: null,
+    popupFilmData: null},
+  DATA: {
+    filmsData,
+  }
+});
 
 it(`This is main test`, () => {
   const tree = renderer.
