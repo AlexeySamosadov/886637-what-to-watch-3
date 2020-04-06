@@ -5,6 +5,7 @@ import MoviePageOverview from "../movie-page-overview/movie-page-overview.jsx";
 import MoviePageDetails from "../movie-page-details/movie-page-details.jsx";
 import MoviePageReviews from "../movie-page-reviews/movie-page-reviews.jsx";
 import FilmsList from "../films-list/films-list.jsx";
+import {filterFilms} from "../util/util";
 
 export const ACTIVE_TABS = {
   OVERVIEW: `OVERVIEW`,
@@ -24,9 +25,10 @@ const renderPageDetails = (filmData, activeTap) => {
   return true;
 };
 
-const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick}) => {
+const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick, popupGenre}) => {
   const {name, genre, date, srcPoster} = filmData;
-  const filmsDataCutted = filmsData.slice(0, 4);
+  const filteredFilmsData = filterFilms(filmsData, popupGenre);
+  const filmsDataCutted = filteredFilmsData.slice(0, 4);
 
 
   return (
@@ -149,4 +151,5 @@ MoviePage.propTypes = {
   onTitleClick: PropTypes.func,
   onTabClick: PropTypes.func,
   activeTap: PropTypes.string,
+  popupGenre: PropTypes.string,
 };

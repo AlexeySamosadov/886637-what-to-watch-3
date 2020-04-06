@@ -2,15 +2,20 @@ import React from "react";
 import PropTypes from "prop-types";
 import VideoPlayer from "../video-player/video-player.jsx";
 import withVideoPlayer from "../../hocs/with-video-player.js";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer/app-status/app-status.js";
 
 const VideoPlayerWrapper = withVideoPlayer(VideoPlayer);
 
-const FilmCard = ({filmData, onTitleClick})=> {
-  const {src, name, id, srcVideo} = filmData;
-  const onClick = () => onTitleClick(id);
+const FilmCard = ({filmData, showPopup})=> {
+  const {src, name, srcVideo} = filmData;
+  const onClick = () => {
+    // onTitleClick(id, genre);
+    showPopup(filmData);
+  };
   return (
     <article onClick={onClick}
-      className="small-movie-card catalog__movies-card"
+      className="small-movie-card test catalog__movies-card"
     >
       <VideoPlayerWrapper src={src} srcVideo={srcVideo} width="280" height="175"/>
       <h3 className="small-movie-card__title">
@@ -22,13 +27,23 @@ const FilmCard = ({filmData, onTitleClick})=> {
 
 
 FilmCard.propTypes = {
-  onTitleClick: PropTypes.func.isRequired,
+  // onTitleClick: PropTypes.func.isRequired,
+  showPopup: PropTypes.func.isRequired,
   filmData: PropTypes.shape({
     src: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
+    // id: PropTypes.string.isRequired,
     srcVideo: PropTypes.string.isRequired,
+    // genre: PropTypes.string.isRequired,
   }),
 };
 
-export default FilmCard;
+export {FilmCard};
+
+const mapStateToDispatch = (dispatch) => ({
+  showPopup(filmData) {
+    dispatch(ActionCreator.showPopup(filmData));
+  }
+});
+
+export default connect(null, mapStateToDispatch)(FilmCard);

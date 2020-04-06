@@ -2,11 +2,24 @@ import React from "react";
 import PropTypes from "prop-types";
 import FilmsList from "../films-list/films-list.jsx";
 import GenreList from "../genre-list/genre-list.jsx";
+import ShowMore from "../show-more/show-more.jsx";
+import {filterFilms} from "../util/util.js";
 
 
-const Main = ({filmsData, onTitleClick}) => {
+const Main = ({filmsData, onTitleClick, filteredGenre, showingFilmsNumber}) => {
   const movieInfo = filmsData[0];
   const {name, genre, date, id} = movieInfo;
+  const filteredFilmsData = filterFilms(filmsData, filteredGenre);
+  const cuttedFilmsData = filteredFilmsData.slice(0, showingFilmsNumber);
+
+  const onPlay = (evt) => {
+    evt.preventDefault();
+  };
+
+  let isRenderButton = true;
+  if (filteredFilmsData.length < showingFilmsNumber) {
+    isRenderButton = false;
+  }
 
   return (
     <React.Fragment>
@@ -42,14 +55,14 @@ const Main = ({filmsData, onTitleClick}) => {
             </div>
 
             <div className="movie-card__desc">
-              <h2 onClick={()=>onTitleClick(id)} className="movie-card__title test">{name}</h2>
+              <h2 onClick={()=>onTitleClick(id, genre)} className="movie-card__title test">{name}</h2>
               <p className="movie-card__meta">
                 <span className="movie-card__genre">{genre}</span>
                 <span className="movie-card__year">{date}</span>
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button onClick={(evt) => onPlay(evt)} className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -76,14 +89,13 @@ const Main = ({filmsData, onTitleClick}) => {
           />
           <div className="catalog__movies-list">
             <FilmsList
-              filmsData={filmsData}
+              filmsData={cuttedFilmsData}
               onTitleClick={onTitleClick}
+              showingFilmsNumber={showingFilmsNumber}
             />
           </div>
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {isRenderButton && <ShowMore/>}
         </section>
 
         <footer className="page-footer">
@@ -112,7 +124,9 @@ Main.propTypes = {
     date: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
   })),
+  filteredGenre: PropTypes.string,
   onTitleClick: PropTypes.func.isRequired,
+  showingFilmsNumber: PropTypes.number,
 };
 
 export default Main;

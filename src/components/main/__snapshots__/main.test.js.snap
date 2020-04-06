@@ -104,6 +104,7 @@ Array [
           >
             <button
               className="btn btn--play movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -156,7 +157,7 @@ Array [
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item false"
+          className="catalog__genres-item catalog__genres-item--active"
           onClick={[Function]}
         >
           <a
@@ -167,7 +168,7 @@ Array [
           </a>
         </li>
         <li
-          className="catalog__genres-item catalog__genres-item--active"
+          className="catalog__genres-item false"
           onClick={[Function]}
         >
           <a
@@ -180,39 +181,13 @@ Array [
       </ul>
       <div
         className="catalog__movies-list"
-      >
-        <article
-          className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          >
-            <video
-              className="player__video"
-              poster="img/somePath"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              The Grand Budapest Hotel
-            </a>
-          </h3>
-        </article>
-      </div>
+      />
       <div
         className="catalog__more"
       >
         <button
           className="catalog__button"
+          onClick={[Function]}
           type="button"
         >
           Show more

@@ -1,16 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {genreType} from "../const/const.js";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/app-status/app-status.js";
 import {connect} from "react-redux";
 import {changeFirstLetterUppercase} from "../util/util.js";
+import {getFilmsData} from "../../reducer/data/selectors.js";
+import {getGenre} from "../../reducer/app-status/selectors";
 
-const GenreList = ({filmsData, filteredGenre, onGenreClick}) => {
+const GenreList = ({fullFilmList, filteredGenre, onGenreClick}) => {
   const genresSet = new Set();
   genresSet.add(genreType.ALL);
-  filmsData.forEach((it)=> genresSet.add(it.genre));
-  const genreList = Array.from(genresSet);
-
+  fullFilmList.forEach((it)=> genresSet.add(it.genre));
+  const genreList = Array.from(genresSet).slice(0, 8);
 
   return (
     <ul className="catalog__genres-list">
@@ -28,13 +29,14 @@ const GenreList = ({filmsData, filteredGenre, onGenreClick}) => {
 
 
 GenreList.propTypes = {
-  filmsData: PropTypes.arrayOf(PropTypes.shape({})),
+  fullFilmList: PropTypes.arrayOf(PropTypes.shape({})),
   filteredGenre: PropTypes.string.isRequired,
-  onGenreClick: PropTypes.func,
+  onGenreClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  filteredGenre: state.genre,
+  filteredGenre: getGenre(state),
+  fullFilmList: getFilmsData(state),
 });
 
 const mapStateToDispatch = (dispatch) => ({
