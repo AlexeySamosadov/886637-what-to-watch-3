@@ -10,6 +10,8 @@ import {getFilmToWatch} from "../../reducer/app-status/selectors.js";
 import withVideo from "../../hocs/with-video/with-video.js";
 import MovieVideoPlayer from "../movie-video-player/movie-video-player.jsx";
 import {ActionCreator} from "../../reducer/app-status/app-status";
+import {playerType} from "../const/const.js";
+import {playerClass} from "../const/const";
 
 const VideoPlayer = withVideo(MovieVideoPlayer);
 
@@ -28,8 +30,8 @@ class App extends React.PureComponent {
 
       return (
         <VideoPlayer
-          type={`movie`}
-          className={`player__video`}
+          type={playerType.MOVIE}
+          className={playerClass.PLAYER_VIDEO}
           srcVideo={filmToWatch.srcVideo}
           srcPoster={filmToWatch.src}
           onExitFilmButtonClick={exitFromMovie}

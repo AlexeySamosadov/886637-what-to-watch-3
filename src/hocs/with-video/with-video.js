@@ -1,5 +1,6 @@
 import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
+import {playerType} from "../../components/const/const.js";
 
 const withVideo = (Component) => {
   class WithVideo extends PureComponent {
@@ -63,7 +64,7 @@ const withVideo = (Component) => {
         });
       };
 
-      if (type === `movie`) {
+      if (type === playerType.MOVIE) {
         video.onpause = () => {
           this.setState({
             isPlaying: false
@@ -84,7 +85,7 @@ const withVideo = (Component) => {
       const video = this.videoRef.current;
 
       const {type} = this.props;
-      if (type === `movie`) {
+      if (type === playerType.MOVIE) {
         if (this.state.isPlaying) {
           video.play();
         } else {
@@ -92,7 +93,7 @@ const withVideo = (Component) => {
         }
       }
 
-      if (type === `trailer`) {
+      if (type === playerType.TRAILER) {
         if (this.state.isPlaying) {
           video.play();
         } else {
