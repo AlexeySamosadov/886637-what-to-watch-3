@@ -25,10 +25,11 @@ const renderPageDetails = (filmData, activeTap) => {
   return true;
 };
 
-const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick, popupGenre}) => {
+const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick}) => {
   const {name, genre, date, srcPoster} = filmData;
-  const filteredFilmsData = filterFilms(filmsData, popupGenre);
-  const filmsDataCutted = filteredFilmsData.slice(0, 4);
+  const filteredFilmsData = filterFilms(filmsData, filmData.genre);
+  const exception = filteredFilmsData.filter((it)=>it.name !== filmData.name);
+  const filmsDataCutted = exception.slice(0, 4);
 
 
   return (
@@ -151,5 +152,4 @@ MoviePage.propTypes = {
   onTitleClick: PropTypes.func,
   onTabClick: PropTypes.func,
   activeTap: PropTypes.string,
-  popupGenre: PropTypes.string,
 };

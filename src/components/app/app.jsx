@@ -36,7 +36,6 @@ class App extends React.PureComponent {
           filmData={chosenFilmData}
           filmsData={filmsData}
           onTitleClick={this.onTitleClick}
-          popupGenre={popupGenre}
         />
       );
     }

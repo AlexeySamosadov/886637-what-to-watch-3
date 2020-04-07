@@ -67,6 +67,7 @@ const extend = (a, b) => {
 };
 
 const filterFilms = (data, genres) => {
+  console.log(`genres`, genres);
   let films = data;
   if (genres !== genreType.ALL) {
     films = data.filter((it)=>it.genre === genres);
