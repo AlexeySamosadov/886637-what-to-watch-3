@@ -29,7 +29,6 @@ class App extends React.PureComponent {
 
   renderApp() {
     const {filmsData, filteredGenre, showingFilmsNumber, chosenFilmData} = this.props;
-    const {popupGenre} = this.state;
     if (chosenFilmData) {
       return (
         <MoviePageWrapper

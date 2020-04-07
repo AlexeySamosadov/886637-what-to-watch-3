@@ -11,7 +11,6 @@ const Main = ({filmsData, onTitleClick, filteredGenre, showingFilmsNumber}) => {
   const {name, genre, date, id} = movieInfo;
   const filteredFilmsData = filterFilms(filmsData, filteredGenre);
   const cuttedFilmsData = filteredFilmsData.slice(0, showingFilmsNumber);
-  console.log(cuttedFilmsData);
 
   const onPlay = (evt) => {
     evt.preventDefault();

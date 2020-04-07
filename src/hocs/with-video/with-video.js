@@ -50,8 +50,6 @@ const withVideo = (Component) => {
     }
 
     _handlerMouseClick() {
-      console.log(`Отработал клик`);
-      console.log(this._timer);
       clearTimeout(this._timer);
     }
 
