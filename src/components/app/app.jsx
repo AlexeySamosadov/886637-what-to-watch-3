@@ -10,8 +10,7 @@ import {getFilmToWatch} from "../../reducer/app-status/selectors.js";
 import withVideo from "../../hocs/with-video/with-video.js";
 import MovieVideoPlayer from "../movie-video-player/movie-video-player.jsx";
 import {ActionCreator} from "../../reducer/app-status/app-status";
-import {playerType} from "../const/const.js";
-import {playerClass} from "../const/const";
+import {playerType, playerClass} from "../const/const.js";
 
 const VideoPlayer = withVideo(MovieVideoPlayer);
 

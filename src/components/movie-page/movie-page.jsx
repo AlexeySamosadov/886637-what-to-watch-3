@@ -27,7 +27,7 @@ const renderPageDetails = (filmData, activeTap) => {
   return true;
 };
 
-export const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick, playFilm}) => {
+export const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick, playFilm, closeMoviePage}) => {
   const {name, genre, date, srcPoster} = filmData;
   const filteredFilmsData = filterFilms(filmsData, filmData.genre);
   const exception = filteredFilmsData.filter((it)=>it.name !== filmData.name);
@@ -35,6 +35,10 @@ export const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleCl
   const onClick = (e) => {
     e.preventDefault();
     playFilm(filmData);
+  };
+  const closePopup = (e) => {
+    e.preventDefault();
+    closeMoviePage();
   };
 
   return (
@@ -49,7 +53,7 @@ export const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleCl
 
           <header className="page-header movie-card__head">
             <div className="logo">
-              <a href="" className="logo__link">
+              <a href="#" onClick={closePopup} className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
@@ -156,12 +160,16 @@ MoviePage.propTypes = {
   onTabClick: PropTypes.func,
   activeTap: PropTypes.string,
   playFilm: PropTypes.func,
+  closeMoviePage: PropTypes.func,
 };
 
 
 const mapStateToDispatch = (dispatch) => ({
   playFilm(filmData) {
     dispatch(ActionCreator.setFilmToWatch(filmData));
+  },
+  closeMoviePage() {
+    dispatch(ActionCreator.showPopup());
   }
 });
 
