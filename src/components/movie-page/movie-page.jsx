@@ -5,7 +5,7 @@ import MoviePageOverview from "../movie-page-overview/movie-page-overview.jsx";
 import MoviePageDetails from "../movie-page-details/movie-page-details.jsx";
 import MoviePageReviews from "../movie-page-reviews/movie-page-reviews.jsx";
 import FilmsList from "../films-list/films-list.jsx";
-import {filterFilms} from "../util/util";
+import {filterFilms} from "../util/util.js";
 
 export const ACTIVE_TABS = {
   OVERVIEW: `OVERVIEW`,
@@ -43,7 +43,7 @@ const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick, po
 
           <header className="page-header movie-card__head">
             <div className="logo">
-              <a href="main.html" className="logo__link">
+              <a href="" className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
@@ -78,7 +78,7 @@ const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick, po
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                <a href="#" className="btn movie-card__button">Add review</a>
               </div>
             </div>
           </div>

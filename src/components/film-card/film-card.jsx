@@ -1,23 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
 import VideoPlayer from "../video-player/video-player.jsx";
-import withVideoPlayer from "../../hocs/with-video-player.js";
+import withVideoPlayer from "../../hocs/with-wideo-player/with-video-player.js";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/app-status/app-status.js";
+import withVideo from "../../hocs/with-video/with-video.js";
+import MovieVideoPlayer from "../movie-video-player/movie-video-player.jsx";
 
 const VideoPlayerWrapper = withVideoPlayer(VideoPlayer);
+
+
+const VideoPlae = withVideo(MovieVideoPlayer);
 
 const FilmCard = ({filmData, showPopup})=> {
   const {src, name, srcVideo} = filmData;
   const onClick = () => {
-    // onTitleClick(id, genre);
     showPopup(filmData);
   };
   return (
     <article onClick={onClick}
-      className="small-movie-card test catalog__movies-card"
-    >
-      <VideoPlayerWrapper src={src} srcVideo={srcVideo} width="280" height="175"/>
+      className="small-movie-card test catalog__movies-card">
+
+      {/* <VideoPlayerWrapper src={src} srcVideo={srcVideo} width="280" height="175"/>*/}
+      <VideoPlae
+        isPlaying={false}
+        srcPoster={src}
+        srcVideo={srcVideo}
+        widthAtr={280}
+        heightAtr={175}
+        type={`trailer`}
+      />
       <h3 className="small-movie-card__title">
         <a className="small-movie-card__link" href="movie-page.html">{name}</a>
       </h3>

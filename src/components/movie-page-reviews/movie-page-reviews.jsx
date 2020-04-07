@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {transformDate, TRANSFORM_TYPES} from "../util/util.js";
+import {transformDate, sliceArray, TRANSFORM_TYPES} from "../util/util.js";
 
 const renderComment = (comment) => {
   const {commentId, commentText, commentatorName, commentTime, commentRating} = comment;
   const commentTimeText = transformDate(commentTime, TRANSFORM_TYPES.TO_COMMENT_DATE);
   const commentTimeAttribute = transformDate(commentTime, TRANSFORM_TYPES.TO_COMMENT_ATTRIBUTE);
-
   return (
     <div key={commentId} className="review">
       <blockquote className="review__quote">
@@ -25,14 +24,14 @@ const renderComment = (comment) => {
 
 const MoviePageReviews = ({filmData}) => {
   const {comments} = filmData;
+  const newArrayComment = sliceArray(comments);
+
   return (
     <div className="movie-card__reviews movie-card__row">
-      <div className="movie-card__reviews-col">
-        {comments.slice(0, 3).map((comment)=> renderComment(comment))}
-      </div>
-      <div className="movie-card__reviews-col">
-        {comments.slice(3).map((comment)=> renderComment(comment))}
-      </div>
+      {newArrayComment && newArrayComment.map((it, i)=>
+        (<div key={i} className="movie-card__reviews-col">
+          {it.map((com)=> renderComment(com))}
+        </div>))}
     </div>
   );
 };
@@ -43,3 +42,4 @@ MoviePageReviews.propTypes = {
   }).isRequired,
 };
 export default MoviePageReviews;
+

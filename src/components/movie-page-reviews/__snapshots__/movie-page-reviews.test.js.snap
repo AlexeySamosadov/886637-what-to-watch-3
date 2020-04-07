@@ -41,8 +41,5 @@ exports[`This is Unit Test for MoviePageDetails component 1`] = `
       </div>
     </div>
   </div>
-  <div
-    className="movie-card__reviews-col"
-  />
 </div>
 `;

@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import PropTypes from 'prop-types';
-import withMoviePage from "../../hocs/with-movie-page.js";
+import withMoviePage from "../../hocs/with-movie-page/with-movie-page.js";
 import {getChosenFilmData, getFilmsToRender, getGenre, getShowingFilmsNumber} from "../../reducer/app-status/selectors.js";
 
 const MoviePageWrapper = withMoviePage(MoviePage);

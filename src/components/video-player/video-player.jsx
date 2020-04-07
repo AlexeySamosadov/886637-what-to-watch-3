@@ -36,7 +36,6 @@ export default class VideoPlayer extends PureComponent {
   }
 
   render() {
-    // eslint-disable-next-line react/prop-types
     const {src, handleMouseLeave, handleMouseEnter, handleClickClearTimeout} = this.props;
     return (
       <div className="small-movie-card__image"
@@ -56,4 +55,5 @@ VideoPlayer.propTypes = {
   isActive: PropTypes.bool.isRequired,
   handleMouseLeave: PropTypes.func.isRequired,
   handleMouseEnter: PropTypes.func.isRequired,
+  handleClickClearTimeout: PropTypes.func.isRequired,
 };

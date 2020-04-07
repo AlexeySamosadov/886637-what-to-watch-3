@@ -74,6 +74,15 @@ const filterFilms = (data, genres) => {
   return films;
 };
 
-export {getRandomNumber, filterFilms, extend, getRandomArray, getRandomItem, transformDate, formatMovieDuration, changeFirstLetterUppercase, TRANSFORM_TYPES};
+const sliceArray = (array) => {
+  let size = 3;
+  let newArray = [];
+  for (let i = 0; i < Math.ceil(array.length / size); i++) {
+    newArray[i] = array.slice((i * size), (i * size) + size);
+  }
+  return newArray;
+};
+
+export {getRandomNumber, filterFilms, extend, getRandomArray, getRandomItem, transformDate, sliceArray, formatMovieDuration, changeFirstLetterUppercase, TRANSFORM_TYPES};
 
 
