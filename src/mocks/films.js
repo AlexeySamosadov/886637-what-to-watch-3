@@ -224,7 +224,7 @@ const getRatingLevel = (rating) => {
 };
 
 const generateFilmCardData = () => {
-  const comments = createComments(getRandomNumber(4, 7));
+  const comments = createComments(getRandomNumber(5, 7));
   const link = getRandomItem(FILMS_LINKS);
   const videoLink = getRandomItem(VIDEO_LINKS);
   const rating = getRandomRating(1, 10);

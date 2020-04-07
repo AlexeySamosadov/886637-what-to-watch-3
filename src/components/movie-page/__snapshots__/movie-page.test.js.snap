@@ -29,7 +29,7 @@ Array [
         >
           <a
             className="logo__link"
-            href="main.html"
+            href=""
           >
             <span
               className="logo__letter logo__letter--1"
@@ -93,6 +93,7 @@ Array [
           >
             <button
               className="btn btn--play movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -127,7 +128,7 @@ Array [
             </button>
             <a
               className="btn movie-card__button"
-              href="add-review.html"
+              href="#"
             >
               Add review
             </a>

@@ -2,7 +2,7 @@
 
 exports[`This is FilmCard Unit test 1`] = `
 <article
-  className="small-movie-card test catalog__movies-card"
+  className="small-movie-card catalog__movies-card"
   onClick={[Function]}
 >
   <div
@@ -12,8 +12,12 @@ exports[`This is FilmCard Unit test 1`] = `
     onMouseLeave={[Function]}
   >
     <video
-      className="player__video"
+      alt=""
+      className=""
+      height={175}
       poster="img/somePath"
+      src="somePath"
+      width={280}
     />
   </div>
   <h3
