@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/app-status/app-status.js";
 import withVideo from "../../hocs/with-video/with-video.js";
 import MovieVideoPlayer from "../movie-video-player/movie-video-player.jsx";
+import {playerType} from "../const/const.js";
 
 const VideoPlayer = withVideo(MovieVideoPlayer);
 
@@ -16,12 +17,11 @@ const FilmCard = ({filmData, showPopup})=> {
     <article onClick={onClick}
       className="small-movie-card catalog__movies-card">
       <VideoPlayer
-        isPlaying={false}
         srcPoster={src}
         srcVideo={srcVideo}
         widthAtr={280}
         heightAtr={175}
-        type={`trailer`}
+        type={playerType.TRAILER}
       />
       <h3 className="small-movie-card__title">
         <a className="small-movie-card__link" href="movie-page.html">{name}</a>

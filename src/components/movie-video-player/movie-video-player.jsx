@@ -1,5 +1,6 @@
 import React, {PureComponent, createRef, Fragment} from "react";
 import PropTypes from "prop-types";
+import {playerType, keyCode, typeEvent} from "../const/const.js";
 
 const convertVideoTime = (time) => {
   let seconds;
@@ -43,17 +44,14 @@ class MovieVideoPlayer extends PureComponent {
       onPlayButtonClick, isPlaying, title, isFullScreen, type} = this.props;
 
     switch (type) {
-      case `trailer`:
+      case playerType.TRAILER:
         return <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onClick={onClick} className="small-movie-card__image">
           {children}
         </div>;
-
-
-      case `movie`:
+      case playerType.MOVIE:
         return (
           <div ref={this._rootElRef} className="player">
             {children}
-
             <button type="button" onClick={() => onExitFilmButtonClick(null)} className="player__exit">Exit</button>
 
             <div className="player__controls">
@@ -102,18 +100,18 @@ class MovieVideoPlayer extends PureComponent {
             </div>
           </div>
         );
+      default: return <p>Something went wrong :(</p>;
     }
-    return <p>Something went wrong :(</p>;
   }
 
   _onPressExitButton(evt) {
-    if (evt.code === `Escape`) {
+    if (evt.code === keyCode.ESCAPE) {
       this.onExitFilmButtonClick(null);
     }
   }
 
   _onPressSpaceButton(evt) {
-    if (evt.code === `Space`) {
+    if (evt.code === keyCode.SPACE) {
       this.onPlayButtonClick();
     }
   }
@@ -122,15 +120,15 @@ class MovieVideoPlayer extends PureComponent {
     this.onExitFilmButtonClick = this.props.onExitFilmButtonClick;
     this.onPlayButtonClick = this.props.onPlayButtonClick;
 
-    document.addEventListener(`fullscreenchange`, this._handlerFullScreenChange);
-    document.addEventListener(`keydown`, this._onPressExitButton);
-    document.addEventListener(`keydown`, this._onPressSpaceButton);
+    document.addEventListener(typeEvent.FULL_SCREEN_CHANGE, this._handlerFullScreenChange);
+    document.addEventListener(typeEvent.KEYDOWN, this._onPressExitButton);
+    document.addEventListener(typeEvent.KEYDOWN, this._onPressSpaceButton);
   }
 
   componentWillUnmount() {
-    document.removeEventListener(`fullscreenchange`, this._handlerFullScreenChange);
-    document.removeEventListener(`keydown`, this._onPressExitButton);
-    document.removeEventListener(`keydown`, this._onPressSpaceButton);
+    document.removeEventListener(typeEvent.FULL_SCREEN_CHANGE, this._handlerFullScreenChange);
+    document.removeEventListener(typeEvent.KEYDOWN, this._onPressExitButton);
+    document.removeEventListener(typeEvent.KEYDOWN, this._onPressSpaceButton);
   }
 
   render() {
@@ -155,7 +153,7 @@ MovieVideoPlayer.propTypes = {
   title: PropTypes.string,
   isFullScreen: PropTypes.bool.isRequired,
   onExitFilmButtonClick: PropTypes.func,
-  type: PropTypes.oneOf([`trailer`, `movie`]),
+  type: PropTypes.oneOf([playerType.TRAILER, playerType.MOVIE]),
 };
 
 export default MovieVideoPlayer;

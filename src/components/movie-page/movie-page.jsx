@@ -27,7 +27,7 @@ const renderPageDetails = (filmData, activeTap) => {
   return true;
 };
 
-const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick, playFilm}) => {
+export const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick, playFilm}) => {
   const {name, genre, date, srcPoster} = filmData;
   const filteredFilmsData = filterFilms(filmsData, filmData.genre);
   const exception = filteredFilmsData.filter((it)=>it.name !== filmData.name);
@@ -158,7 +158,6 @@ MoviePage.propTypes = {
   playFilm: PropTypes.func,
 };
 
-export {MoviePage};
 
 const mapStateToDispatch = (dispatch) => ({
   playFilm(filmData) {
