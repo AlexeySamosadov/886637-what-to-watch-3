@@ -24,5 +24,9 @@ const combiner = (films, genre, number)=> {
   return filteredFilms.slice(0, number);
 };
 
+export const getFilmToWatch = (state) => {
+  return state[NameSpace.APP_STATUS].filmToWatch;
+};
+
 
 export const getFilmsToRender = createSelector(getFilmsData, getGenre, getShowingFilmsNumber, combiner);

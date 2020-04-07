@@ -6,12 +6,14 @@ const initialState = {
   isRenderButton: true,
   chosenFilmData: null,
   popupFilmData: null,
+  filmToWatch: null,
 };
 
 const ActionType = {
   CHANGE_GENRE: `CHANGE_GENRE`,
   SHOW_MORE: `SHOW_MORE`,
   SHOW_POPUP: `SHOW_POPUP`,
+  SET_FILM_TO_WATCH: `SET_FILM_TO_WATCH`,
 };
 
 export const ActionCreator = {
@@ -27,6 +29,10 @@ export const ActionCreator = {
   showPopup: (filmData) =>({
     type: ActionType.SHOW_POPUP,
     payload: filmData,
+  }),
+  setFilmToWatch: (film) => ({
+    type: ActionType.SET_FILM_TO_WATCH,
+    payload: film
   }),
 };
 export const reducer = (state = initialState, action) => {
@@ -45,6 +51,10 @@ export const reducer = (state = initialState, action) => {
     case ActionType.SHOW_POPUP:
       return extend(state, {
         chosenFilmData: action.payload,
+      });
+    case ActionType.SET_FILM_TO_WATCH:
+      return extend(state, {
+        filmToWatch: action.payload
       });
   }
   return state;

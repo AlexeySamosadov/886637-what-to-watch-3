@@ -32,14 +32,11 @@ const FilmCard = ({filmData, showPopup})=> {
 
 
 FilmCard.propTypes = {
-  // onTitleClick: PropTypes.func.isRequired,
   showPopup: PropTypes.func.isRequired,
   filmData: PropTypes.shape({
     src: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    // id: PropTypes.string.isRequired,
     srcVideo: PropTypes.string.isRequired,
-    // genre: PropTypes.string.isRequired,
   }),
 };
 

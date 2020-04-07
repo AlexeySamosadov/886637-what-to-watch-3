@@ -6,6 +6,12 @@ import MoviePage from "../movie-page/movie-page.jsx";
 import PropTypes from 'prop-types';
 import withMoviePage from "../../hocs/with-movie-page/with-movie-page.js";
 import {getChosenFilmData, getFilmsToRender, getGenre, getShowingFilmsNumber} from "../../reducer/app-status/selectors.js";
+import {getFilmToWatch} from "../../reducer/app-status/selectors.js";
+import withVideo from "../../hocs/with-video/with-video.js";
+import MovieVideoPlayer from "../movie-video-player/movie-video-player.jsx";
+
+const VideoPlayer = withVideo(MovieVideoPlayer);
+
 
 const MoviePageWrapper = withMoviePage(MoviePage);
 
@@ -28,7 +34,20 @@ class App extends React.PureComponent {
   }
 
   renderApp() {
-    const {filmsData, filteredGenre, showingFilmsNumber, chosenFilmData} = this.props;
+    const {filmsData, filteredGenre, showingFilmsNumber, chosenFilmData, filmToWatch} = this.props;
+    if (filmToWatch) {
+      return (
+        <VideoPlayer
+          type={`movie`}
+          className={`player__video`}
+          isPlaying={true}
+          srcVideo={filmToWatch.srcVideo}
+          srcPoster={filmToWatch.srcPoster}
+          // onExitFilmButtonClick={()=> console.log(`Отработал Ексит`)}
+          isMuted
+        />
+      )
+    }
     if (chosenFilmData) {
       return (
         <MoviePageWrapper
@@ -74,6 +93,7 @@ App.propTypes = {
   filteredGenre: PropTypes.string,
   showingFilmsNumber: PropTypes.number,
   chosenFilmData: PropTypes.object,
+  filmToWatch: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
@@ -82,6 +102,7 @@ const mapStateToProps = (state) => ({
   showMoviePage: state.showMoviePage,
   filmsData: getFilmsToRender(state),
   chosenFilmData: getChosenFilmData(state),
+  filmToWatch: getFilmToWatch(state),
 });
 
 export {App};

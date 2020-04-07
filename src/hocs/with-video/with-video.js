@@ -41,7 +41,6 @@ const withVideo = (Component) => {
       }, 1000);
     }
 
-
     _handlerMouseLeave() {
       clearTimeout(this._timer);
       this.setState({

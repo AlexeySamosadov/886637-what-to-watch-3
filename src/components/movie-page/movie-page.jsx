@@ -6,6 +6,8 @@ import MoviePageDetails from "../movie-page-details/movie-page-details.jsx";
 import MoviePageReviews from "../movie-page-reviews/movie-page-reviews.jsx";
 import FilmsList from "../films-list/films-list.jsx";
 import {filterFilms} from "../util/util.js";
+import {ActionCreator} from "../../reducer/app-status/app-status.js";
+import {connect} from "react-redux";
 
 export const ACTIVE_TABS = {
   OVERVIEW: `OVERVIEW`,
@@ -25,12 +27,15 @@ const renderPageDetails = (filmData, activeTap) => {
   return true;
 };
 
-const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick}) => {
+const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick, playFilm}) => {
   const {name, genre, date, srcPoster} = filmData;
   const filteredFilmsData = filterFilms(filmsData, filmData.genre);
   const exception = filteredFilmsData.filter((it)=>it.name !== filmData.name);
   const filmsDataCutted = exception.slice(0, 4);
-
+  const onClick = (e) => {
+    e.preventDefault();
+    playFilm(filmData);
+  };
 
   return (
     <React.Fragment>
@@ -67,7 +72,7 @@ const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick}) =
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button onClick={onClick} className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -134,8 +139,6 @@ const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick}) =
   );
 };
 
-export default MoviePage;
-
 MoviePage.propTypes = {
   filmData: PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -152,4 +155,15 @@ MoviePage.propTypes = {
   onTitleClick: PropTypes.func,
   onTabClick: PropTypes.func,
   activeTap: PropTypes.string,
+  playFilm: PropTypes.func,
 };
+
+export {MoviePage};
+
+const mapStateToDispatch = (dispatch) => ({
+  playFilm(filmData) {
+    dispatch(ActionCreator.setFilmToWatch(filmData));
+  }
+});
+
+export default connect(null, mapStateToDispatch)(MoviePage);

@@ -4,16 +4,19 @@ import FilmsList from "../films-list/films-list.jsx";
 import GenreList from "../genre-list/genre-list.jsx";
 import ShowMore from "../show-more/show-more.jsx";
 import {filterFilms} from "../util/util.js";
+import {ActionCreator} from "../../reducer/app-status/app-status.js";
+import {connect} from "react-redux";
 
 
-const Main = ({filmsData, onTitleClick, filteredGenre, showingFilmsNumber}) => {
+const Main = ({filmsData, onTitleClick, filteredGenre, showingFilmsNumber, playFilm}) => {
   const movieInfo = filmsData[0];
   const {name, genre, date, id} = movieInfo;
   const filteredFilmsData = filterFilms(filmsData, filteredGenre);
   const cuttedFilmsData = filteredFilmsData.slice(0, showingFilmsNumber);
 
-  const onPlay = (evt) => {
-    evt.preventDefault();
+  const onClick = (e) => {
+    e.preventDefault();
+    playFilm(movieInfo);
   };
 
   let isRenderButton = true;
@@ -62,7 +65,7 @@ const Main = ({filmsData, onTitleClick, filteredGenre, showingFilmsNumber}) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button onClick={(evt) => onPlay(evt)} className="btn btn--play movie-card__button" type="button">
+                <button onClick={onClick} className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -127,6 +130,15 @@ Main.propTypes = {
   filteredGenre: PropTypes.string,
   onTitleClick: PropTypes.func.isRequired,
   showingFilmsNumber: PropTypes.number,
+  playFilm: PropTypes.func,
 };
 
-export default Main;
+const mapStateToDispatch = (dispatch) => ({
+  playFilm(filmData) {
+    dispatch(ActionCreator.setFilmToWatch(filmData));
+  }
+});
+
+export {Main};
+
+export default connect(null, mapStateToDispatch)(Main);
