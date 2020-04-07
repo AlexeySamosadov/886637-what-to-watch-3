@@ -18,6 +18,7 @@ const withVideo = (Component) => {
       this._handlerFullScreenButtonClick = this._handlerFullScreenButtonClick.bind(this);
       this._handlerMouseEnter = this._handlerMouseEnter.bind(this);
       this._handlerMouseLeave = this._handlerMouseLeave.bind(this);
+      this._handlerMouseClick = this._handlerMouseClick.bind(this);
     }
 
     _handlerPlayButtonClick() {
@@ -40,11 +41,18 @@ const withVideo = (Component) => {
       }, 1000);
     }
 
+
     _handlerMouseLeave() {
       clearTimeout(this._timer);
       this.setState({
         isPlaying: false,
       });
+    }
+
+    _handlerMouseClick() {
+      console.log(`Отработал клик`);
+      console.log(this._timer);
+      clearTimeout(this._timer);
     }
 
     componentDidMount() {
@@ -115,7 +123,7 @@ const withVideo = (Component) => {
         onPlayButtonClick={this._handlerPlayButtonClick}
         onMouseEnter={this._handlerMouseEnter}
         onMouseLeave={this._handlerMouseLeave}
-        onClick={()=>{}}
+        onClick={this._handlerMouseClick}
         isPlaying={isPlaying}
         isFullScreen={isFullScreen}
         progressInSeconds={progressInSeconds}

@@ -5,7 +5,7 @@ import {ActionCreator} from "../../reducer/app-status/app-status.js";
 import withVideo from "../../hocs/with-video/with-video.js";
 import MovieVideoPlayer from "../movie-video-player/movie-video-player.jsx";
 
-const VideoPlae = withVideo(MovieVideoPlayer);
+const VideoPlayer = withVideo(MovieVideoPlayer);
 
 const FilmCard = ({filmData, showPopup})=> {
   const {src, name, srcVideo} = filmData;
@@ -15,8 +15,7 @@ const FilmCard = ({filmData, showPopup})=> {
   return (
     <article onClick={onClick}
       className="small-movie-card test catalog__movies-card">
-
-      <VideoPlae
+      <VideoPlayer
         isPlaying={false}
         srcPoster={src}
         srcVideo={srcVideo}
