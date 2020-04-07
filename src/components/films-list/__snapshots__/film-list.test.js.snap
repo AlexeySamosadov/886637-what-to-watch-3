@@ -12,8 +12,12 @@ exports[`This is FilmList Unit Test 1`] = `
     onMouseLeave={[Function]}
   >
     <video
-      className="player__video"
+      alt=""
+      className=""
+      height={175}
       poster="img/somePath"
+      src="somePath"
+      width={280}
     />
   </div>
   <h3

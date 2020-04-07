@@ -37,14 +37,14 @@ class MovieVideoPlayer extends PureComponent {
   }
 
   _renderPlayer() {
-    const {children, onExitFilmButtonClick, progressInPercent, progressInSeconds, onMouseEnter, onMouseLeave,
+    const {children, onExitFilmButtonClick, progressInPercent, progressInSeconds, onMouseEnter, onMouseLeave, onClick,
       onPlayButtonClick, isPlaying, title, isFullScreen, type} = this.props;
 
     switch (type) {
       case `trailer`:
-        return <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="small-movie-card__image">
+        return <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onClick={onClick} className="small-movie-card__image">
           {children}
-        </div>
+        </div>;
 
 
       case `movie`:
@@ -120,6 +120,7 @@ class MovieVideoPlayer extends PureComponent {
 
 MovieVideoPlayer.propTypes = {
   onMouseEnter: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
   onFullScreenButtonClick: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([

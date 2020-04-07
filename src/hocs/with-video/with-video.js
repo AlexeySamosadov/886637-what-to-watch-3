@@ -34,17 +34,17 @@ const withVideo = (Component) => {
 
     _handlerMouseEnter() {
       this._timer = setTimeout(()=>{
-        this.setState((prevState) =>({
-          isPlaying: !prevState.isPlaying,
-        }));
+        this.setState({
+          isPlaying: true,
+        });
       }, 1000);
     }
 
     _handlerMouseLeave() {
       clearTimeout(this._timer);
-      this.setState((prevState) =>({
-        isPlaying: !prevState.isPlaying,
-      }));
+      this.setState({
+        isPlaying: false,
+      });
     }
 
     componentDidMount() {
@@ -94,19 +94,6 @@ const withVideo = (Component) => {
       } else {
         video.load();
       }
-
-
-      // if (type === `trailer` && isPlaying !== this.state.isPlaying) {
-      // if (type === `trailer` && isPlaying !== this.state.isPlaying) {
-      //   const newState = this.state.isPlaying;
-      //   this.setState({newState}, ()=> {
-      //     if (newState) {
-      //       video.play();
-      //     } else {
-      //       video.load();
-      //     }
-      //   });
-      // }
     }
 
     componentWillUnmount() {
@@ -128,6 +115,7 @@ const withVideo = (Component) => {
         onPlayButtonClick={this._handlerPlayButtonClick}
         onMouseEnter={this._handlerMouseEnter}
         onMouseLeave={this._handlerMouseLeave}
+        onClick={()=>{}}
         isPlaying={isPlaying}
         isFullScreen={isFullScreen}
         progressInSeconds={progressInSeconds}
