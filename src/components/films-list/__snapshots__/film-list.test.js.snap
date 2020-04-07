@@ -2,7 +2,7 @@
 
 exports[`This is FilmList Unit Test 1`] = `
 <article
-  className="small-movie-card test catalog__movies-card"
+  className="small-movie-card catalog__movies-card"
   onClick={[Function]}
 >
   <div

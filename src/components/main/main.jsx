@@ -8,9 +8,9 @@ import {ActionCreator} from "../../reducer/app-status/app-status.js";
 import {connect} from "react-redux";
 
 
-const Main = ({filmsData, onTitleClick, filteredGenre, showingFilmsNumber, playFilm}) => {
+const Main = ({filmsData, showPopup, filteredGenre, showingFilmsNumber, playFilm}) => {
   const movieInfo = filmsData[0];
-  const {name, genre, date, id} = movieInfo;
+  const {name, genre, date} = movieInfo;
   const filteredFilmsData = filterFilms(filmsData, filteredGenre);
   const cuttedFilmsData = filteredFilmsData.slice(0, showingFilmsNumber);
 
@@ -53,12 +53,12 @@ const Main = ({filmsData, onTitleClick, filteredGenre, showingFilmsNumber, playF
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
-            <div onClick={()=>onTitleClick(id)} className="movie-card__poster">
+            <div onClick={()=>showPopup(movieInfo)} className="movie-card__poster">
               <img src="img/the-grand-budapest-hotel-poster.jpg" alt="{name} poster" width="218" height="327"/>
             </div>
 
             <div className="movie-card__desc">
-              <h2 onClick={()=>onTitleClick(id, genre)} className="movie-card__title test">{name}</h2>
+              <h2 onClick={()=>showPopup(movieInfo)} className="movie-card__title test">{name}</h2>
               <p className="movie-card__meta">
                 <span className="movie-card__genre">{genre}</span>
                 <span className="movie-card__year">{date}</span>
@@ -93,7 +93,6 @@ const Main = ({filmsData, onTitleClick, filteredGenre, showingFilmsNumber, playF
           <div className="catalog__movies-list">
             <FilmsList
               filmsData={cuttedFilmsData}
-              onTitleClick={onTitleClick}
               showingFilmsNumber={showingFilmsNumber}
             />
           </div>
@@ -128,14 +127,17 @@ Main.propTypes = {
     id: PropTypes.string.isRequired,
   })),
   filteredGenre: PropTypes.string,
-  onTitleClick: PropTypes.func.isRequired,
   showingFilmsNumber: PropTypes.number,
   playFilm: PropTypes.func,
+  showPopup: PropTypes.func.isRequired,
 };
 
 const mapStateToDispatch = (dispatch) => ({
   playFilm(filmData) {
     dispatch(ActionCreator.setFilmToWatch(filmData));
+  },
+  showPopup(filmData) {
+    dispatch(ActionCreator.showPopup(filmData));
   }
 });
 

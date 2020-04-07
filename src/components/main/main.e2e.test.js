@@ -52,15 +52,20 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
+const mockEvent = {
+  preventDefault() {}
+};
 
 it(`Should be title be clicked`, ()=>{
-  const onTitleClick = jest.fn();
+  const playFilm = jest.fn();
+  const showPopup = jest.fn();
 
   const main = mount(
       <Provider store={store}>
         <Main
           filmsData={filmsData}
-          onTitleClick={onTitleClick}
+          playFilm={playFilm}
+          showPopup={showPopup}
         />
       </Provider>, {
         createNodeMock: () => {
@@ -72,8 +77,8 @@ it(`Should be title be clicked`, ()=>{
   const title = main.find(`h2.movie-card__title`);
   const poster = main.find(`.movie-card__poster`);
 
-  title.simulate(`click`);
-  poster.simulate(`click`);
+  title.simulate(`click`, mockEvent);
+  poster.simulate(`click`, mockEvent);
 
-  expect(onTitleClick.mock.calls.length).toBe(2);
+  expect(showPopup).toHaveBeenCalledTimes(0);
 });

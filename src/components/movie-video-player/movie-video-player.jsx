@@ -30,6 +30,8 @@ class MovieVideoPlayer extends PureComponent {
     super(props);
     this._rootElRef = createRef();
     this._handlerFullScreenChange = this._handlerFullScreenChange.bind(this);
+    this._onPressExitButton = this._onPressExitButton.bind(this);
+    this._onPressSpaceButton = this._onPressSpaceButton.bind(this);
   }
 
   _handlerFullScreenChange() {
@@ -104,12 +106,31 @@ class MovieVideoPlayer extends PureComponent {
     return <p>Something went wrong :(</p>;
   }
 
+  _onPressExitButton(evt) {
+    if (evt.code === `Escape`) {
+      this.onExitFilmButtonClick(null);
+    }
+  }
+
+  _onPressSpaceButton(evt) {
+    if (evt.code === `Space`) {
+      this.onPlayButtonClick();
+    }
+  }
+
   componentDidMount() {
+    this.onExitFilmButtonClick = this.props.onExitFilmButtonClick;
+    this.onPlayButtonClick = this.props.onPlayButtonClick;
+
     document.addEventListener(`fullscreenchange`, this._handlerFullScreenChange);
+    document.addEventListener(`keydown`, this._onPressExitButton);
+    document.addEventListener(`keydown`, this._onPressSpaceButton);
   }
 
   componentWillUnmount() {
     document.removeEventListener(`fullscreenchange`, this._handlerFullScreenChange);
+    document.removeEventListener(`keydown`, this._onPressExitButton);
+    document.removeEventListener(`keydown`, this._onPressSpaceButton);
   }
 
   render() {

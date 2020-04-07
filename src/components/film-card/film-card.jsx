@@ -14,7 +14,7 @@ const FilmCard = ({filmData, showPopup})=> {
   };
   return (
     <article onClick={onClick}
-      className="small-movie-card test catalog__movies-card">
+      className="small-movie-card catalog__movies-card">
       <VideoPlayer
         isPlaying={false}
         srcPoster={src}

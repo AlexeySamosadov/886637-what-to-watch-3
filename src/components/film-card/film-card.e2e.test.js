@@ -58,13 +58,11 @@ const mockEvent = {
 };
 
 it(`Should data get pass when mouse over card`, ()=>{
-  const handleMouseOver = jest.fn();
   const showPopup = jest.fn();
   const smallMovieCard = mount(
       <Provider store={store}>
         <FilmCard
           filmData={filmsData[0]}
-          handleMouseOver={handleMouseOver}
           showPopup={showPopup}
         />
       </Provider>, {
@@ -73,7 +71,7 @@ it(`Should data get pass when mouse over card`, ()=>{
         },
       });
 
-  const card = smallMovieCard.find(`.test`);
+  const card = smallMovieCard.find(`.small-movie-card`);
   card.simulate(`click`, mockEvent);
 
   expect(showPopup).toHaveBeenCalledTimes(1);

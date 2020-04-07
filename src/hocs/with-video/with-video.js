@@ -8,7 +8,7 @@ const withVideo = (Component) => {
       this._timer = null;
       this.videoRef = createRef();
       this.state = {
-        isPlaying: this.props.isPlaying,
+        isPlaying: false,
         isFullScreen: false,
         progressInPercent: 0,
         progressInSeconds: 0,
@@ -57,7 +57,6 @@ const withVideo = (Component) => {
       const video = this.videoRef.current;
       video.src = srcVideo;
       video.muted = isMuted;
-
       video.onplay = () => {
         this.setState({
           isPlaying: true,
@@ -85,7 +84,6 @@ const withVideo = (Component) => {
       const video = this.videoRef.current;
 
       const {type} = this.props;
-
       if (type === `movie`) {
         if (this.state.isPlaying) {
           video.play();
@@ -94,10 +92,12 @@ const withVideo = (Component) => {
         }
       }
 
-      if (type === `trailer` && this.state.isPlaying) {
-        video.play();
-      } else {
-        video.load();
+      if (type === `trailer`) {
+        if (this.state.isPlaying) {
+          video.play();
+        } else {
+          video.load();
+        }
       }
     }
 
@@ -132,7 +132,6 @@ const withVideo = (Component) => {
   }
 
   WithVideo.propTypes = {
-    isPlaying: PropTypes.bool.isRequired,
     srcVideo: PropTypes.string.isRequired,
     srcPoster: PropTypes.string.isRequired,
     isMuted: PropTypes.bool,
