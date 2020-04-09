@@ -6,17 +6,17 @@ import ShowMore from "../show-more/show-more.jsx";
 import {filterFilms} from "../util/util.js";
 import {ActionCreator} from "../../reducer/app-status/app-status.js";
 import {connect} from "react-redux";
+import {getPromoFilm} from "../../reducer/data/selectors";
+import {getFilmsToRender} from "../../reducer/app-status/selectors";
 
 
-const Main = ({filmsData, showPopup, filteredGenre, showingFilmsNumber, playFilm}) => {
-  const movieInfo = filmsData[0];
-  const {name, genre, date} = movieInfo;
+const Main = ({filmsData, promoFilm, showPopup, filteredGenre, showingFilmsNumber, playFilm}) => {
+  const {name, genre, date, srcPoster, backgroundImage} = promoFilm;
   const filteredFilmsData = filterFilms(filmsData, filteredGenre);
   const cuttedFilmsData = filteredFilmsData.slice(0, showingFilmsNumber);
-
   const onClick = (e) => {
     e.preventDefault();
-    playFilm(movieInfo);
+    playFilm(promoFilm);
   };
 
   let isRenderButton = true;
@@ -28,8 +28,8 @@ const Main = ({filmsData, showPopup, filteredGenre, showingFilmsNumber, playFilm
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg"
-            alt="{name} poster"
+          <img src={backgroundImage}
+            alt={`${backgroundImage} poster`}
           />
         </div>
 
@@ -53,12 +53,12 @@ const Main = ({filmsData, showPopup, filteredGenre, showingFilmsNumber, playFilm
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
-            <div onClick={()=>showPopup(movieInfo)} className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="{name} poster" width="218" height="327"/>
+            <div onClick={()=>showPopup(promoFilm)} className="movie-card__poster">
+              <img src={srcPoster} alt={`${name} poster`} width="218" height="327"/>
             </div>
 
             <div className="movie-card__desc">
-              <h2 onClick={()=>showPopup(movieInfo)} className="movie-card__title test">{name}</h2>
+              <h2 onClick={()=>showPopup(promoFilm)} className="movie-card__title test">{name}</h2>
               <p className="movie-card__meta">
                 <span className="movie-card__genre">{genre}</span>
                 <span className="movie-card__year">{date}</span>
@@ -124,13 +124,21 @@ Main.propTypes = {
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     date: PropTypes.number.isRequired,
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    srcPoster: PropTypes.string.isRequired,
+    srcPreview: PropTypes.string.isRequired,
   })),
   filteredGenre: PropTypes.string,
   showingFilmsNumber: PropTypes.number,
   playFilm: PropTypes.func,
   showPopup: PropTypes.func.isRequired,
+  promoFilm: PropTypes.object.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  promoFilm: getPromoFilm(state),
+  filmsData: getFilmsToRender(state),
+});
 
 const mapStateToDispatch = (dispatch) => ({
   playFilm(filmData) {
@@ -143,4 +151,4 @@ const mapStateToDispatch = (dispatch) => ({
 
 export {Main};
 
-export default connect(null, mapStateToDispatch)(Main);
+export default connect(mapStateToProps, mapStateToDispatch)(Main);

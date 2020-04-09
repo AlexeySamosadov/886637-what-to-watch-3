@@ -57,6 +57,8 @@ class MovieVideoPlayer extends PureComponent {
             <div className="player__controls">
               <div className="player__controls-row">
                 <div className="player__time">
+                  {/* <input type="range" className="player__progress" min="0" max="100" step="1" value={`${progressInPercent}`}/>*/}
+                  {/* <div className="player__toggler" style={{left: `${progressInPercent}%`}}>Toggler</div>*/}
                   <progress className="player__progress" value={`${progressInPercent}`} max="100"/>
                   <div className="player__toggler" style={{left: `${progressInPercent}%`}}>Toggler</div>
                 </div>

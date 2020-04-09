@@ -127,7 +127,7 @@ const withVideo = (Component) => {
         progressInSeconds={progressInSeconds}
         progressInPercent={progressInPercent}
       >
-        <video src={srcVideo} className={className} ref={this.videoRef} poster={`img/${srcPoster}`} alt="" width={widthAtr} height={heightAtr}/>
+        <video src={srcVideo} className={className} ref={this.videoRef} poster={srcPoster} alt="" width={widthAtr} height={heightAtr}/>
       </Component>;
     }
   }

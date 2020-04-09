@@ -9,7 +9,7 @@ import {playerType} from "../const/const.js";
 const VideoPlayer = withVideo(MovieVideoPlayer);
 
 const FilmCard = ({filmData, showPopup})=> {
-  const {src, name, srcVideo} = filmData;
+  const {srcPreview, name, srcPreviewVideo} = filmData;
   const onClick = () => {
     showPopup(filmData);
   };
@@ -17,8 +17,8 @@ const FilmCard = ({filmData, showPopup})=> {
     <article onClick={onClick}
       className="small-movie-card catalog__movies-card">
       <VideoPlayer
-        srcPoster={src}
-        srcVideo={srcVideo}
+        srcPoster={srcPreview}
+        srcVideo={srcPreviewVideo}
         widthAtr={280}
         heightAtr={175}
         type={playerType.TRAILER}
@@ -34,9 +34,9 @@ const FilmCard = ({filmData, showPopup})=> {
 FilmCard.propTypes = {
   showPopup: PropTypes.func.isRequired,
   filmData: PropTypes.shape({
-    src: PropTypes.string.isRequired,
+    srcPreview: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    srcVideo: PropTypes.string.isRequired,
+    srcPreviewVideo: PropTypes.string.isRequired,
   }),
 };
 

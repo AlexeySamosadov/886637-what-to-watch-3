@@ -5,12 +5,12 @@ import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import PropTypes from 'prop-types';
 import withMoviePage from "../../hocs/with-movie-page/with-movie-page.js";
-import {getChosenFilmData, getFilmsToRender, getGenre, getShowingFilmsNumber} from "../../reducer/app-status/selectors.js";
-import {getFilmToWatch} from "../../reducer/app-status/selectors.js";
+import {getChosenFilmData, getFilmsToRender, getGenre, getShowingFilmsNumber, getFilmToWatch} from "../../reducer/app-status/selectors.js";
 import withVideo from "../../hocs/with-video/with-video.js";
 import MovieVideoPlayer from "../movie-video-player/movie-video-player.jsx";
 import {ActionCreator} from "../../reducer/app-status/app-status";
 import {playerType, playerClass} from "../const/const.js";
+// import {getFilmsNew} from "../../reducer/data/selectors.js";
 
 const VideoPlayer = withVideo(MovieVideoPlayer);
 
@@ -24,7 +24,7 @@ class App extends React.PureComponent {
   }
 
   renderApp() {
-    const {filmsData, filteredGenre, showingFilmsNumber, chosenFilmData, filmToWatch, exitFromMovie} = this.props;
+    const {filteredGenre, showingFilmsNumber, chosenFilmData, filmToWatch, exitFromMovie} = this.props;
     if (filmToWatch) {
 
       return (
@@ -32,23 +32,17 @@ class App extends React.PureComponent {
           type={playerType.MOVIE}
           className={playerClass.PLAYER_VIDEO}
           srcVideo={filmToWatch.srcVideo}
-          srcPoster={filmToWatch.src}
+          srcPoster={filmToWatch.srcPreview}
           onExitFilmButtonClick={exitFromMovie}
           isMuted
         />
       );
     }
     if (chosenFilmData) {
-      return (
-        <MoviePageWrapper
-          filmData={chosenFilmData}
-          filmsData={filmsData}
-        />
-      );
+      return (<MoviePageWrapper/>);
     }
     return (
       <Main
-        filmsData={filmsData}
         filteredGenre={filteredGenre}
         showingFilmsNumber={showingFilmsNumber}
       />
@@ -64,7 +58,6 @@ class App extends React.PureComponent {
           </Route>
           <Route exact path="/moviePage">
             <MoviePage
-              filmsData={this.props.filmsData}
             />
           </Route>
         </Switch>
@@ -76,8 +69,6 @@ class App extends React.PureComponent {
 App.propTypes = {
   movieInfo: PropTypes.shape({
   }),
-  filmsData: PropTypes.arrayOf(PropTypes.shape({
-  })),
   filteredGenre: PropTypes.string,
   showingFilmsNumber: PropTypes.number,
   chosenFilmData: PropTypes.object,

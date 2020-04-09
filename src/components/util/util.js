@@ -49,6 +49,29 @@ const formatMovieDuration = (movieDuration) => {
   return `${(movieDuration / 60).toFixed(0)}h ${movieDuration % 60}min`;
 };
 
+const RatingDescription = {
+  satisfying: `Satisfying`,
+  normal: `Normal`,
+  well: `Well`,
+  veryGood: `Very good`,
+  mustSee: `Must-see`,
+};
+
+const getRatingLevel = (rating) => {
+  if (rating < 3) {
+    return RatingDescription.satisfying;
+  } else if (rating < 5) {
+    return RatingDescription.normal;
+  } else if (rating < 7) {
+    return RatingDescription.well;
+  } else if (rating < 9) {
+    return RatingDescription.veryGood;
+  } else if (rating >= 9) {
+    return RatingDescription.mustSee;
+  }
+  return true;
+};
+
 const transformDate = (fullDate, transformType) => {
   const month = (fullDate.getMonth() + 1).toString();
   const monthByString = getMonthByString(month);
@@ -74,6 +97,8 @@ const filterFilms = (data, genres) => {
   return films;
 };
 
+
+
 const sliceArray = (array) => {
   let size = 3;
   let newArray = [];
@@ -83,6 +108,6 @@ const sliceArray = (array) => {
   return newArray;
 };
 
-export {getRandomNumber, filterFilms, extend, getRandomArray, getRandomItem, transformDate, sliceArray, formatMovieDuration, changeFirstLetterUppercase, TRANSFORM_TYPES};
+export {getRandomNumber, filterFilms, getRatingLevel, extend, getRandomArray, getRandomItem, transformDate, sliceArray, formatMovieDuration, changeFirstLetterUppercase, TRANSFORM_TYPES};
 
 

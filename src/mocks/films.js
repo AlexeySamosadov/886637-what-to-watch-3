@@ -201,28 +201,28 @@ const createComments = (count) => {
     .map(generateComment);
 };
 
-const RatingDescription = {
-  satisfying: `Satisfying`,
-  normal: `Normal`,
-  well: `Well`,
-  veryGood: `Very good`,
-  mustSee: `Must-see`,
-};
+// const RatingDescription = {
+//   satisfying: `Satisfying`,
+//   normal: `Normal`,
+//   well: `Well`,
+//   veryGood: `Very good`,
+//   mustSee: `Must-see`,
+// };
 
-const getRatingLevel = (rating) => {
-  if (rating < 3) {
-    return RatingDescription.satisfying;
-  } else if (rating < 5) {
-    return RatingDescription.normal;
-  } else if (rating < 7) {
-    return RatingDescription.well;
-  } else if (rating < 9) {
-    return RatingDescription.veryGood;
-  } else if (rating >= 9) {
-    return RatingDescription.mustSee;
-  }
-  return true;
-};
+// const getRatingLevel = (rating) => {
+//   if (rating < 3) {
+//     return RatingDescription.satisfying;
+//   } else if (rating < 5) {
+//     return RatingDescription.normal;
+//   } else if (rating < 7) {
+//     return RatingDescription.well;
+//   } else if (rating < 9) {
+//     return RatingDescription.veryGood;
+//   } else if (rating >= 9) {
+//     return RatingDescription.mustSee;
+//   }
+//   return true;
+// };
 
 const generateFilmCardData = () => {
   const comments = createComments(getRandomNumber(5, 7));
@@ -232,20 +232,23 @@ const generateFilmCardData = () => {
   return {
 
     name: getRandomItem(filmNames),
-    src: link,
     srcPoster: link,
+    srcPreview: link,
     id: String(Math.random() + Math.random()),
     date: getRandomFullDate().getFullYear(),
     genre: getRandomItem(genres),
     rating,
     ratingCount: getRandomNumber(1, 300),
-    ratingLevel: getRatingLevel(rating),
+    // ratingLevel: getRatingLevel(rating),
     description: getRandomArray(descriptionFilms, 3).join(` `),
     actors: getRandomArray(ACTORS, ACTORS.length),
     directors: getRandomItem(DIRECTORS),
     srcVideo: videoLink,
+    srcPreviewVideo: videoLink,
     comments,
     duration: getRandomNumber(70, 150),
+
+
     // posterSource: getRandomItem(posters),
 
 
