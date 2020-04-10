@@ -5,12 +5,10 @@ import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import PropTypes from 'prop-types';
 import withMoviePage from "../../hocs/with-movie-page/with-movie-page.js";
-import {getChosenFilmData, getFilmsToRender, getGenre, getShowingFilmsNumber, getFilmToWatch} from "../../reducer/app-status/selectors.js";
+import {getChosenFilmData, getFilmToWatch} from "../../reducer/app-status/selectors.js";
 import withVideo from "../../hocs/with-video/with-video.js";
 import MovieVideoPlayer from "../movie-video-player/movie-video-player.jsx";
-import {ActionCreator} from "../../reducer/app-status/app-status";
 import {playerType, playerClass} from "../const/const.js";
-// import {getFilmsNew} from "../../reducer/data/selectors.js";
 
 const VideoPlayer = withVideo(MovieVideoPlayer);
 
@@ -24,16 +22,14 @@ class App extends React.PureComponent {
   }
 
   renderApp() {
-    const {filteredGenre, showingFilmsNumber, chosenFilmData, filmToWatch, exitFromMovie} = this.props;
+    const {chosenFilmData, filmToWatch} = this.props;
     if (filmToWatch) {
-
       return (
         <VideoPlayer
           type={playerType.MOVIE}
           className={playerClass.PLAYER_VIDEO}
           srcVideo={filmToWatch.srcVideo}
           srcPoster={filmToWatch.srcPreview}
-          onExitFilmButtonClick={exitFromMovie}
           isMuted
         />
       );
@@ -41,12 +37,7 @@ class App extends React.PureComponent {
     if (chosenFilmData) {
       return (<MoviePageWrapper/>);
     }
-    return (
-      <Main
-        filteredGenre={filteredGenre}
-        showingFilmsNumber={showingFilmsNumber}
-      />
-    );
+    return (<Main/>);
   }
 
   render() {
@@ -57,8 +48,7 @@ class App extends React.PureComponent {
             {this.renderApp()};
           </Route>
           <Route exact path="/moviePage">
-            <MoviePage
-            />
+            <MoviePage/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -67,29 +57,15 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
-  movieInfo: PropTypes.shape({
-  }),
-  filteredGenre: PropTypes.string,
-  showingFilmsNumber: PropTypes.number,
+  movieInfo: PropTypes.shape({}),
   chosenFilmData: PropTypes.object,
   filmToWatch: PropTypes.object,
-  exitFromMovie: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
-  showingFilmsNumber: getShowingFilmsNumber(state),
-  filteredGenre: getGenre(state),
-  showMoviePage: state.showMoviePage,
-  filmsData: getFilmsToRender(state),
   chosenFilmData: getChosenFilmData(state),
   filmToWatch: getFilmToWatch(state),
 });
 
-const mapStateToDispatch = (dispatch) => ({
-  exitFromMovie(filmData) {
-    dispatch(ActionCreator.setFilmToWatch(filmData));
-  },
-});
-
 export {App};
-export default connect(mapStateToProps, mapStateToDispatch)(App);
+export default connect(mapStateToProps)(App);

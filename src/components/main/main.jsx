@@ -7,7 +7,8 @@ import {filterFilms} from "../util/util.js";
 import {ActionCreator} from "../../reducer/app-status/app-status.js";
 import {connect} from "react-redux";
 import {getPromoFilm} from "../../reducer/data/selectors";
-import {getFilmsToRender} from "../../reducer/app-status/selectors";
+import {getFilmsToRender, getShowingFilmsNumber} from "../../reducer/app-status/selectors.js";
+import {getGenre} from "../../reducer/app-status/selectors";
 
 
 const Main = ({filmsData, promoFilm, showPopup, filteredGenre, showingFilmsNumber, playFilm}) => {
@@ -46,7 +47,8 @@ const Main = ({filmsData, promoFilm, showPopup, filteredGenre, showingFilmsNumbe
 
           <div className="user-block">
             <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+              <img src="https://htmlacademy-react-3.appspot.com/wtw/static/film/background/matrix.jpg" alt="User avatar" width="63" height="63"/>
+              {/*src="img/avatar.jpg"*/}
             </div>
           </div>
         </header>
@@ -138,6 +140,8 @@ Main.propTypes = {
 const mapStateToProps = (state) => ({
   promoFilm: getPromoFilm(state),
   filmsData: getFilmsToRender(state),
+  showingFilmsNumber: getShowingFilmsNumber(state),
+  filteredGenre: getGenre(state),
 });
 
 const mapStateToDispatch = (dispatch) => ({

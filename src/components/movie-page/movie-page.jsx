@@ -30,7 +30,6 @@ const renderPageDetails = (filmData, activeTap) => {
 
 export const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick, playFilm, closeMoviePage}) => {
   const {name, genre, date, srcPoster, backgroundImage, backgroundColor} = filmData;
-  console.log(backgroundColor);
   const filteredFilmsData = filterFilms(filmsData, filmData.genre);
   const exception = filteredFilmsData.filter((it)=>it.name !== filmData.name);
   const filmsDataCutted = exception.slice(0, 4);
@@ -64,7 +63,7 @@ export const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleCl
 
             <div className="user-block">
               <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+                <img src="https://htmlacademy-react-3.appspot.com/wtw/static/film/background/matrix.jpg" alt="User avatar" width="63" height="63"/>
               </div>
             </div>
           </header>

@@ -1,6 +1,9 @@
 import React, {PureComponent, createRef, Fragment} from "react";
 import PropTypes from "prop-types";
 import {playerType, keyCode, typeEvent} from "../const/const.js";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer/app-status/app-status.js";
+
 
 const convertVideoTime = (time) => {
   let seconds;
@@ -158,4 +161,13 @@ MovieVideoPlayer.propTypes = {
   type: PropTypes.oneOf([playerType.TRAILER, playerType.MOVIE]),
 };
 
-export default MovieVideoPlayer;
+
+const mapStateToDispatch = (dispatch) => ({
+  onExitFilmButtonClick(filmData) {
+    dispatch(ActionCreator.setFilmToWatch(filmData));
+  },
+});
+
+export {MovieVideoPlayer};
+
+export default connect(null, mapStateToDispatch)(MovieVideoPlayer);

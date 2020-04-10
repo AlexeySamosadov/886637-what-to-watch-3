@@ -25,7 +25,6 @@ const renderComment = (comment) => {
 const MoviePageReviews = ({filmData}) => {
   const {comments} = filmData;
   const newArrayComment = sliceArray(comments);
-
   return (
     <div className="movie-card__reviews movie-card__row">
       {newArrayComment && newArrayComment.map((it, i)=>
