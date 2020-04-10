@@ -47,9 +47,10 @@ class App extends React.PureComponent {
           <Route exact path="/">
             {this.renderApp()};
           </Route>
-          <Route exact path="/moviePage">
-            <MoviePage/>
-          </Route>
+          <Route exact path="/main" component={Main}/>
+          {/*<Route exact path="/main">*/}
+          {/*  <Main/>*/}
+          {/*</Route>*/}
         </Switch>
       </BrowserRouter>
     );

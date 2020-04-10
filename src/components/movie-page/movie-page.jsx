@@ -9,6 +9,10 @@ import {filterFilms} from "../util/util.js";
 import {ActionCreator} from "../../reducer/app-status/app-status.js";
 import {connect} from "react-redux";
 import {getChosenFilmData, getFilmsToRender} from "../../reducer/app-status/selectors";
+import {Link} from "react-router-dom";
+import Footer from "../footer/footer.jsx";
+import Header from "../header/header.jsx";
+
 
 export const ACTIVE_TABS = {
   OVERVIEW: `OVERVIEW`,
@@ -28,7 +32,7 @@ const renderPageDetails = (filmData, activeTap) => {
   return true;
 };
 
-export const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick, playFilm, closeMoviePage}) => {
+export const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleClick, playFilm}) => {
   const {name, genre, date, srcPoster, backgroundImage, backgroundColor} = filmData;
   const filteredFilmsData = filterFilms(filmsData, filmData.genre);
   const exception = filteredFilmsData.filter((it)=>it.name !== filmData.name);
@@ -36,10 +40,6 @@ export const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleCl
   const onClick = (e) => {
     e.preventDefault();
     playFilm(filmData);
-  };
-  const closePopup = (e) => {
-    e.preventDefault();
-    closeMoviePage();
   };
 
   return (
@@ -52,22 +52,7 @@ export const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleCl
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <header className="page-header movie-card__head">
-            <div className="logo">
-              <a href="#" onClick={closePopup} className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="https://htmlacademy-react-3.appspot.com/wtw/static/film/background/matrix.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
-            </div>
-          </header>
-
+          <Header/>
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
               <h2 className="movie-card__title">{name}</h2>
@@ -90,6 +75,7 @@ export const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleCl
                   <span>My list</span>
                 </button>
                 <a href="#" className="btn movie-card__button">Add review</a>
+                <Link to="/main">LINK HERE WILL SEN YOU TO MAIN</Link>
               </div>
             </div>
           </div>
@@ -126,19 +112,7 @@ export const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleCl
 
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer/>
       </div>
     </React.Fragment>
   );
@@ -172,9 +146,6 @@ const mapStateToDispatch = (dispatch) => ({
   playFilm(filmData) {
     dispatch(ActionCreator.setFilmToWatch(filmData));
   },
-  closeMoviePage() {
-    dispatch(ActionCreator.showPopup());
-  }
 });
 
 export default connect(mapStateToProps, mapStateToDispatch)(MoviePage);
