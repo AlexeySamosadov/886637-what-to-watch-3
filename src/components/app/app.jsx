@@ -6,11 +6,11 @@ import MoviePage from "../movie-page/movie-page.jsx";
 import PropTypes from 'prop-types';
 import withMoviePage from "../../hocs/with-movie-page/with-movie-page.js";
 import {getChosenFilmData, getFilmToWatch} from "../../reducer/app-status/selectors.js";
-import withVideo from "../../hocs/with-video/with-video.js";
-import MovieVideoPlayer from "../movie-video-player/movie-video-player.jsx";
+import withVideoPlayer from "../../hocs/with-video-player/with-video-player.js";
+import MovieVideoPlayer from "../video-player/video-player.jsx";
 import {playerType, playerClass} from "../const/const.js";
 
-const VideoPlayer = withVideo(MovieVideoPlayer);
+const VideoPlayer = withVideoPlayer(MovieVideoPlayer);
 
 
 const MoviePageWrapper = withMoviePage(MoviePage);
@@ -47,10 +47,10 @@ class App extends React.PureComponent {
           <Route exact path="/">
             {this.renderApp()};
           </Route>
-          <Route exact path="/main" component={Main}/>
-          {/*<Route exact path="/main">*/}
-          {/*  <Main/>*/}
-          {/*</Route>*/}
+          {/* <Route exact path="/main" component={Main}/>*/}
+          <Route path="/main">
+            <Main/>
+          </Route>
         </Switch>
       </BrowserRouter>
     );

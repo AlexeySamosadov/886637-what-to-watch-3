@@ -3,13 +3,10 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/app-status/app-status.js";
 
-// Почемуто при рендеренге в Main не принимает функцию из Reducer;
 const Header = ({closeMoviePage})=> {
   const closePopup = (e) => {
     e.preventDefault();
-    if (closeMoviePage) {
-      closeMoviePage();
-    }
+    closeMoviePage();
   };
   return (
     <header className="page-header movie-card__head">

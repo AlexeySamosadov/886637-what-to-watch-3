@@ -2,7 +2,7 @@ import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 import {playerType} from "../../components/const/const.js";
 
-const withVideo = (Component) => {
+const withVideoPlayer = (Component) => {
   class WithVideo extends PureComponent {
     constructor(props) {
       super(props);
@@ -13,6 +13,8 @@ const withVideo = (Component) => {
         isFullScreen: false,
         progressInPercent: 0,
         progressInSeconds: 0,
+        isSoundOff: false,
+        value: 1,
       };
 
       this._handlerPlayButtonClick = this._handlerPlayButtonClick.bind(this);
@@ -20,6 +22,9 @@ const withVideo = (Component) => {
       this._handlerMouseEnter = this._handlerMouseEnter.bind(this);
       this._handlerMouseLeave = this._handlerMouseLeave.bind(this);
       this._handlerMouseClick = this._handlerMouseClick.bind(this);
+      this._handlerOnOffSound = this._handlerOnOffSound.bind(this);
+      this._setValue = this._setValue.bind(this);
+      this._setPercentFilm = this._setPercentFilm.bind(this);
     }
 
     _handlerPlayButtonClick() {
@@ -40,6 +45,27 @@ const withVideo = (Component) => {
           isPlaying: true,
         });
       }, 1000);
+    }
+
+    _handlerOnOffSound() {
+      this.setState((prevState) => ({
+        isSoundOff: !prevState.isSoundOff,
+      }));
+    }
+
+    _setValue(evt) {
+      const value = evt.target.value / 100;
+      this.setState(() => ({
+        value,
+      }));
+    }
+
+    _setPercentFilm(evt) {
+      const value = evt.target.value;
+      console.log(value);
+      this.setState(() => ({
+        progressInPercent: value,
+      }));
     }
 
     _handlerMouseLeave() {
@@ -84,6 +110,14 @@ const withVideo = (Component) => {
     componentDidUpdate() {
       const video = this.videoRef.current;
 
+      video.muted = this.state.isSoundOff;
+      video.volume = this.state.value;
+
+      // console.log(`Время видео`, video.currentTime);
+      // console.log(`Длина видео`, video.duration);
+
+      // video.currentTime = video.duration / this.progressInPercent;
+
       const {type} = this.props;
       if (type === playerType.MOVIE) {
         if (this.state.isPlaying) {
@@ -114,7 +148,7 @@ const withVideo = (Component) => {
 
     render() {
       const {srcPoster, srcVideo, widthAtr = null, heightAtr = null, className = ``} = this.props;
-      const {isPlaying, isFullScreen, progressInSeconds, progressInPercent} = this.state;
+      const {isPlaying, isFullScreen, progressInSeconds, progressInPercent, isSoundOff} = this.state;
       return <Component
         {...this.props}
         onFullScreenButtonClick={this._handlerFullScreenButtonClick}
@@ -122,6 +156,10 @@ const withVideo = (Component) => {
         onMouseEnter={this._handlerMouseEnter}
         onMouseLeave={this._handlerMouseLeave}
         onClick={this._handlerMouseClick}
+        onSoundClick={this._handlerOnOffSound}
+        setValue={this._setValue}
+        setPercentFilm={this._setPercentFilm}
+        isSoundOff={isSoundOff}
         isPlaying={isPlaying}
         isFullScreen={isFullScreen}
         progressInSeconds={progressInSeconds}
@@ -144,4 +182,4 @@ const withVideo = (Component) => {
   return WithVideo;
 };
 
-export default withVideo;
+export default withVideoPlayer;

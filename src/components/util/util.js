@@ -98,7 +98,6 @@ const filterFilms = (data, genres) => {
 };
 
 
-
 const sliceArray = (array) => {
   let size = 3;
   let newArray = [];

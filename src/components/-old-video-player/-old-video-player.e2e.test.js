@@ -1,7 +1,7 @@
 import React from "react";
 import {mount, configure} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import VideoPlayer from "./video-player.jsx";
+import OldVideoPlayer from "./-old-video-player.jsx";
 
 configure({adapter: new Adapter()});
 
@@ -16,7 +16,7 @@ it(`Should video player change state with different isPlaying props`, ()=>{
 
   const videoPlayerWrapper = (isActive) => {
     return mount(
-        <VideoPlayer
+        <OldVideoPlayer
           src={src}
           srcVideo={srcVideo}
           isActive={isActive}

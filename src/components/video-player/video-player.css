@@ -1,0 +1,22 @@
+.player__progress {
+  height: 5px;
+}
+
+.player__controls-audio-on-off {
+  width: 20px;
+  height: 20px;
+  /*background-color: #574427;*/
+  margin-left: 25px;
+}
+
+.player__controls-audio {
+  margin-left: 20px;
+}
+
+.player__controls-audio-svg {
+  margin-top: -8px;
+}
+
+/*.player__controls-audio-svg--off {*/
+/*  margin-left: 1px;*/
+/*}*/

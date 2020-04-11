@@ -1,9 +1,11 @@
 import {extend} from "../../components/util/util.js";
 import {adaptFilmsData, adaptFilmData} from "./adapt-films-data.js";
+import {generateFilmCardData} from "../../mocks/films.js";
 
 const initialState = {
   filmsData: [],
-  promoFilm: {}
+  promoFilm: {},
+  oldData: generateFilmCardData(10),
 };
 
 const ActionTypes = {

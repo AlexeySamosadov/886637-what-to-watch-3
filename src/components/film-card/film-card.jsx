@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/app-status/app-status.js";
-import withVideo from "../../hocs/with-video/with-video.js";
-import MovieVideoPlayer from "../movie-video-player/movie-video-player.jsx";
+import withVideoPlayer from "../../hocs/with-video-player/with-video-player.js";
+import MovieVideoPlayer from "../video-player/video-player.jsx";
 import {playerType} from "../const/const.js";
 
-const VideoPlayer = withVideo(MovieVideoPlayer);
+const VideoPlayer = withVideoPlayer(MovieVideoPlayer);
 
 const FilmCard = ({filmData, showPopup})=> {
   const {srcPreview, name, srcPreviewVideo} = filmData;

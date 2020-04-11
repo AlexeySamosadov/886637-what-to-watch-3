@@ -51,8 +51,8 @@ export const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleCl
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
-
           <Header/>
+
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
               <h2 className="movie-card__title">{name}</h2>
@@ -75,7 +75,11 @@ export const MoviePage = ({filmData, filmsData, activeTap, onTabClick, onTitleCl
                   <span>My list</span>
                 </button>
                 <a href="#" className="btn movie-card__button">Add review</a>
-                <Link to="/main">LINK HERE WILL SEN YOU TO MAIN</Link>
+                <Link onClick={()=>{
+                  history.push(fdsfdsfdsfdsf);
+                }
+
+                } to="/main">LINK HERE WILL SEN YOU TO MAIN</Link>
               </div>
             </div>
           </div>

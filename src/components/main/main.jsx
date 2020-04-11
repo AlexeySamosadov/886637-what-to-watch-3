@@ -10,7 +10,8 @@ import {getPromoFilm} from "../../reducer/data/selectors";
 import {getFilmsToRender, getShowingFilmsNumber} from "../../reducer/app-status/selectors.js";
 import {getGenre} from "../../reducer/app-status/selectors";
 import Footer from "../footer/footer.jsx";
-import {Header} from "../header/header.jsx";
+import Header from "../header/header.jsx";
+import "./main.css";
 
 
 const Main = ({filmsData, promoFilm, showPopup, filteredGenre, showingFilmsNumber, playFilm}) => {
@@ -29,7 +30,7 @@ const Main = ({filmsData, promoFilm, showPopup, filteredGenre, showingFilmsNumbe
 
   return (
     <React.Fragment>
-      <section className="movie-card">
+      <section className="movie-card test">
         <div className="movie-card__bg">
           <img src={backgroundImage}
             alt={`${backgroundImage} poster`}
