@@ -60,8 +60,13 @@ class VideoPlayer extends PureComponent {
         </div>;
       case playerType.MOVIE:
         return (
-          <div ref={this._rootElRef} onDoubleClick={()=>console.log(`Отработал Double Улик`)} className="player">
-            {children}
+          <div ref={this._rootElRef} className="player">
+            <div
+              onClick={onPlayButtonClick}
+              onDoubleClick={()=>onExitFilmButtonClick(null)}
+            >
+              {children}
+            </div>
             <button type="button" onClick={() => onExitFilmButtonClick(null)} className="player__exit">Exit</button>
 
             <div className="player__controls">
