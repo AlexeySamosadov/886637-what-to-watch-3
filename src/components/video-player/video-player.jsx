@@ -60,7 +60,7 @@ class VideoPlayer extends PureComponent {
         </div>;
       case playerType.MOVIE:
         return (
-          <div ref={this._rootElRef} className="player">
+          <div ref={this._rootElRef} onDoubleClick={()=>console.log(`Отработал Double Улик`)} className="player">
             {children}
             <button type="button" onClick={() => onExitFilmButtonClick(null)} className="player__exit">Exit</button>
 
@@ -68,8 +68,8 @@ class VideoPlayer extends PureComponent {
               <div className="player__controls-row">
                 <div className="player__time">
                   {/*<progress className="player__progress" value={`${progressInPercent}`} max="100"/>*/}
-                  <input onChange={(evt)=> setPercentFilm(evt)} type="range" className="player__progress" step="0.1" max="100"/>
-                  <div className="player__toggler" style={{left: `${progressInPercent}%`}}>Toggler</div>
+                  <input onChange={(evt)=> setPercentFilm(evt)} type="range" className="player__progress" step="1" max="100"/>
+                  {/*<div className="player__toggler" style={{left: `${progressInPercent}%`}}>Toggler</div>*/}
                 </div>
                 <div className="player__time-value">{convertVideoTime(progressInSeconds)}</div>
               </div>

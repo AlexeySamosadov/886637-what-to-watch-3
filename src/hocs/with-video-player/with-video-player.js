@@ -15,6 +15,7 @@ const withVideoPlayer = (Component) => {
         progressInSeconds: 0,
         isSoundOff: false,
         value: 1,
+        // filmProgressInPercent: 0,
       };
 
       this._handlerPlayButtonClick = this._handlerPlayButtonClick.bind(this);
@@ -61,10 +62,9 @@ const withVideoPlayer = (Component) => {
     }
 
     _setPercentFilm(evt) {
-      const value = evt.target.value;
-      console.log(value);
+      const value = evt.target.value / 100;
       this.setState(() => ({
-        progressInPercent: value,
+        filmProgressInPercent: value,
       }));
     }
 
@@ -112,11 +112,16 @@ const withVideoPlayer = (Component) => {
 
       video.muted = this.state.isSoundOff;
       video.volume = this.state.value;
+      console.log(`filmProgressInPercent`, this.state.progressInPercent);
+      // console.log(video.duration * this.state.progressInPercent);
+      // console.log(`video-time`, video.duration / this.state.progressInPercent);
+
+      // video.currentTime = video.duration * this.state.progressInPercent;
 
       // console.log(`Время видео`, video.currentTime);
       // console.log(`Длина видео`, video.duration);
 
-      // video.currentTime = video.duration / this.progressInPercent;
+      // video.currentTime = video.duration / this.state.filmProgressInPercent;
 
       const {type} = this.props;
       if (type === playerType.MOVIE) {
