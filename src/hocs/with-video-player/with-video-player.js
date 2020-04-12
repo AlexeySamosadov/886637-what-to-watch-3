@@ -2,6 +2,17 @@ import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 import {playerType} from "../../components/const/const.js";
 
+const roundVolume = (value) => {
+  const result = parseFloat(value.toFixed(2));
+  if (result >= 1) {
+    return 1;
+  }
+  if (result <= 0) {
+    return 0;
+  }
+  return result;
+};
+
 const withVideoPlayer = (Component) => {
   class WithVideo extends PureComponent {
     constructor(props) {
@@ -15,6 +26,7 @@ const withVideoPlayer = (Component) => {
         progressInSeconds: 0,
         isSoundOff: false,
         value: 1,
+        valueInPercent: 100,
         // filmProgressInPercent: 0,
       };
 
@@ -26,6 +38,7 @@ const withVideoPlayer = (Component) => {
       this._handlerOnOffSound = this._handlerOnOffSound.bind(this);
       this._setValue = this._setValue.bind(this);
       this._setPercentFilm = this._setPercentFilm.bind(this);
+      this._handlerWheel = this._handlerWheel.bind(this);
     }
 
     _handlerPlayButtonClick() {
@@ -79,6 +92,13 @@ const withVideoPlayer = (Component) => {
       clearTimeout(this._timer);
     }
 
+    _handlerWheel(evt) {
+      const diff = evt.deltaY / 530;
+      this.setState((prevState) => ({
+        value: roundVolume(prevState.value + diff),
+      }));
+    }
+
     componentDidMount() {
       const {srcVideo, isMuted = false, type} = this.props;
       const video = this.videoRef.current;
@@ -112,7 +132,13 @@ const withVideoPlayer = (Component) => {
 
       video.muted = this.state.isSoundOff;
       video.volume = this.state.value;
-      console.log(`filmProgressInPercent`, this.state.progressInPercent);
+      const valueInPercent = this.state.value * 100;
+      this.setState({
+        valueInPercent,
+      });
+
+
+      // console.log(`filmProgressInPercent`, this.state.progressInPercent);
       // console.log(video.duration * this.state.progressInPercent);
       // console.log(`video-time`, video.duration / this.state.progressInPercent);
 
@@ -153,7 +179,7 @@ const withVideoPlayer = (Component) => {
 
     render() {
       const {srcPoster, srcVideo, widthAtr = null, heightAtr = null, className = ``} = this.props;
-      const {isPlaying, isFullScreen, progressInSeconds, progressInPercent, isSoundOff} = this.state;
+      const {isPlaying, isFullScreen, progressInSeconds, progressInPercent, valueInPercent, isSoundOff} = this.state;
       return <Component
         {...this.props}
         onFullScreenButtonClick={this._handlerFullScreenButtonClick}
@@ -164,11 +190,13 @@ const withVideoPlayer = (Component) => {
         onSoundClick={this._handlerOnOffSound}
         setValue={this._setValue}
         setPercentFilm={this._setPercentFilm}
+        onWheel={this._handlerWheel}
         isSoundOff={isSoundOff}
         isPlaying={isPlaying}
         isFullScreen={isFullScreen}
         progressInSeconds={progressInSeconds}
         progressInPercent={progressInPercent}
+        valueInPercent={valueInPercent}
       >
         <video src={srcVideo} className={className} ref={this.videoRef} poster={srcPoster} alt="" width={widthAtr} height={heightAtr}/>
       </Component>;

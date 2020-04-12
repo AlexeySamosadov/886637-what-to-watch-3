@@ -48,10 +48,8 @@ class VideoPlayer extends PureComponent {
   }
 
   _renderPlayer() {
-    const {children, onExitFilmButtonClick, setPercentFilm, progressInPercent, progressInSeconds, onMouseEnter, onMouseLeave, onClick,
+    const {children, onExitFilmButtonClick, setPercentFilm, onWheel, valueInPercent, progressInPercent, progressInSeconds, onMouseEnter, onMouseLeave, onClick,
       onPlayButtonClick, isPlaying, setValue, onSoundClick, isSoundOff,isFullScreen, type} = this.props;
-
-
 
     switch (type) {
       case playerType.TRAILER:
@@ -61,12 +59,14 @@ class VideoPlayer extends PureComponent {
       case playerType.MOVIE:
         return (
           <div ref={this._rootElRef} className="player">
-            <div
+            <span
+
+              onWheel={(evt)=>onWheel(evt)}
               onClick={onPlayButtonClick}
               onDoubleClick={()=>onExitFilmButtonClick(null)}
             >
               {children}
-            </div>
+            </span>
             <button type="button" onClick={() => onExitFilmButtonClick(null)} className="player__exit">Exit</button>
 
             <div className="player__controls">
@@ -74,7 +74,7 @@ class VideoPlayer extends PureComponent {
                 <div className="player__time">
                   {/*<progress className="player__progress" value={`${progressInPercent}`} max="100"/>*/}
                   <input onChange={(evt)=> setPercentFilm(evt)} type="range" className="player__progress" step="1" max="100"/>
-                  {/*<div className="player__toggler" style={{left: `${progressInPercent}%`}}>Toggler</div>*/}
+                  <div className="player__toggler" style={{left: `${progressInPercent}%`}}>Toggler</div>
                 </div>
                 <div className="player__time-value">{convertVideoTime(progressInSeconds)}</div>
               </div>
@@ -108,7 +108,11 @@ class VideoPlayer extends PureComponent {
                     </svg>
                   )}
                 </div>
-                <input onChange={(evt)=> setValue(evt)} type="range" className="player__controls-audio"/>
+                <div className="player__controls-audio">
+                  <input className="player__controls-audio-range" onChange={(evt)=> setValue(evt)} type="range" />
+                  <div className="player__controls-audio-toggler" style={{left: `${valueInPercent}%`}}>Toggler</div>
+                </div>
+
 
                 <button onClick={() => {
                   if (isFullScreen) {
