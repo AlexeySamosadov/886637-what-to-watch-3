@@ -74,7 +74,7 @@
   width: 17px;
   height: 17px;
   border-radius: 50%;
-  background: #D9CD8D;
+  background: none;
   cursor: pointer;
 }
 
@@ -82,6 +82,6 @@
   width: 17px;
   height: 17px;
   border-radius: 50%;
-  background: #D9CD8D;
+  background: none;
   cursor: pointer;
 }
