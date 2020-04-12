@@ -14,6 +14,8 @@ export const playerClass = {
 export const keyCode = {
   ESCAPE: `Escape`,
   SPACE: `Space`,
+  ARROW_RIGHT: `ArrowRight`,
+  ARROW_LEFT: `ArrowLeft`,
 };
 
 export const typeEvent = {

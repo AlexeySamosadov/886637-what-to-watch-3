@@ -39,8 +39,7 @@ class VideoPlayer extends PureComponent {
     super(props);
     this._rootElRef = createRef();
     this._handlerFullScreenChange = this._handlerFullScreenChange.bind(this);
-    this._onPressExitButton = this._onPressExitButton.bind(this);
-    this._onPressSpaceButton = this._onPressSpaceButton.bind(this);
+    this._onPressButton = this._onPressButton.bind(this);
   }
 
   _handlerFullScreenChange() {
@@ -50,7 +49,6 @@ class VideoPlayer extends PureComponent {
   _renderPlayer() {
     const {children, onExitFilmButtonClick, setPercentFilm, onWheel, valueInPercent, progressInPercent, progressInSeconds, onMouseEnter, onMouseLeave, onClick,
       onPlayButtonClick, isPlaying, setValue, onSoundClick, isSoundOff,isFullScreen, type} = this.props;
-
     switch (type) {
       case playerType.TRAILER:
         return <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onClick={onClick} className="small-movie-card__image">
@@ -135,31 +133,34 @@ class VideoPlayer extends PureComponent {
     }
   }
 
-  _onPressExitButton(evt) {
+  _onPressButton(evt) {
     if (evt.code === keyCode.ESCAPE) {
       this.onExitFilmButtonClick(null);
     }
-  }
-
-  _onPressSpaceButton(evt) {
+    if (evt.code === keyCode.ARROW_RIGHT) {
+      console.log(`Отработала правая кнопка`);
+    }
+    if (evt.code === keyCode.ARROW_LEFT) {
+      console.log(`Отработала левая кнопка`);
+    }
     if (evt.code === keyCode.SPACE) {
-      this.onPlayButtonClick();
+      const percent = -5;
+      this.onPlayButtonClick(evt, percent);
     }
   }
+
 
   componentDidMount() {
     this.onExitFilmButtonClick = this.props.onExitFilmButtonClick;
     this.onPlayButtonClick = this.props.onPlayButtonClick;
 
     document.addEventListener(typeEvent.FULL_SCREEN_CHANGE, this._handlerFullScreenChange);
-    document.addEventListener(typeEvent.KEYDOWN, this._onPressExitButton);
-    document.addEventListener(typeEvent.KEYDOWN, this._onPressSpaceButton);
+    document.addEventListener(typeEvent.KEYDOWN, this._onPressButton);
   }
 
   componentWillUnmount() {
     document.removeEventListener(typeEvent.FULL_SCREEN_CHANGE, this._handlerFullScreenChange);
-    document.removeEventListener(typeEvent.KEYDOWN, this._onPressExitButton);
-    document.removeEventListener(typeEvent.KEYDOWN, this._onPressSpaceButton);
+    document.removeEventListener(typeEvent.KEYDOWN, this._onPressButton);
   }
 
   render() {
