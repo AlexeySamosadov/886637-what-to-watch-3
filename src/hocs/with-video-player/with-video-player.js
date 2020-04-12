@@ -31,6 +31,8 @@ const withVideoPlayer = (Component) => {
         isIndicatorShow: true,
       };
 
+      this._interval = null;
+
       this._handlerPlayButtonClick = this._handlerPlayButtonClick.bind(this);
       this._handlerFullScreenButtonClick = this._handlerFullScreenButtonClick.bind(this);
       this._handlerMouseEnter = this._handlerMouseEnter.bind(this);
@@ -147,8 +149,12 @@ const withVideoPlayer = (Component) => {
       video.ontimeupdate = () => this.setState({
         progressInSeconds: Math.floor(video.currentTime),
         progressInPercent: video.duration ? Math.round(video.currentTime / video.duration * 100) : 0,
+      });
+
+      const hideIndicator = () => this.setState({
         isIndicatorShow: false,
       });
+      this._interval = setInterval(hideIndicator, 5000);
 
       if (this.state.isPlaying) {
         video.play();
@@ -164,7 +170,6 @@ const withVideoPlayer = (Component) => {
       this.setState({
         valueInPercent,
       });
-
 
       const {type} = this.props;
       if (type === playerType.MOVIE) {
@@ -192,6 +197,7 @@ const withVideoPlayer = (Component) => {
       video.muted = false;
       video.onpause = null;
       video.ontimeupdate = null;
+      clearInterval(this._interval);
     }
 
     render() {

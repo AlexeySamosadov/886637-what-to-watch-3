@@ -50,7 +50,6 @@ class VideoPlayer extends PureComponent {
   _renderPlayer() {
     const {children, onExitFilmButtonClick, setPercentFilm, onWheel, valueInPercent, progressInPercent, progressInSeconds, onMouseEnter, onMouseLeave, onClick,
       onPlayButtonClick, isPlaying, isIndicatorShow, setValue, onSoundClick, isSoundOff, isFullScreen, type} = this.props;
-    console.log(isIndicatorShow);
     switch (type) {
       case playerType.TRAILER:
         return <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onClick={onClick} className="small-movie-card__image">
