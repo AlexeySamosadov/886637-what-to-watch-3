@@ -13,6 +13,7 @@ const roundVolume = (value) => {
   return result;
 };
 
+
 const withVideoPlayer = (Component) => {
   class WithVideo extends PureComponent {
     constructor(props) {
@@ -85,20 +86,21 @@ const withVideoPlayer = (Component) => {
 
     _handlerButtonArrow(percent) {
       this.setState((prevState) => {
-        const updatePercent = (percent) => {
-          let percentResult = prevState.progressInPercent + percent;
-          if (percentResult <= 0) {
-            percentResult = 0;
+        const correctPercent = () => {
+          let result = prevState.progressInPercent + percent;
+          if (result <= 0) {
+            result = 0;
           }
-          if (percentResult >= 100) {
-            percentResult = 100;
+          if (result >= 100) {
+            result = 100;
           }
-          return percentResult;
+          return result;
         };
         return {
-          progressInPercent: updatePercent(percent),
+          progressInPercent: correctPercent(percent),
         };
       });
+
       const video = this.videoRef.current;
       video.currentTime = Math.round(video.duration * (this.state.progressInPercent / 100));
     }
@@ -158,11 +160,6 @@ const withVideoPlayer = (Component) => {
       this.setState({
         valueInPercent,
       });
-
-
-
-      console.log(`progressInPercent`, this.state.progressInPercent);
-      console.log(`progressInSeconds`, this.state.progressInSeconds);
 
 
       const {type} = this.props;

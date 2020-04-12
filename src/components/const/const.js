@@ -22,3 +22,8 @@ export const typeEvent = {
   FULL_SCREEN_CHANGE: `fullscreenchange`,
   KEYDOWN: `keydown`,
 };
+
+export const arrowTimingPercent = {
+  TEN: 3,
+  MINUS_TEN: -3,
+};

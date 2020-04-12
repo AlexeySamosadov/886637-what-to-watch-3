@@ -4,6 +4,7 @@ import {playerType, keyCode, typeEvent} from "../const/const.js";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/app-status/app-status.js";
 import "./video-player.css";
+import {arrowTimingPercent} from "../const/const";
 
 // <progress className="player__progress" value={`${progressInPercent}`} max="100"/>
 
@@ -138,11 +139,11 @@ class VideoPlayer extends PureComponent {
       this.onExitFilmButtonClick(null);
     }
     if (evt.code === keyCode.ARROW_RIGHT) {
-      const percent = 10;
+      const percent = arrowTimingPercent.TEN;
       this.handlerButtonArrow(percent);
     }
     if (evt.code === keyCode.ARROW_LEFT) {
-      const percent = -10;
+      const percent = arrowTimingPercent.MINUS_TEN;
       this.handlerButtonArrow(percent);
     }
     if (evt.code === keyCode.SPACE) {
@@ -183,6 +184,7 @@ VideoPlayer.propTypes = {
   progressInPercent: PropTypes.number.isRequired,
   progressInSeconds: PropTypes.number.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
+  handlerButtonArrow: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   title: PropTypes.string,
   isFullScreen: PropTypes.bool.isRequired,
