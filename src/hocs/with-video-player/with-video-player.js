@@ -1,4 +1,4 @@
-import React, {PureComponent, createRef} from "react";
+import React, {createRef, PureComponent} from "react";
 import PropTypes from "prop-types";
 import {playerType} from "../../components/const/const.js";
 
@@ -38,6 +38,7 @@ const withVideoPlayer = (Component) => {
       this._setValue = this._setValue.bind(this);
       this._setPercentFilm = this._setPercentFilm.bind(this);
       this._handlerWheel = this._handlerWheel.bind(this);
+      this._handlerButtonArrow = this._handlerButtonArrow.bind(this);
     }
 
     _handlerPlayButtonClick() {
@@ -79,8 +80,27 @@ const withVideoPlayer = (Component) => {
         progressInPercent: value,
       });
       const video = this.videoRef.current;
-      const currentTime = Math.round(video.duration * (value / 100));
-      video.currentTime = currentTime;
+      video.currentTime = Math.round(video.duration * (value / 100));
+    }
+
+    _handlerButtonArrow(percent) {
+      this.setState((prevState) => {
+        const updatePercent = (percent) => {
+          let percentResult = prevState.progressInPercent + percent;
+          if (percentResult <= 0) {
+            percentResult = 0;
+          }
+          if (percentResult >= 100) {
+            percentResult = 100;
+          }
+          return percentResult;
+        };
+        return {
+          progressInPercent: updatePercent(percent),
+        };
+      });
+      const video = this.videoRef.current;
+      video.currentTime = Math.round(video.duration * (this.state.progressInPercent / 100));
     }
 
     _handlerMouseLeave() {
@@ -187,6 +207,7 @@ const withVideoPlayer = (Component) => {
         setValue={this._setValue}
         setPercentFilm={this._setPercentFilm}
         onWheel={this._handlerWheel}
+        handlerButtonArrow={this._handlerButtonArrow }
         isSoundOff={isSoundOff}
         isPlaying={isPlaying}
         isFullScreen={isFullScreen}

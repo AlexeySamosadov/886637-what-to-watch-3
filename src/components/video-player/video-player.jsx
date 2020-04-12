@@ -138,14 +138,15 @@ class VideoPlayer extends PureComponent {
       this.onExitFilmButtonClick(null);
     }
     if (evt.code === keyCode.ARROW_RIGHT) {
-      console.log(`Отработала правая кнопка`);
+      const percent = 10;
+      this.handlerButtonArrow(percent);
     }
     if (evt.code === keyCode.ARROW_LEFT) {
-      console.log(`Отработала левая кнопка`);
+      const percent = -10;
+      this.handlerButtonArrow(percent);
     }
     if (evt.code === keyCode.SPACE) {
-      const percent = -5;
-      this.onPlayButtonClick(evt, percent);
+      this.onPlayButtonClick(evt);
     }
   }
 
@@ -153,6 +154,7 @@ class VideoPlayer extends PureComponent {
   componentDidMount() {
     this.onExitFilmButtonClick = this.props.onExitFilmButtonClick;
     this.onPlayButtonClick = this.props.onPlayButtonClick;
+    this.handlerButtonArrow = this.props.handlerButtonArrow;
 
     document.addEventListener(typeEvent.FULL_SCREEN_CHANGE, this._handlerFullScreenChange);
     document.addEventListener(typeEvent.KEYDOWN, this._onPressButton);
