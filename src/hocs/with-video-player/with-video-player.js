@@ -121,7 +121,7 @@ const withVideoPlayer = (Component) => {
     }
 
     _handlerWheel(evt) {
-      const diff = evt.deltaY / 530;
+      const diff = evt.deltaY / 530 * -1;
       this.setState((prevState) => ({
         value: roundVolume(prevState.value + diff),
         isIndicatorShow: true,
