@@ -28,6 +28,7 @@ const withVideoPlayer = (Component) => {
         isSoundOff: false,
         value: 1,
         valueInPercent: 100,
+        isIndicatorShow: true,
       };
 
       this._handlerPlayButtonClick = this._handlerPlayButtonClick.bind(this);
@@ -72,6 +73,7 @@ const withVideoPlayer = (Component) => {
       const value = evt.target.value / 100;
       this.setState(() => ({
         value,
+        isIndicatorShow: true,
       }));
     }
 
@@ -120,6 +122,7 @@ const withVideoPlayer = (Component) => {
       const diff = evt.deltaY / 530;
       this.setState((prevState) => ({
         value: roundVolume(prevState.value + diff),
+        isIndicatorShow: true,
       }));
     }
 
@@ -143,7 +146,8 @@ const withVideoPlayer = (Component) => {
       }
       video.ontimeupdate = () => this.setState({
         progressInSeconds: Math.floor(video.currentTime),
-        progressInPercent: video.duration ? Math.round(video.currentTime / video.duration * 100) : 0
+        progressInPercent: video.duration ? Math.round(video.currentTime / video.duration * 100) : 0,
+        isIndicatorShow: false,
       });
 
       if (this.state.isPlaying) {
@@ -192,7 +196,7 @@ const withVideoPlayer = (Component) => {
 
     render() {
       const {srcPoster, srcVideo, widthAtr = null, heightAtr = null, className = ``} = this.props;
-      const {isPlaying, isFullScreen, progressInSeconds, progressInPercent, valueInPercent, isSoundOff} = this.state;
+      const {isPlaying, isFullScreen, progressInSeconds, progressInPercent, valueInPercent, isSoundOff, isIndicatorShow} = this.state;
       return <Component
         {...this.props}
         onFullScreenButtonClick={this._handlerFullScreenButtonClick}
@@ -211,6 +215,7 @@ const withVideoPlayer = (Component) => {
         progressInSeconds={progressInSeconds}
         progressInPercent={progressInPercent}
         valueInPercent={valueInPercent}
+        isIndicatorShow={isIndicatorShow}
       >
         <video src={srcVideo} className={className} ref={this.videoRef} poster={srcPoster} alt="" width={widthAtr} height={heightAtr}/>
       </Component>;

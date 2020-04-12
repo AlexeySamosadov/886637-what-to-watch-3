@@ -49,7 +49,8 @@ class VideoPlayer extends PureComponent {
 
   _renderPlayer() {
     const {children, onExitFilmButtonClick, setPercentFilm, onWheel, valueInPercent, progressInPercent, progressInSeconds, onMouseEnter, onMouseLeave, onClick,
-      onPlayButtonClick, isPlaying, setValue, onSoundClick, isSoundOff,isFullScreen, type} = this.props;
+      onPlayButtonClick, isPlaying, isIndicatorShow, setValue, onSoundClick, isSoundOff, isFullScreen, type} = this.props;
+    console.log(isIndicatorShow);
     switch (type) {
       case playerType.TRAILER:
         return <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onClick={onClick} className="small-movie-card__image">
@@ -67,6 +68,7 @@ class VideoPlayer extends PureComponent {
               {children}
             </span>
             <button type="button" onClick={() => onExitFilmButtonClick(null)} className="player__exit">Exit</button>
+            {isIndicatorShow && <span className="player-value-indicator">{valueInPercent}%</span>}
 
             <div className="player__controls">
               <div className="player__controls-row">
@@ -156,6 +158,12 @@ class VideoPlayer extends PureComponent {
     this.onExitFilmButtonClick = this.props.onExitFilmButtonClick;
     this.onPlayButtonClick = this.props.onPlayButtonClick;
     this.handlerButtonArrow = this.props.handlerButtonArrow;
+
+    // const indicator = document.querySelector(`.player-value-indicator`);
+    // const removeIndicator = () => {
+    //   indicator.remove();
+    // };
+    // setTimeout(removeIndicator, 5000);
 
     document.addEventListener(typeEvent.FULL_SCREEN_CHANGE, this._handlerFullScreenChange);
     document.addEventListener(typeEvent.KEYDOWN, this._onPressButton);
