@@ -7,6 +7,7 @@ const initialState = {
   chosenFilmData: null,
   popupFilmData: null,
   filmToWatch: null,
+  activeTab: null,
 };
 
 const ActionType = {
@@ -14,6 +15,7 @@ const ActionType = {
   SHOW_MORE: `SHOW_MORE`,
   SHOW_POPUP: `SHOW_POPUP`,
   SET_FILM_TO_WATCH: `SET_FILM_TO_WATCH`,
+  SET_ACTIVE_TAB: `ET_ACTIVE_TAB`,
 };
 
 export const ActionCreator = {
@@ -33,6 +35,10 @@ export const ActionCreator = {
   setFilmToWatch: (film) => ({
     type: ActionType.SET_FILM_TO_WATCH,
     payload: film
+  }),
+  setActiveTab: (tab) => ({
+    type: ActionType.SET_ACTIVE_TAB,
+    payload: tab
   }),
 };
 export const reducer = (state = initialState, action) => {
@@ -55,6 +61,10 @@ export const reducer = (state = initialState, action) => {
     case ActionType.SET_FILM_TO_WATCH:
       return extend(state, {
         filmToWatch: action.payload
+      });
+    case ActionType.SET_ACTIVE_TAB:
+      return extend(state, {
+        activeTab: action.payload
       });
   }
   return state;

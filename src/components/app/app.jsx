@@ -35,7 +35,7 @@ class App extends React.PureComponent {
       );
     }
     if (chosenFilmData) {
-      return (<MoviePageWrapper/>);
+      return (<MoviePage/>);
     }
     return (<Main/>);
   }

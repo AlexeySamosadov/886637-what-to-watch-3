@@ -27,3 +27,9 @@ export const arrowTimingPercent = {
   TEN: 3,
   MINUS_TEN: -3,
 };
+
+export const ACTIVE_TABS = {
+  OVERVIEW: `OVERVIEW`,
+  DETAILS: `DETAILS`,
+  REVIEWS: `REVIEWS`,
+};
