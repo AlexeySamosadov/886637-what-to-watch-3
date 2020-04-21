@@ -12,96 +12,92 @@ import Header from "../header/header.jsx";
 import MoviePageDescription from "../movie-page-description/movie-page-description.jsx";
 
 
-export class MoviePage extends React.PureComponent {
-  render() {
-    const {filmData, filmsData, onTitleClick, playFilm} = this.props;
-    const {name, genre, date, srcPoster, backgroundImage, backgroundColor} = filmData;
-    const filteredFilmsData = filterFilms(filmsData, filmData.genre);
-    const exception = filteredFilmsData.filter((it)=>it.name !== filmData.name);
-    const filmsDataCutted = exception.slice(0, 4);
-    const onClick = (e) => {
-      e.preventDefault();
-      playFilm(filmData);
-    };
+export const MoviePage = React.memo(({filmData, filmsData, onTitleClick, playFilm})=>{
+  const {name, genre, date, srcPoster, backgroundImage, backgroundColor} = filmData;
+  const filteredFilmsData = filterFilms(filmsData, filmData.genre);
+  const exception = filteredFilmsData.filter((it)=>it.name !== filmData.name);
+  const filmsDataCutted = exception.slice(0, 4);
+  const onClick = (e) => {
+    e.preventDefault();
+    playFilm(filmData);
+  };
 
-    return (
-      <React.Fragment>
-        <section className="movie-card movie-card--full" style={{backgroundColor: `${backgroundColor}`}}>
-          <div className="movie-card__hero">
-            <div className="movie-card__bg">
-              <img src={backgroundImage} alt="The Grand Budapest Hotel"/>
-            </div>
+  return (
+    <React.Fragment>
+      <section className="movie-card movie-card--full" style={{backgroundColor: `${backgroundColor}`}}>
+        <div className="movie-card__hero">
+          <div className="movie-card__bg">
+            <img src={backgroundImage} alt="The Grand Budapest Hotel"/>
+          </div>
 
-            <h1 className="visually-hidden">WTW</h1>
-            <Header/>
+          <h1 className="visually-hidden">WTW</h1>
+          <Header/>
 
-            <div className="movie-card__wrap">
-              <div className="movie-card__desc">
-                <h2 className="movie-card__title">{name}</h2>
-                <p className="movie-card__meta">
-                  <span className="movie-card__genre">{genre}</span>
-                  <span className="movie-card__year">{date}</span>
-                </p>
+          <div className="movie-card__wrap">
+            <div className="movie-card__desc">
+              <h2 className="movie-card__title">{name}</h2>
+              <p className="movie-card__meta">
+                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__year">{date}</span>
+              </p>
 
-                <div className="movie-card__buttons">
-                  <button onClick={onClick} className="btn btn--play movie-card__button" type="button">
-                    <svg viewBox="0 0 19 19" width="19" height="19">
-                      <use xlinkHref="#play-s"/>
-                    </svg>
-                    <span>Play</span>
-                  </button>
-                  <button className="btn btn--list movie-card__button" type="button">
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"/>
-                    </svg>
-                    <span>My list</span>
-                  </button>
-                  <a href="#" className="btn movie-card__button">Add review</a>
-                  <Link onClick={()=>{
-                    history.push(fdsfdsfdsfdsf);
-                  }
+              <div className="movie-card__buttons">
+                <button onClick={onClick} className="btn btn--play movie-card__button" type="button">
+                  <svg viewBox="0 0 19 19" width="19" height="19">
+                    <use xlinkHref="#play-s"/>
+                  </svg>
+                  <span>Play</span>
+                </button>
+                <button className="btn btn--list movie-card__button" type="button">
+                  <svg viewBox="0 0 19 20" width="19" height="20">
+                    <use xlinkHref="#add"/>
+                  </svg>
+                  <span>My list</span>
+                </button>
+                <a href="#" className="btn movie-card__button">Add review</a>
+                <Link onClick={()=>{
+                  history.push(fdsfdsfdsfdsf);
+                }
 
-                  } to="/main">LINK HERE WILL SEN YOU TO MAIN</Link>
-                </div>
+                } to="/main">LINK HERE WILL SEN YOU TO MAIN</Link>
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="movie-card__wrap movie-card__translate-top">
-            <div className="movie-card__info">
-              <div className="movie-card__poster movie-card__poster--big">
-                <img src={srcPoster} alt={name} width="218"
-                  height="327"/>
-              </div>
-              <div className="movie-card__desc">
-                <nav className="movie-nav movie-card__nav">
-                  <Tabs/>
-                </nav>
-                <MoviePageDescription/>
-              </div>
+        <div className="movie-card__wrap movie-card__translate-top">
+          <div className="movie-card__info">
+            <div className="movie-card__poster movie-card__poster--big">
+              <img src={srcPoster} alt={name} width="218"
+                height="327"/>
+            </div>
+            <div className="movie-card__desc">
+              <nav className="movie-nav movie-card__nav">
+                <Tabs/>
+              </nav>
+              <MoviePageDescription/>
             </div>
           </div>
+        </div>
+      </section>
+
+      <div className="page-content">
+        <section className="catalog catalog--like-this">
+          <h2 className="catalog__title">More like this</h2>
+          <div className="catalog__movies-list">
+            <FilmsList
+              filmsData={filmsDataCutted}
+              onTitleClick={onTitleClick}
+            />
+          </div>
+
         </section>
 
-        <div className="page-content">
-          <section className="catalog catalog--like-this">
-            <h2 className="catalog__title">More like this</h2>
-            <div className="catalog__movies-list">
-              <FilmsList
-                filmsData={filmsDataCutted}
-                onTitleClick={onTitleClick}
-              />
-            </div>
-
-          </section>
-
-          <Footer/>
-        </div>
-      </React.Fragment>
-    );
-  };
-}
-
+        <Footer/>
+      </div>
+    </React.Fragment>
+  );
+});
 
 MoviePage.propTypes = {
   filmData: PropTypes.shape({
