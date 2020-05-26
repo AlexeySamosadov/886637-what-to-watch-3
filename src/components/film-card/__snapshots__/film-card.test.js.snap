@@ -4,16 +4,20 @@ exports[`This is FilmCard Unit test 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
   onClick={[Function]}
-  onMouseOver={[Function]}
 >
   <div
     className="small-movie-card__image"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <img
-      alt="The Grand Budapest Hotel"
-      height="175"
-      src="img/www.rr.i/fsfsdf"
-      width="280"
+    <video
+      alt=""
+      className=""
+      height={175}
+      poster="img/somePath"
+      src="somePath"
+      width={280}
     />
   </div>
   <h3

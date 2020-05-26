@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`This is Unit Test for MoviePageDetails component 1`] = `
+Array [
+  <div
+    className="movie-rating"
+  >
+    <div
+      className="movie-rating__score"
+    >
+      9.79
+    </div>
+    <p
+      className="movie-rating__meta"
+    >
+      <span
+        className="movie-rating__level"
+      >
+        mustSee
+      </span>
+      <span
+        className="movie-rating__count"
+      >
+        323
+         ratings
+      </span>
+    </p>
+  </div>,
+  <div
+    className="movie-card__text"
+  >
+    <p>
+      dsfsdfdsfsfsdfsdfdsf
+    </p>
+    <p
+      className="movie-card__director"
+    >
+      <strong>
+        Director: 
+        Alex Smitch
+      </strong>
+    </p>
+    <p
+      className="movie-card__starring"
+    >
+      <strong>
+        Starring: 
+        Toni Hawk, Arnold Vicci, Van gog, Charli Chaplin, German French, Italian English
+        .
+      </strong>
+    </p>
+  </div>,
+]
+`;

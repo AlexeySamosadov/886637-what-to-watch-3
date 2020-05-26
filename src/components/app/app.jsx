@@ -1,47 +1,43 @@
 import React from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {connect} from "react-redux";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import PropTypes from 'prop-types';
+import withMoviePage from "../../hocs/with-movie-page/with-movie-page.js";
+import {getChosenFilmData, getFilmToWatch} from "../../reducer/app-status/selectors.js";
+import withVideoPlayer from "../../hocs/with-video-player/with-video-player.js";
+import MovieVideoPlayer from "../video-player/video-player.jsx";
+import {playerType, playerClass} from "../const/const.js";
+
+const VideoPlayer = withVideoPlayer(MovieVideoPlayer);
+
+
+const MoviePageWrapper = withMoviePage(MoviePage);
 
 
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      popupFilmData: null,
-    };
-    this.onTitleClick = this.onTitleClick.bind(this);
-  }
-
-  onTitleClick(id) {
-    const [currentFilm] = this.props.filmsData.filter((it)=>it.id === id);
-
-    this.setState({
-      showMoviePage: true,
-      popupFilmData: currentFilm,
-    });
   }
 
   renderApp() {
-    const filmsData = this.props.filmsData;
-    const {showMoviePage, popupFilmData} = this.state;
-    if (!showMoviePage) {
+    const {chosenFilmData, filmToWatch} = this.props;
+    if (filmToWatch) {
       return (
-        <Main
-          filmsData={filmsData}
-          onTitleClick={this.onTitleClick}
+        <VideoPlayer
+          type={playerType.MOVIE}
+          className={playerClass.PLAYER_VIDEO}
+          srcVideo={filmToWatch.srcVideo}
+          srcPoster={filmToWatch.srcPreview}
+          isMuted
         />
       );
-    } else if (showMoviePage) {
-      return (
-        <MoviePage
-          filmData={popupFilmData}
-        />
-      );
-    } else {
-      return true;
     }
+    if (chosenFilmData) {
+      return (<MoviePage/>);
+    }
+    return (<Main/>);
   }
 
   render() {
@@ -51,10 +47,9 @@ class App extends React.PureComponent {
           <Route exact path="/">
             {this.renderApp()};
           </Route>
-          <Route exact path="/moviePage">
-            <MoviePage
-              filmsData={this.props.filmsData}
-            />
+          {/* <Route exact path="/main" component={Main}/>*/}
+          <Route path="/main">
+            <Main/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -62,20 +57,16 @@ class App extends React.PureComponent {
   }
 }
 
-// const App = ({filmsData}) => {
-//   return (
-//     <Main
-//       filmsData={filmsData}
-//       testClick={titleHandler}
-//     />
-//   );
-// };
-
 App.propTypes = {
-  movieInfo: PropTypes.shape({
-  }),
-  filmsData: PropTypes.arrayOf(PropTypes.shape({
-  })),
+  movieInfo: PropTypes.shape({}),
+  chosenFilmData: PropTypes.object,
+  filmToWatch: PropTypes.object,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  chosenFilmData: getChosenFilmData(state),
+  filmToWatch: getFilmToWatch(state),
+});
+
+export {App};
+export default connect(mapStateToProps)(App);

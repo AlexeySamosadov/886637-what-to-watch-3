@@ -86,12 +86,12 @@ const genres = [
   `post-apocalyptic`,
 ];
 
-const EMOJIESLINKS = [
-  `smile.png`,
-  `angry.png`,
-  `puke.png`,
-  `sleeping.png`,
-];
+// const EMOJIESLINKS = [
+//   `smile.png`,
+//   `angry.png`,
+//   `puke.png`,
+//   `sleeping.png`,
+// ];
 
 const COMMENTS = [
   `stupid`,
@@ -101,16 +101,23 @@ const COMMENTS = [
   `Почему он?`,
   `Нереальная концовка`,
   `Фильм хорош, чтобы уснуть`,
+  `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\`'\`s funniest and most exquisitely designed movies in years.`,
+  `Anderson\`'\`s films are too precious for some, but for those of us willing to lose ourselves in them, they\`'\`re a delight. \`'\`The Grand Budapest Hotel\`'\` is no different, except that he has added a hint of gravitas to the mix, improving the recipe.`,
+  `I didn\`'\`t find it amusing, and while I can appreciate the creativity, it\`'\`s an hour and 40 minutes I wish I could take back.`,
+  `The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.`,
+  `It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.`,
+  `It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.`,
 ];
 
 const COMMENTATOR_NAMES = [
-  `Antonio`,
-  `Hyan`,
-  `Genry`,
-  `Sergey Talizin`,
-  `Mark`,
-  `Fill`,
-  `Chipolino`
+  `Antonio Muir`,
+  `Hyan Greever`,
+  `Genry Goodykoontz`,
+  `Amanda Lickona`,
+  `Mark  Fleri-Soler`,
+  `Fill Espozito`,
+  `Paula Fleri-Soler`,
+  `Canning Tattum`,
 ];
 
 const FILMS_LINKS = [
@@ -132,6 +139,41 @@ const FILMS_LINKS = [
   `midnight-special.jpg`,
 ];
 
+const VIDEO_LINKS = [
+  // `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  // `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  `img/GameOfThrones.mkv`,
+];
+
+const DIRECTORS = [
+  `Arnold Vicci`,
+  `Van gog`,
+  `Charli Chaplin`,
+  `German French`,
+  `Italian English`
+];
+
+const ACTORS = [
+  `Toni Hawk`,
+  `Arnold Vicci`,
+  `Van gog`,
+  `Charli Chaplin`,
+  `German French`,
+  `Italian English`,
+  `Bill Murray`,
+  `Edward Norton`,
+  `Jude Law`,
+  `Willem Dafoe`,
+  `Saoirse Ronan`,
+  `Tony Revoloru`,
+  `Tilda Swinton`,
+  `Tom Wilkinson`,
+  `Owen Wilkinson`,
+  `Adrien Brody`,
+  `Ralph Fiennes`,
+  `Jeff Goldblum`
+];
+
 const getRandomRating = (minNumber, maxNumber) => {
   return (Math.random() * (maxNumber - minNumber) + minNumber).toFixed(2);
 };
@@ -148,8 +190,8 @@ const generateComment = () => {
     commentId: `id` + String(getRandomNumber(1, 99999999)),
     commentText: getRandomItem(COMMENTS),
     commentatorName: getRandomItem(COMMENTATOR_NAMES),
-    emojiLink: getRandomItem(EMOJIESLINKS),
     commentTime: getRandomFullDate(),
+    commentRating: getRandomRating(1, 10),
   };
 };
 
@@ -159,71 +201,62 @@ const createComments = (count) => {
     .map(generateComment);
 };
 
-const RATING_DESCRIPTION = {
-  satisfying: `Satisfying`,
-  normal: `Normal`,
-  well: `Well`,
-  veryGood: `Very good`,
-  mustSee: `Must-see`,
-};
+// const RatingDescription = {
+//   satisfying: `Satisfying`,
+//   normal: `Normal`,
+//   well: `Well`,
+//   veryGood: `Very good`,
+//   mustSee: `Must-see`,
+// };
 
-const getRatingLevel = (rating) => {
-  if (rating < 3) {
-    return RATING_DESCRIPTION.satisfying;
-  } else if (rating < 5) {
-    return RATING_DESCRIPTION.normal;
-  } else if (rating < 7) {
-    return RATING_DESCRIPTION.well;
-  } else if (rating < 9) {
-    return RATING_DESCRIPTION.veryGood;
-  } else if (rating >= 9) {
-    return RATING_DESCRIPTION.mustSee;
-  }
-  return true;
-
-  // switch (rating) {
-  //   case rating < 3:
-  //     return `Satisfying`;
-  //   case rating < 5:
-  //     return `Norma`;
-  //   case rating < 7:
-  //     return `lWell`;
-  //   case rating < 9:
-  //     return `Very good`;
-  //   case rating >= 9:
-  //     return `Must-see`;
-  // }
-  // return true;
-};
+// const getRatingLevel = (rating) => {
+//   if (rating < 3) {
+//     return RatingDescription.satisfying;
+//   } else if (rating < 5) {
+//     return RatingDescription.normal;
+//   } else if (rating < 7) {
+//     return RatingDescription.well;
+//   } else if (rating < 9) {
+//     return RatingDescription.veryGood;
+//   } else if (rating >= 9) {
+//     return RatingDescription.mustSee;
+//   }
+//   return true;
+// };
 
 const generateFilmCardData = () => {
-  const comments = createComments(getRandomNumber(1, 10));
+  const comments = createComments(getRandomNumber(5, 7));
   const link = getRandomItem(FILMS_LINKS);
+  const videoLink = getRandomItem(VIDEO_LINKS);
   const rating = getRandomRating(1, 10);
   return {
 
     name: getRandomItem(filmNames),
-    src: link,
     srcPoster: link,
+    srcPreview: link,
     id: String(Math.random() + Math.random()),
     date: getRandomFullDate().getFullYear(),
     genre: getRandomItem(genres),
     rating,
     ratingCount: getRandomNumber(1, 300),
-    ratingLevel: getRatingLevel(rating),
+
+    // ratingLevel: getRatingLevel(rating),
     description: getRandomArray(descriptionFilms, 3).join(` `),
-    actors: [`Toni Hawk `],
-    directors: [`Arnold Vicci, `, `Van gog, `, `Charli Chaplin, `, `German French, `, `Italian English, `],
+    actors: getRandomArray(ACTORS, ACTORS.length),
+    directors: getRandomItem(DIRECTORS),
+    srcVideo: videoLink,
+    srcPreviewVideo: videoLink,
+    comments,
+    duration: getRandomNumber(70, 150),
+
     // posterSource: getRandomItem(posters),
 
-    duration: getRandomNumber(70, 150),
     commentsQuantity: comments.length,
     titleDetails: getRandomItem(nameDetails),
     country: getRandomArray(countries, 3),
     isAddWatch: Math.random() > 0.5,
     isWatched: Math.random() > 0.5,
     isFavorite: Math.random() > 0.5,
-    comments,
   };
 };
 
@@ -233,4 +266,4 @@ const generateFilmCardsData = (count) => {
     .map(generateFilmCardData);
 };
 
-export {generateFilmCardData, generateFilmCardsData, genres, getRandomFullDate, RATING_DESCRIPTION};
+export {generateFilmCardData, generateFilmCardsData, genres, getRandomFullDate};

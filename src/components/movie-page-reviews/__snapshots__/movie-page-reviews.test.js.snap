@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`This is Unit Test for MoviePageDetails component 1`] = `
+<div
+  className="movie-card__reviews movie-card__row"
+>
+  <div
+    className="movie-card__reviews-col"
+  >
+    <div
+      className="review"
+    >
+      <blockquote
+        className="review__quote"
+      >
+        <p
+          className="review__text"
+        >
+          Some text
+        </p>
+        <footer
+          className="review__details"
+        >
+          <cite
+            className="review__author"
+          >
+            Antoni Banderers
+          </cite>
+          <time
+            className="review__date"
+            dateTime="2016-06-20"
+          >
+            June 20, 2016
+          </time>
+        </footer>
+      </blockquote>
+      <div
+        className="review__rating"
+      >
+        7.9
+      </div>
+    </div>
+  </div>
+</div>
+`;
