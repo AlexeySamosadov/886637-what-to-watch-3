@@ -239,6 +239,7 @@ const generateFilmCardData = () => {
     genre: getRandomItem(genres),
     rating,
     ratingCount: getRandomNumber(1, 300),
+
     // ratingLevel: getRatingLevel(rating),
     description: getRandomArray(descriptionFilms, 3).join(` `),
     actors: getRandomArray(ACTORS, ACTORS.length),
@@ -248,9 +249,7 @@ const generateFilmCardData = () => {
     comments,
     duration: getRandomNumber(70, 150),
 
-
     // posterSource: getRandomItem(posters),
-
 
     commentsQuantity: comments.length,
     titleDetails: getRandomItem(nameDetails),
