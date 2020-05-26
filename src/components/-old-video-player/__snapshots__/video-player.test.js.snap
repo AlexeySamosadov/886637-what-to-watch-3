@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VideoPlayer is renderer correctly 1`] = `
+exports[`OldVideoPlayer is renderer correctly 1`] = `
 <div
   className="small-movie-card__image"
   onMouseEnter={[Function]}

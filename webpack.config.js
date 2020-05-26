@@ -9,7 +9,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, `public`),
     open: true,
-    port: 1333,
+    port: 1335,
     historyApiFallback: true
   },
   module: {
@@ -20,7 +20,11 @@ module.exports = {
         use: {
           loader: `babel-loader`,
         },
-      }
+      },
+      {
+        test: /\.css$/i,
+        use: [`style-loader`, `css-loader`],
+      },
     ],
   },
   devtool: `source-map`,

@@ -1,8 +1,20 @@
-import React, {PureComponent, createRef} from "react";
+import React, {createRef, PureComponent} from "react";
 import PropTypes from "prop-types";
 import {playerType} from "../../components/const/const.js";
 
-const withVideo = (Component) => {
+const roundVolume = (value) => {
+  const result = parseFloat(value.toFixed(2));
+  if (result >= 1) {
+    return 1;
+  }
+  if (result <= 0) {
+    return 0;
+  }
+  return result;
+};
+
+
+const withVideoPlayer = (Component) => {
   class WithVideo extends PureComponent {
     constructor(props) {
       super(props);
@@ -13,13 +25,24 @@ const withVideo = (Component) => {
         isFullScreen: false,
         progressInPercent: 0,
         progressInSeconds: 0,
+        isSoundOff: false,
+        value: 1,
+        valueInPercent: 100,
+        isIndicatorShow: true,
       };
+
+      this._interval = null;
 
       this._handlerPlayButtonClick = this._handlerPlayButtonClick.bind(this);
       this._handlerFullScreenButtonClick = this._handlerFullScreenButtonClick.bind(this);
       this._handlerMouseEnter = this._handlerMouseEnter.bind(this);
       this._handlerMouseLeave = this._handlerMouseLeave.bind(this);
       this._handlerMouseClick = this._handlerMouseClick.bind(this);
+      this._handlerOnOffSound = this._handlerOnOffSound.bind(this);
+      this._setValue = this._setValue.bind(this);
+      this._setPercentFilm = this._setPercentFilm.bind(this);
+      this._handlerWheel = this._handlerWheel.bind(this);
+      this._handlerButtonArrow = this._handlerButtonArrow.bind(this);
     }
 
     _handlerPlayButtonClick() {
@@ -42,6 +65,50 @@ const withVideo = (Component) => {
       }, 1000);
     }
 
+    _handlerOnOffSound() {
+      this.setState((prevState) => ({
+        isSoundOff: !prevState.isSoundOff,
+      }));
+    }
+
+    _setValue(evt) {
+      const value = evt.target.value / 100;
+      this.setState(() => ({
+        value,
+        isIndicatorShow: true,
+      }));
+    }
+
+    _setPercentFilm(evt) {
+      const value = evt.target.value * 1;
+      this.setState({
+        progressInPercent: value,
+      });
+      const video = this.videoRef.current;
+      video.currentTime = Math.round(video.duration * (value / 100));
+    }
+
+    _handlerButtonArrow(percent) {
+      this.setState((prevState) => {
+        const correctPercent = () => {
+          let result = prevState.progressInPercent + percent;
+          if (result <= 0) {
+            result = 0;
+          }
+          if (result >= 100) {
+            result = 100;
+          }
+          return result;
+        };
+        return {
+          progressInPercent: correctPercent(percent),
+        };
+      });
+
+      const video = this.videoRef.current;
+      video.currentTime = Math.round(video.duration * (this.state.progressInPercent / 100));
+    }
+
     _handlerMouseLeave() {
       clearTimeout(this._timer);
       this.setState({
@@ -51,6 +118,14 @@ const withVideo = (Component) => {
 
     _handlerMouseClick() {
       clearTimeout(this._timer);
+    }
+
+    _handlerWheel(evt) {
+      const diff = evt.deltaY / 530 * -1;
+      this.setState((prevState) => ({
+        value: roundVolume(prevState.value + diff),
+        isIndicatorShow: true,
+      }));
     }
 
     componentDidMount() {
@@ -73,8 +148,13 @@ const withVideo = (Component) => {
       }
       video.ontimeupdate = () => this.setState({
         progressInSeconds: Math.floor(video.currentTime),
-        progressInPercent: video.duration ? Math.round(video.currentTime / video.duration * 100) : 0
+        progressInPercent: video.duration ? Math.round(video.currentTime / video.duration * 100) : 0,
       });
+
+      const hideIndicator = () => this.setState({
+        isIndicatorShow: false,
+      });
+      this._interval = setInterval(hideIndicator, 5000);
 
       if (this.state.isPlaying) {
         video.play();
@@ -83,6 +163,13 @@ const withVideo = (Component) => {
 
     componentDidUpdate() {
       const video = this.videoRef.current;
+
+      video.muted = this.state.isSoundOff;
+      video.volume = this.state.value;
+      const valueInPercent = this.state.value * 100;
+      this.setState({
+        valueInPercent,
+      });
 
       const {type} = this.props;
       if (type === playerType.MOVIE) {
@@ -110,11 +197,12 @@ const withVideo = (Component) => {
       video.muted = false;
       video.onpause = null;
       video.ontimeupdate = null;
+      clearInterval(this._interval);
     }
 
     render() {
       const {srcPoster, srcVideo, widthAtr = null, heightAtr = null, className = ``} = this.props;
-      const {isPlaying, isFullScreen, progressInSeconds, progressInPercent} = this.state;
+      const {isPlaying, isFullScreen, progressInSeconds, progressInPercent, valueInPercent, isSoundOff, isIndicatorShow} = this.state;
       return <Component
         {...this.props}
         onFullScreenButtonClick={this._handlerFullScreenButtonClick}
@@ -122,12 +210,20 @@ const withVideo = (Component) => {
         onMouseEnter={this._handlerMouseEnter}
         onMouseLeave={this._handlerMouseLeave}
         onClick={this._handlerMouseClick}
+        onSoundClick={this._handlerOnOffSound}
+        setValue={this._setValue}
+        setPercentFilm={this._setPercentFilm}
+        onWheel={this._handlerWheel}
+        handlerButtonArrow={this._handlerButtonArrow }
+        isSoundOff={isSoundOff}
         isPlaying={isPlaying}
         isFullScreen={isFullScreen}
         progressInSeconds={progressInSeconds}
         progressInPercent={progressInPercent}
+        valueInPercent={valueInPercent}
+        isIndicatorShow={isIndicatorShow}
       >
-        <video src={srcVideo} className={className} ref={this.videoRef} poster={`img/${srcPoster}`} alt="" width={widthAtr} height={heightAtr}/>
+        <video src={srcVideo} className={className} ref={this.videoRef} poster={srcPoster} alt="" width={widthAtr} height={heightAtr}/>
       </Component>;
     }
   }
@@ -144,4 +240,4 @@ const withVideo = (Component) => {
   return WithVideo;
 };
 
-export default withVideo;
+export default withVideoPlayer;

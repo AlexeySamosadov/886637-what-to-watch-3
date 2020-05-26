@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {getRatingLevel} from "../util/util.js";
 
 const MoviePageOverview = ({filmData}) => {
-  const {rating, ratingLevel, ratingCount, directors, actors, description} = filmData;
+  const {rating, ratingCount, directors, actors, description} = filmData;
+  const ratingLevel = getRatingLevel(rating);
   return (
     <React.Fragment>
       <div className="movie-rating">
@@ -26,8 +28,7 @@ const MoviePageOverview = ({filmData}) => {
 MoviePageOverview.propTypes = {
   filmData: PropTypes.shape({
     ratingCount: PropTypes.number.isRequired,
-    rating: PropTypes.string.isRequired,
-    ratingLevel: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     actors: PropTypes.array.isRequired,
     directors: PropTypes.string.isRequired,

@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {formatMovieDuration} from "../util/util.js";
-import {changeFirstLetterUppercase} from "../util/util";
+import {formatMovieDuration, changeFirstLetterUppercase} from "../util/util.js";
 
 const MoviePageDetails = ({filmData}) => {
   const {actors, directors, genre, date, duration} = filmData;

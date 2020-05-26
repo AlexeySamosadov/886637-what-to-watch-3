@@ -6,17 +6,21 @@ import ShowMore from "../show-more/show-more.jsx";
 import {filterFilms} from "../util/util.js";
 import {ActionCreator} from "../../reducer/app-status/app-status.js";
 import {connect} from "react-redux";
+import {getPromoFilm} from "../../reducer/data/selectors";
+import {getFilmsToRender, getShowingFilmsNumber} from "../../reducer/app-status/selectors.js";
+import {getGenre} from "../../reducer/app-status/selectors";
+import Footer from "../footer/footer.jsx";
+import Header from "../header/header.jsx";
+import "./main.css";
 
 
-const Main = ({filmsData, showPopup, filteredGenre, showingFilmsNumber, playFilm}) => {
-  const movieInfo = filmsData[0];
-  const {name, genre, date} = movieInfo;
+const Main = ({filmsData, promoFilm, showPopup, filteredGenre, showingFilmsNumber, playFilm}) => {
+  const {name, genre, date, srcPoster, backgroundImage} = promoFilm;
   const filteredFilmsData = filterFilms(filmsData, filteredGenre);
   const cuttedFilmsData = filteredFilmsData.slice(0, showingFilmsNumber);
-
   const onClick = (e) => {
     e.preventDefault();
-    playFilm(movieInfo);
+    playFilm(promoFilm);
   };
 
   let isRenderButton = true;
@@ -26,39 +30,24 @@ const Main = ({filmsData, showPopup, filteredGenre, showingFilmsNumber, playFilm
 
   return (
     <React.Fragment>
-      <section className="movie-card">
+      <section className="movie-card test">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg"
-            alt="{name} poster"
+          <img src={backgroundImage}
+            alt={`${backgroundImage} poster`}
           />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-            </div>
-          </div>
-        </header>
-
+        <Header/>
         <div className="movie-card__wrap">
           <div className="movie-card__info">
-            <div onClick={()=>showPopup(movieInfo)} className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="{name} poster" width="218" height="327"/>
+            <div onClick={()=>showPopup(promoFilm)} className="movie-card__poster">
+              <img src={srcPoster} alt={`${name} poster`} width="218" height="327"/>
             </div>
 
             <div className="movie-card__desc">
-              <h2 onClick={()=>showPopup(movieInfo)} className="movie-card__title test">{name}</h2>
+              <h2 onClick={()=>showPopup(promoFilm)} className="movie-card__title test">{name}</h2>
               <p className="movie-card__meta">
                 <span className="movie-card__genre">{genre}</span>
                 <span className="movie-card__year">{date}</span>
@@ -99,20 +88,7 @@ const Main = ({filmsData, showPopup, filteredGenre, showingFilmsNumber, playFilm
 
           {isRenderButton && <ShowMore/>}
         </section>
-
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer/>
       </div>
     </React.Fragment>
   );
@@ -124,13 +100,23 @@ Main.propTypes = {
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     date: PropTypes.number.isRequired,
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    srcPoster: PropTypes.string.isRequired,
+    srcPreview: PropTypes.string.isRequired,
   })),
   filteredGenre: PropTypes.string,
   showingFilmsNumber: PropTypes.number,
   playFilm: PropTypes.func,
   showPopup: PropTypes.func.isRequired,
+  promoFilm: PropTypes.object.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  promoFilm: getPromoFilm(state),
+  filmsData: getFilmsToRender(state),
+  showingFilmsNumber: getShowingFilmsNumber(state),
+  filteredGenre: getGenre(state),
+});
 
 const mapStateToDispatch = (dispatch) => ({
   playFilm(filmData) {
@@ -143,4 +129,4 @@ const mapStateToDispatch = (dispatch) => ({
 
 export {Main};
 
-export default connect(null, mapStateToDispatch)(Main);
+export default connect(mapStateToProps, mapStateToDispatch)(Main);
