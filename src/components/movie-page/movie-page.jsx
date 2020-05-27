@@ -21,7 +21,7 @@ export const MoviePage = React.memo(({filmData, filmsData, onTitleClick, playFil
     e.preventDefault();
     playFilm(filmData);
   };
-
+  
   return (
     <React.Fragment>
       <section className="movie-card movie-card--full" style={{backgroundColor: `${backgroundColor}`}}>
