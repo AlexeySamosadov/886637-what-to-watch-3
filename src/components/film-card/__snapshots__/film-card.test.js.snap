@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`This is FilmCard Unit test 1`] = `
+<article
+  className="small-movie-card catalog__movies-card"
+  onClick={[Function]}
+>
+  <div
+    className="small-movie-card__image"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <video
+      alt=""
+      className=""
+      height={175}
+      poster="img/somePath"
+      src="somePath"
+      width={280}
+    />
+  </div>
+  <h3
+    className="small-movie-card__title"
+  >
+    <a
+      className="small-movie-card__link"
+      href="movie-page.html"
+    >
+      The Grand Budapest Hotel
+    </a>
+  </h3>
+</article>
+`;
