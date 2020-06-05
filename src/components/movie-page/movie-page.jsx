@@ -109,6 +109,7 @@ MoviePage.propTypes = {
     description: PropTypes.string.isRequired,
     actors: PropTypes.array.isRequired,
     directors: PropTypes.string.isRequired,
+
   }),
   filmsData: PropTypes.array.isRequired,
   onTitleClick: PropTypes.func,
